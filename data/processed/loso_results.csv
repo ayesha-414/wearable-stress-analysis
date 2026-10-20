@@ -1,0 +1,3 @@
+Classifier,N Subjects,Valid Folds,Accuracy,F1 Macro
+RF,35,35,0.4791,0.4418
+SVM,35,35,0.5057,0.4795
