@@ -25,13 +25,17 @@ logger = logging.getLogger(__name__)
 
 MIN_SAMPLES = 10
 
+# Feature columns used throughout the pipeline (updated name)
 FEATURE_COLS = [
-    "hr_mean", "hr_std", "hr_min", "hr_max", "hr_range", "hr_rmssd_approx",
+    "hr_mean", "hr_std", "hr_min", "hr_max", "hr_range", "hr_diff_rms",
     "eda_mean", "eda_std", "eda_slope", "eda_range", "eda_scl_mean", "eda_scr_count",
     "temp_mean", "temp_std", "temp_slope",
     "acc_mean", "acc_std", "acc_max",
     "hrv_mean_ibi", "hrv_sdnn", "hrv_rmssd", "hrv_pnn50", "hrv_lf_hf_ratio",
 ]
+
+
+
 
 
 # ---------------------------------------------------------------------------
@@ -69,7 +73,7 @@ def _scr_peak_count(eda: pd.Series, tonic: pd.Series, threshold: float = 0.02) -
 def hr_features(series: Optional[pd.Series]) -> dict:
     prefix = "hr_"
     nans = {f"{prefix}{k}": float("nan") for k in
-            ["mean", "std", "min", "max", "range", "rmssd_approx"]}
+            ["mean", "std", "min", "max", "range", "diff_rms"]}
     if series is None or len(series.dropna()) < MIN_SAMPLES:
         return nans
     s = series.dropna()
@@ -81,7 +85,7 @@ def hr_features(series: Optional[pd.Series]) -> dict:
         "hr_min":          float(s.min()),
         "hr_max":          float(s.max()),
         "hr_range":        float(s.max() - s.min()),
-        "hr_rmssd_approx": rmssd,
+        "hr_diff_rms":     rmssd,  # RMS of consecutive 1-Hz HR differences (not IBI RMSSD)
     }
 
 

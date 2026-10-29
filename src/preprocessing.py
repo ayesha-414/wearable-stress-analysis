@@ -204,7 +204,10 @@ def clean_subject_signals(signals: dict) -> dict:
     # HR
     hr_df = signals.get("HR")
     if hr_df is not None and isinstance(hr_df, pd.DataFrame) and len(hr_df) > 0:
-        cleaned["HR"] = clean_hr(resample_to_1hz(hr_df, "HR"))
+        hr_series = clean_hr(resample_to_1hz(hr_df, "HR"))
+        # Align HR to EDA start (HR timestamps are +10 s relative to EDA)
+        hr_series = hr_series.rename_axis(None).reindex(hr_series.index - 10, fill_value=np.nan)
+        cleaned["HR"] = hr_series
     else:
         cleaned["HR"] = None
 
@@ -245,6 +248,12 @@ def clean_subject_signals(signals: dict) -> dict:
         if session_start_utc is not None:
             tags_rel = (tags_df["utc_ts"].astype(float) - session_start_utc).tolist()
         else:
+            # Fallback: time_s is relative to first button-press, not session start.
+            # This is only reached if session_start_utc is None (EDA missing).
+            logger.warning(
+                "session_start_utc unavailable; tag times are relative to first "
+                "button-press, not recording start. Stage boundaries may be shifted."
+            )
             tags_rel = tags_df.get("time_s", pd.Series([], dtype=float)).tolist()
         cleaned["tags_s"] = [float(t) for t in tags_rel]
     else:
@@ -295,10 +304,28 @@ def segment_by_stage(cleaned: dict, activity: str, subject_id: str) -> dict:
                 mask = mask & (idx <= t1)
             stage_sigs[sig] = series[mask]
 
-        # IBI within window -- uses offset_s column
+        # IBI within window -- align using absolute UTC timestamps to match
+        # tags_s which are relative to EDA session_start_utc.
+        # Using offset_s directly would be wrong if IBI and EDA start at
+        # different UTC times (common on Empatica E4).
         ibi_raw = cleaned.get("IBI_raw")
+        session_start_utc = cleaned.get("session_start_utc")
         if (ibi_raw is not None and isinstance(ibi_raw, pd.DataFrame)
-                and "offset_s" in ibi_raw.columns):
+                and "utc_ts" in ibi_raw.columns
+                and session_start_utc is not None):
+            t0_utc = session_start_utc + t0
+            mask = ibi_raw["utc_ts"] >= t0_utc
+            if t1 is not None:
+                t1_utc = session_start_utc + t1
+                mask = mask & (ibi_raw["utc_ts"] < t1_utc)
+            stage_sigs["IBI_raw"] = ibi_raw[mask].copy()
+        elif (ibi_raw is not None and isinstance(ibi_raw, pd.DataFrame)
+              and "offset_s" in ibi_raw.columns):
+            # Fallback: utc_ts unavailable; use offset_s (may be misaligned)
+            logger.warning(
+                "IBI utc_ts unavailable for stage %s; using offset_s fallback "
+                "(HRV features may be stage-misaligned).", stage_name
+            )
             mask = ibi_raw["offset_s"] >= t0
             if t1 is not None:
                 mask = mask & (ibi_raw["offset_s"] < t1)
