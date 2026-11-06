@@ -1,0 +1,54 @@
+{
+  "_readme": "Crisis and support resources, keyed by region code. The project owner MUST verify every entry and fill 'verified_on' before any use with real people. Entries with verified_on = null are shown with a notice. There is deliberately no default region.",
+  "GENERIC": {
+    "name": "Any region",
+    "resources": [
+      {
+        "name": "Your local emergency number",
+        "phone": null,
+        "kind": "emergency",
+        "notes": "If you or someone else is in immediate danger, contact your local emergency services now.",
+        "source_url": null,
+        "verified_on": null
+      },
+      {
+        "name": "Someone you trust",
+        "phone": null,
+        "kind": "person",
+        "notes": "A friend, family member, teacher or colleague. You do not have to go through this alone.",
+        "source_url": null,
+        "verified_on": null
+      },
+      {
+        "name": "A doctor, counsellor or other health professional",
+        "phone": null,
+        "kind": "professional",
+        "notes": "Especially if distress feels persistent or severe.",
+        "source_url": null,
+        "verified_on": null
+      }
+    ]
+  },
+  "IN": {
+    "name": "India",
+    "resources": [
+      {
+        "name": "Tele-MANAS (national tele mental health helpline, Ministry of Health and Family Welfare)",
+        "phone": "14416 or 1-800-891-4416",
+        "kind": "helpline",
+        "notes": "Free, 24x7, about 20 languages. A counselling and support line, not an emergency service.",
+        "source_url": "https://telemanas.mohfw.gov.in/home",
+        "verified_on": null,
+        "found_in_public_sources_on": "2026-11-01"
+      },
+      {
+        "name": "Single emergency number",
+        "phone": "112",
+        "kind": "emergency",
+        "notes": "Believed to be India's unified emergency number. NOT verified in this project: confirm before use.",
+        "source_url": null,
+        "verified_on": null
+      }
+    ]
+  }
+}

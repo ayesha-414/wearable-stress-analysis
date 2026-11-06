@@ -1,0 +1,284 @@
+/* ==========================================================================
+   NEUROTWIN AI — Neural Digital Twin Theme
+   Dark navy / near-black background, cyan/teal to amber/magenta gradients,
+   subtle biosignal motifs, and clean scientific typography.
+   ========================================================================== */
+
+/* external font import removed: app is offline-first */
+
+:root {
+  --nt-bg-dark: #060913;
+  --nt-bg-card: rgba(12, 21, 39, 0.75);
+  --nt-bg-card-hover: rgba(18, 30, 56, 0.85);
+  --nt-border: rgba(56, 189, 248, 0.18);
+  --nt-border-active: rgba(0, 242, 254, 0.45);
+  --nt-cyan: #00f2fe;
+  --nt-teal: #00d4aa;
+  --nt-sky: #38bdf8;
+  --nt-amber: #f59e0b;
+  --nt-rose: #f43f5e;
+  --nt-text-primary: #f0f6fc;
+  --nt-text-secondary: #94a3b8;
+  --nt-text-muted: #64748b;
+  --nt-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --nt-font-display: 'Space Grotesk', var(--nt-font-sans);
+  --nt-font-mono: 'JetBrains Mono', monospace;
+}
+
+/* Base App Container */
+.stApp {
+  background: radial-gradient(circle at 15% 15%, rgba(0, 242, 254, 0.05) 0%, transparent 40%),
+              radial-gradient(circle at 85% 85%, rgba(244, 63, 94, 0.04) 0%, transparent 40%),
+              linear-gradient(145deg, #060913 0%, #0a1020 40%, #070c18 70%, #050811 100%) !important;
+  color: var(--nt-text-primary) !important;
+  font-family: var(--nt-font-sans) !important;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--nt-font-display) !important;
+  color: #f8fafc !important;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  background: linear-gradient(120deg, #ffffff 30%, #38bdf8 70%, #00f2fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700 !important;
+}
+
+/* Formulas & Code */
+code, pre, .stCode, .katex {
+  font-family: var(--nt-font-mono) !important;
+}
+
+.katex-display {
+  background: rgba(8, 14, 26, 0.85);
+  padding: 0.85rem 1.2rem;
+  border-radius: 8px;
+  border-left: 3px solid var(--nt-teal);
+  overflow-x: auto;
+  margin: 0.8rem 0 !important;
+}
+
+/* Cards & Glassmorphism */
+.nt-card {
+  background: var(--nt-bg-card);
+  border: 1px solid var(--nt-border);
+  border-radius: 14px;
+  padding: 1.4rem;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  margin-bottom: 1.2rem;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nt-card:hover {
+  border-color: var(--nt-border-active);
+  box-shadow: 0 12px 40px rgba(0, 242, 254, 0.1);
+  transform: translateY(-2px);
+}
+
+.nt-card-glow {
+  border-color: rgba(0, 212, 170, 0.35);
+  box-shadow: 0 0 25px rgba(0, 212, 170, 0.15);
+}
+
+.nt-card-stressed {
+  border-color: rgba(244, 63, 94, 0.35);
+  box-shadow: 0 0 25px rgba(244, 63, 94, 0.15);
+}
+
+/* Metric Cards */
+.metric-card {
+  background: linear-gradient(135deg, rgba(12, 24, 46, 0.95), rgba(7, 14, 28, 0.95));
+  border: 1px solid var(--nt-border);
+  border-radius: 12px;
+  padding: 1.2rem 1rem;
+  text-align: center;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+}
+
+.metric-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--nt-cyan);
+  box-shadow: 0 8px 24px rgba(0, 242, 254, 0.18);
+}
+
+.metric-card h4 {
+  margin: 0 0 0.4rem 0;
+  font-size: 0.82rem;
+  color: var(--nt-sky);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.metric-card p {
+  margin: 0;
+  font-size: 1.85rem;
+  font-weight: 700;
+  font-family: var(--nt-font-display);
+  color: #ffffff;
+}
+
+.metric-card .sub {
+  font-size: 0.78rem;
+  color: var(--nt-text-secondary);
+  margin-top: 0.35rem;
+}
+
+/* Pipeline Flow Strip */
+.pipeline-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(10, 18, 34, 0.7);
+  border: 1px solid var(--nt-border);
+  border-radius: 12px;
+  padding: 1rem 1.4rem;
+  margin: 1.5rem 0;
+  gap: 0.6rem;
+  overflow-x: auto;
+}
+
+.pipeline-step {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(15, 27, 51, 0.8);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: #e2e8f0;
+  white-space: nowrap;
+}
+
+.pipeline-arrow {
+  color: var(--nt-sky);
+  font-size: 1.1rem;
+  opacity: 0.7;
+}
+
+/* Biosignal Waveform Divider */
+.waveform-divider {
+  width: 100%;
+  height: 20px;
+  margin: 1.5rem 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 24' preserveAspectRatio='none'%3E%3Cpath d='M0,12 L100,12 L110,4 L120,20 L130,2 L140,16 L150,12 L300,12 L310,6 L320,18 L330,12 L450,12 L460,3 L470,22 L480,1 L490,17 L500,12 L700,12 L710,5 L720,19 L730,12 L900,12 L910,2 L920,22 L930,12 L1200,12' fill='none' stroke='rgba(56,189,248,0.25)' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: 600px 20px;
+  opacity: 0.7;
+}
+
+/* Evidence Badges */
+.nt-badge {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 20px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-right: 0.4rem;
+}
+
+.nt-badge-standard {
+  background: rgba(0, 212, 170, 0.18);
+  color: #2dd4bf;
+  border: 1px solid rgba(0, 212, 170, 0.4);
+}
+
+.nt-badge-custom {
+  background: rgba(56, 189, 248, 0.18);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+}
+
+.nt-badge-heuristic {
+  background: rgba(245, 158, 11, 0.18);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.nt-badge-uncertain {
+  background: rgba(244, 63, 94, 0.18);
+  color: #fb7185;
+  border: 1px solid rgba(244, 63, 94, 0.4);
+}
+
+/* Sidebar Styling */
+[data-testid="stSidebar"] {
+  background: #050811 !important;
+  border-right: 1px solid rgba(56, 189, 248, 0.12) !important;
+}
+
+[data-testid="stSidebar"] hr {
+  border-color: rgba(56, 189, 248, 0.15) !important;
+}
+
+/* Step Progress Indicator in Sidebar */
+.step-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  background: rgba(12, 21, 39, 0.6);
+  border: 1px solid var(--nt-border);
+  border-radius: 10px;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.82rem;
+  color: var(--nt-text-secondary);
+  padding: 0.35rem 0.5rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.step-item.active {
+  background: rgba(0, 242, 254, 0.12);
+  color: var(--nt-cyan);
+  font-weight: 600;
+  border-left: 2px solid var(--nt-cyan);
+}
+
+/* Buttons */
+.stButton > button {
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  font-size: 0.92rem !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  border: 1px solid var(--nt-border) !important;
+}
+
+.stButton > button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 242, 254, 0.2) !important;
+  border-color: var(--nt-cyan) !important;
+}
+
+/* Responsive Digital Twin Centerpiece */
+.twin-centerpiece {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 210px;
+  height: 210px;
+  margin: 0 auto;
+}
+
+.twin-centerpiece svg {
+  filter: drop-shadow(0 0 12px rgba(0, 242, 254, 0.3));
+}
+

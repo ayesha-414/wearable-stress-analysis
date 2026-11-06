@@ -1,0 +1,332 @@
+{
+  "_readme": "Every item needs at least one source, an evidence note and a contraindication note (enforced by tests). Source level A = page/record seen; B = seen only via a secondary source. No item may promise an effect on stress.",
+  "categories": [
+    "immediate_overwhelm",
+    "study_work_pressure",
+    "sleep",
+    "emotional_distress",
+    "physical_tension",
+    "general"
+  ],
+  "items": [
+    {
+      "id": "who_grounding",
+      "title": "A short grounding exercise",
+      "categories": [
+        "immediate_overwhelm",
+        "general"
+      ],
+      "text": "When things feel like too much, grounding can help bring your attention back to the present. The WHO guide includes audio-guided grounding exercises you can follow at your own pace. If you would like to try something right now: notice your feet on the floor and the support of the chair, and quietly name three things you can see.",
+      "sources": [
+        {
+          "name": "WHO (2020). Doing What Matters in Times of Stress: an illustrated guide",
+          "url": "https://who.int/publications/i/item/9789240003927",
+          "level": "A"
+        },
+        {
+          "name": "Tol et al. (2020) Lancet Glob Health 8(2):e254-e263 (Self-Help Plus, facilitator-guided group course in distressed refugee women)",
+          "url": "https://doi.org/10.1016/S2214-109X(19)30504-2",
+          "level": "A"
+        }
+      ],
+      "evidence_note": "WHO self-help skill. Trial evidence is for facilitator-guided delivery in distressed adults (Tol 2020), not for an unguided app. No effect on stress is claimed.",
+      "contraindications": "Stop if this feels uncomfortable. It is optional and not a substitute for support.",
+      "priority": 1.0,
+      "link": "https://who.int/publications/i/item/9789240003927"
+    },
+    {
+      "id": "who_notice_name",
+      "title": "Notice and name what is showing up",
+      "categories": [
+        "immediate_overwhelm",
+        "emotional_distress"
+      ],
+      "text": "You might gently notice and name difficult thoughts or feelings, without trying to push them away. The WHO guide has an audio exercise called 'Notice and Name' that walks you through it.",
+      "sources": [
+        {
+          "name": "WHO (2020). Doing What Matters in Times of Stress: an illustrated guide",
+          "url": "https://who.int/publications/i/item/9789240003927",
+          "level": "A"
+        },
+        {
+          "name": "Tol et al. (2020) Lancet Glob Health 8(2):e254-e263 (Self-Help Plus, facilitator-guided group course in distressed refugee women)",
+          "url": "https://doi.org/10.1016/S2214-109X(19)30504-2",
+          "level": "A"
+        }
+      ],
+      "evidence_note": "WHO self-help skill (by title; content to be followed in the WHO audio). Same evidence caveat as grounding.",
+      "contraindications": "Skip if it makes distress worse. Not a substitute for support.",
+      "priority": 0.8,
+      "link": "https://who.int/publications/i/item/9789240003927"
+    },
+    {
+      "id": "who_kindness",
+      "title": "Being kind to yourself",
+      "categories": [
+        "emotional_distress",
+        "study_work_pressure"
+      ],
+      "text": "Some people find it helps to treat themselves the way they would treat a friend in the same situation. The WHO guide includes a short audio exercise on being kind to yourself.",
+      "sources": [
+        {
+          "name": "WHO (2020). Doing What Matters in Times of Stress: an illustrated guide",
+          "url": "https://who.int/publications/i/item/9789240003927",
+          "level": "A"
+        },
+        {
+          "name": "Tol et al. (2020) Lancet Glob Health 8(2):e254-e263 (Self-Help Plus, facilitator-guided group course in distressed refugee women)",
+          "url": "https://doi.org/10.1016/S2214-109X(19)30504-2",
+          "level": "A"
+        }
+      ],
+      "evidence_note": "WHO self-help skill (by title). Same evidence caveat as grounding.",
+      "contraindications": "Optional. Skip if it does not feel right.",
+      "priority": 0.7,
+      "link": "https://who.int/publications/i/item/9789240003927"
+    },
+    {
+      "id": "who_making_room",
+      "title": "Making room for difficult feelings",
+      "categories": [
+        "emotional_distress",
+        "immediate_overwhelm"
+      ],
+      "text": "The WHO guide has an audio exercise called 'Making Room' about allowing difficult feelings to be there while you do what matters to you.",
+      "sources": [
+        {
+          "name": "WHO (2020). Doing What Matters in Times of Stress: an illustrated guide",
+          "url": "https://who.int/publications/i/item/9789240003927",
+          "level": "A"
+        },
+        {
+          "name": "Tol et al. (2020) Lancet Glob Health 8(2):e254-e263 (Self-Help Plus, facilitator-guided group course in distressed refugee women)",
+          "url": "https://doi.org/10.1016/S2214-109X(19)30504-2",
+          "level": "A"
+        }
+      ],
+      "evidence_note": "WHO self-help skill (by title). Same evidence caveat as grounding.",
+      "contraindications": "Skip if it makes distress worse. Not a substitute for support.",
+      "priority": 0.6,
+      "link": "https://who.int/publications/i/item/9789240003927"
+    },
+    {
+      "id": "slow_breathing",
+      "title": "Slow, gentle breathing",
+      "categories": [
+        "immediate_overwhelm",
+        "physical_tension"
+      ],
+      "text": "Breathe in gently through your nose and let the breath out slowly, a little longer than the in-breath. Keep it comfortable and natural, and do this for a minute or two if you like. Do not hold your breath or force it.",
+      "sources": [
+        {
+          "name": "Fincham et al. (2023) Sci Rep 13:432 (meta-analysis of breathwork RCTs; self-reported outcomes; mostly moderate risk of bias)",
+          "url": "https://doi.org/10.1038/s41598-022-27247-y",
+          "level": "A"
+        },
+        {
+          "name": "Mutze et al. (2025) Front Psychiatry 16:1616996 (patients; adverse events more frequent with fast than slow breathing)",
+          "url": "https://doi.org/10.3389/fpsyt.2025.1616996",
+          "level": "A"
+        }
+      ],
+      "evidence_note": "Meta-analytic evidence of small to moderate short-term benefit on SELF-REPORTED outcomes, most trials at moderate risk of bias; adverse events were more common with fast techniques, so only slow, gentle breathing is offered.",
+      "contraindications": "Stop if you feel dizzy, light-headed or uncomfortable. Avoid breath-holding and forceful breathing. Take care if you have a breathing or heart condition and ask a health professional.",
+      "priority": 0.9,
+      "excluded_when": [
+        "breathing_declined"
+      ]
+    },
+    {
+      "id": "split_task",
+      "title": "Split the big task into small steps",
+      "categories": [
+        "study_work_pressure"
+      ],
+      "text": "If a task feels overwhelming, try breaking it into smaller chunks and write down just the very next small step. Give yourself credit for finishing each one.",
+      "sources": [
+        {
+          "name": "NHS Every Mind Matters: how to deal with change (break tasks into manageable chunks; talk to someone you trust)",
+          "url": "https://www.nhs.uk/every-mind-matters/mental-wellbeing-tips/how-to-deal-with-change",
+          "level": "A"
+        },
+        {
+          "name": "Every Mind Matters top tips (seen via a secondary summary: split big tasks, stay active, talk to someone, plan ahead)",
+          "url": "https://www.nhbf.co.uk/news-and-blogs/blog/nhbf-backs-public-health-englands-better-health-every-mind",
+          "level": "B"
+        }
+      ],
+      "evidence_note": "General self-help idea from public-health guidance. Not trial evidence for this prototype, and no effect on stress is claimed.",
+      "contraindications": "Optional.",
+      "priority": 1.0,
+      "link": "https://www.nhs.uk/every-mind-matters/"
+    },
+    {
+      "id": "plan_ahead",
+      "title": "Make a short plan",
+      "categories": [
+        "study_work_pressure"
+      ],
+      "text": "You could list what needs doing, decide what comes first, and note a time for it. A short plan can make a heavy day feel more manageable.",
+      "sources": [
+        {
+          "name": "Every Mind Matters top tips (seen via a secondary summary: split big tasks, stay active, talk to someone, plan ahead)",
+          "url": "https://www.nhbf.co.uk/news-and-blogs/blog/nhbf-backs-public-health-englands-better-health-every-mind",
+          "level": "B"
+        }
+      ],
+      "evidence_note": "General self-help idea from public-health guidance. Not trial evidence for this prototype, and no effect on stress is claimed.",
+      "contraindications": "Optional.",
+      "priority": 0.8,
+      "link": "https://www.nhs.uk/every-mind-matters/"
+    },
+    {
+      "id": "take_break",
+      "title": "Take a proper break",
+      "categories": [
+        "study_work_pressure",
+        "physical_tension",
+        "general"
+      ],
+      "text": "If it is possible right now, step away from what you are doing for a few minutes. Get some water, look away from the screen, or simply pause.",
+      "sources": [
+        {
+          "name": "Every Mind Matters top tips (seen via a secondary summary: split big tasks, stay active, talk to someone, plan ahead)",
+          "url": "https://www.nhbf.co.uk/news-and-blogs/blog/nhbf-backs-public-health-englands-better-health-every-mind",
+          "level": "B"
+        }
+      ],
+      "evidence_note": "General self-help idea from public-health guidance. Not trial evidence for this prototype, and no effect on stress is claimed.",
+      "contraindications": "Optional.",
+      "priority": 0.7,
+      "link": "https://www.nhs.uk/every-mind-matters/"
+    },
+    {
+      "id": "gentle_movement",
+      "title": "A short walk or gentle stretch",
+      "categories": [
+        "physical_tension",
+        "study_work_pressure",
+        "general"
+      ],
+      "text": "If your body feels tense, a short walk or gentle stretching may help you loosen up. Only do what feels comfortable and safe for you.",
+      "sources": [
+        {
+          "name": "Every Mind Matters top tips (seen via a secondary summary: split big tasks, stay active, talk to someone, plan ahead)",
+          "url": "https://www.nhbf.co.uk/news-and-blogs/blog/nhbf-backs-public-health-englands-better-health-every-mind",
+          "level": "B"
+        }
+      ],
+      "evidence_note": "General self-help idea from public-health guidance. Not trial evidence for this prototype, and no effect on stress is claimed.",
+      "contraindications": "Skip if you are in pain, injured, unwell, or have been advised not to exercise. Not suggested when you have just been very active.",
+      "priority": 0.8,
+      "excluded_when": [
+        "recent_exertion",
+        "movement_declined"
+      ],
+      "link": "https://www.nhs.uk/every-mind-matters/"
+    },
+    {
+      "id": "talk_to_someone",
+      "title": "Talk to someone you trust",
+      "categories": [
+        "emotional_distress",
+        "general",
+        "immediate_overwhelm"
+      ],
+      "text": "Sharing how you feel with a friend, family member, teacher or colleague can help you feel more supported. You do not have to explain everything.",
+      "sources": [
+        {
+          "name": "NHS Every Mind Matters: how to deal with change (break tasks into manageable chunks; talk to someone you trust)",
+          "url": "https://www.nhs.uk/every-mind-matters/mental-wellbeing-tips/how-to-deal-with-change",
+          "level": "A"
+        },
+        {
+          "name": "Every Mind Matters top tips (seen via a secondary summary: split big tasks, stay active, talk to someone, plan ahead)",
+          "url": "https://www.nhbf.co.uk/news-and-blogs/blog/nhbf-backs-public-health-englands-better-health-every-mind",
+          "level": "B"
+        }
+      ],
+      "evidence_note": "General self-help idea from public-health guidance. Not trial evidence for this prototype, and no effect on stress is claimed.",
+      "contraindications": "Only if it feels safe and right for you.",
+      "priority": 0.9,
+      "link": "https://www.nhs.uk/every-mind-matters/"
+    },
+    {
+      "id": "professional_support",
+      "title": "Consider speaking with a professional",
+      "categories": [
+        "emotional_distress"
+      ],
+      "text": "If these feelings keep coming back, feel heavy, or get in the way of daily life, it can help to speak with a doctor, counsellor or other health professional. This app cannot replace that kind of support.",
+      "sources": [
+        {
+          "name": "NHS Every Mind Matters",
+          "url": "https://www.nhs.uk/every-mind-matters/",
+          "level": "A"
+        }
+      ],
+      "evidence_note": "Signposting only; no effect is claimed.",
+      "contraindications": "None.",
+      "priority": 0.5,
+      "link": "https://www.nhs.uk/every-mind-matters/"
+    },
+    {
+      "id": "sleep_routine",
+      "title": "A steadier sleep routine",
+      "categories": [
+        "sleep"
+      ],
+      "text": "Going to bed and getting up at around the same times each day can help your body settle into a rhythm. Change only what feels realistic for you.",
+      "sources": [
+        {
+          "name": "NHS Every Mind Matters: sleep hygiene tips (regular routine; write next-day list before bed)",
+          "url": "https://www.nhs.uk/every-mind-matters/coronavirus/how-to-fall-asleep-faster-and-sleep-better/",
+          "level": "A"
+        }
+      ],
+      "evidence_note": "General self-help idea from public-health guidance. Not trial evidence for this prototype, and no effect on stress is claimed.",
+      "contraindications": "If sleep problems are persistent, speak to a health professional.",
+      "priority": 1.0,
+      "link": "https://www.nhs.uk/every-mind-matters/"
+    },
+    {
+      "id": "sleep_worry_list",
+      "title": "Write tomorrow's list before bed",
+      "categories": [
+        "sleep",
+        "study_work_pressure"
+      ],
+      "text": "If worries keep you awake, try writing down what you need to do tomorrow before you go to bed. Writing things down can help clear your mind.",
+      "sources": [
+        {
+          "name": "NHS Every Mind Matters: sleep hygiene tips (regular routine; write next-day list before bed)",
+          "url": "https://www.nhs.uk/every-mind-matters/coronavirus/how-to-fall-asleep-faster-and-sleep-better/",
+          "level": "A"
+        }
+      ],
+      "evidence_note": "General self-help idea from public-health guidance. Not trial evidence for this prototype, and no effect on stress is claimed.",
+      "contraindications": "Optional.",
+      "priority": 0.9,
+      "link": "https://www.nhs.uk/every-mind-matters/"
+    },
+    {
+      "id": "sleep_winddown",
+      "title": "Wind down before bed",
+      "categories": [
+        "sleep"
+      ],
+      "text": "Giving yourself some quiet time before bed, away from stimulating activities and screens, and avoiding caffeine, alcohol and nicotine close to bedtime, may help.",
+      "sources": [
+        {
+          "name": "NHS Borders sleep tips (wind-down 60-90 min; avoid alcohol, caffeine, nicotine near bedtime) - secondary news report",
+          "url": "https://www.bordertelegraph.com/news/23395008.world-sleep-day-nhs-borders-shares-sleep-health-tips/",
+          "level": "B"
+        }
+      ],
+      "evidence_note": "General self-help idea from public-health guidance. Not trial evidence for this prototype, and no effect on stress is claimed. Source is a secondary news report of NHS Borders advice.",
+      "contraindications": "Optional.",
+      "priority": 0.8,
+      "link": "https://www.nhs.uk/every-mind-matters/"
+    }
+  ]
+}

@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wearable Stress Analysis — Project Presentation</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#0a0e1a;--surface:#111827;--card:#1a2036;--border:#2d3555;
+--accent:#6366f1;--accent2:#818cf8;--accent3:#a78bfa;
+--green:#34d399;--red:#f87171;--amber:#fbbf24;--cyan:#22d3ee;
+--text:#e2e8f0;--muted:#94a3b8;--white:#ffffff;
+--grad1:linear-gradient(135deg,#6366f1,#8b5cf6,#a78bfa);
+--grad2:linear-gradient(135deg,#0ea5e9,#6366f1);
+--grad3:linear-gradient(135deg,#10b981,#06b6d4);
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+
+/* SLIDES */
+.slide{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:60px 40px;position:relative;overflow:hidden}
+.slide::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(99,102,241,.08) 0%,transparent 60%);pointer-events:none}
+.slide-inner{max-width:1100px;width:100%;z-index:2;animation:fadeUp .7s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+/* TITLE SLIDE */
+.title-slide .slide-inner{text-align:center}
+.title-badge{display:inline-block;padding:6px 18px;border-radius:50px;background:rgba(99,102,241,.15);border:1px solid rgba(99,102,241,.3);color:var(--accent2);font-size:.8rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:24px}
+.title-main{font-size:3.2rem;font-weight:900;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.15;margin-bottom:16px}
+.title-sub{font-size:1.2rem;color:var(--muted);max-width:700px;margin:0 auto 40px;line-height:1.6}
+.title-meta{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+.meta-chip{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:12px;background:var(--card);border:1px solid var(--border);font-size:.85rem;color:var(--muted)}
+.meta-chip .dot{width:8px;height:8px;border-radius:50%}
+
+/* SECTION HEADERS */
+.section-num{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--accent2);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.section-num::after{content:'';flex:1;height:1px;background:var(--border)}
+.section-title{font-size:2.2rem;font-weight:800;margin-bottom:8px;color:var(--white)}
+.section-desc{font-size:1rem;color:var(--muted);margin-bottom:32px;max-width:750px;line-height:1.65}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;transition:all .3s ease}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 30px rgba(99,102,241,.1)}
+.card-grid{display:grid;gap:20px}
+.card-grid.cols-2{grid-template-columns:repeat(2,1fr)}
+.card-grid.cols-3{grid-template-columns:repeat(3,1fr)}
+.card-grid.cols-4{grid-template-columns:repeat(4,1fr)}
+.card-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:14px}
+.card h3{font-size:1rem;font-weight:700;margin-bottom:8px;color:var(--white)}
+.card p,.card li{font-size:.88rem;color:var(--muted);line-height:1.55}
+.card ul{list-style:none;padding:0}
+.card ul li{padding:4px 0;padding-left:18px;position:relative}
+.card ul li::before{content:'›';position:absolute;left:0;color:var(--accent2);font-weight:700}
+
+/* STAT BOXES */
+.stat-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.stat-box{flex:1;min-width:140px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;text-align:center}
+.stat-val{font-size:2rem;font-weight:800;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat-label{font-size:.78rem;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+
+/* TABLES */
+.table-wrap{overflow-x:auto;border-radius:14px;border:1px solid var(--border);background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+th{background:rgba(99,102,241,.1);color:var(--accent2);font-weight:600;text-align:left;padding:14px 16px;white-space:nowrap}
+td{padding:12px 16px;border-top:1px solid var(--border);color:var(--muted)}
+tr:hover td{background:rgba(99,102,241,.04)}
+
+/* IMAGE containers */
+.img-grid{display:grid;gap:16px}
+.img-grid.cols-2{grid-template-columns:repeat(2,1fr)}
+.img-card{border-radius:14px;overflow:hidden;border:1px solid var(--border);background:var(--surface)}
+.img-card img{width:100%;display:block;background:#fff}
+.img-caption{padding:10px 14px;font-size:.78rem;color:var(--muted);text-align:center}
+
+/* COMPARISON BAR */
+.compare-bar{display:flex;align-items:center;gap:16px;padding:18px 24px;border-radius:14px;background:var(--card);border:1px solid var(--border);margin-bottom:14px}
+.compare-bar .label{width:60px;font-weight:700;font-size:.9rem;color:var(--white)}
+.bar-track{flex:1;height:28px;background:var(--surface);border-radius:8px;overflow:hidden;position:relative}
+.bar-fill{height:100%;border-radius:8px;display:flex;align-items:center;justify-content:flex-end;padding-right:10px;font-size:.75rem;font-weight:700;color:#fff;transition:width .8s ease}
+.compare-bar .value{width:90px;text-align:right;font-family:'JetBrains Mono',monospace;font-size:.95rem;font-weight:700}
+
+/* BADGES */
+.badge{display:inline-block;padding:3px 10px;border-radius:6px;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.badge-green{background:rgba(52,211,153,.12);color:var(--green)}
+.badge-amber{background:rgba(251,191,36,.12);color:var(--amber)}
+.badge-red{background:rgba(248,113,113,.12);color:var(--red)}
+.badge-blue{background:rgba(99,102,241,.12);color:var(--accent2)}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:36px}
+.timeline::before{content:'';position:absolute;left:14px;top:0;bottom:0;width:2px;background:var(--border)}
+.tl-item{position:relative;margin-bottom:24px}
+.tl-dot{position:absolute;left:-30px;top:4px;width:14px;height:14px;border-radius:50%;border:2px solid var(--accent);background:var(--bg)}
+.tl-item.done .tl-dot{background:var(--green);border-color:var(--green)}
+.tl-item h4{font-size:.95rem;font-weight:700;color:var(--white);margin-bottom:4px}
+.tl-item p{font-size:.82rem;color:var(--muted)}
+
+/* TECH STACK PILLS */
+.tech-pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.tech-pill{padding:8px 16px;border-radius:10px;background:var(--card);border:1px solid var(--border);font-size:.85rem;font-weight:500;color:var(--text);display:flex;align-items:center;gap:8px}
+.tech-pill .tp-icon{font-size:1.1rem}
+
+/* DIVIDER */
+.slide-divider{width:60px;height:3px;border-radius:3px;background:var(--grad1);margin:20px 0}
+
+/* FOOTER NAV */
+.slide-nav{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:6px;padding:8px 14px;border-radius:50px;background:rgba(17,24,39,.85);backdrop-filter:blur(12px);border:1px solid var(--border);z-index:100}
+.slide-nav a{width:10px;height:10px;border-radius:50%;background:var(--border);display:block;transition:all .25s}
+.slide-nav a:hover,.slide-nav a.active{background:var(--accent);transform:scale(1.3)}
+
+@media(max-width:768px){
+.title-main{font-size:2rem}
+.section-title{font-size:1.5rem}
+.card-grid.cols-2,.card-grid.cols-3,.card-grid.cols-4{grid-template-columns:1fr}
+.img-grid.cols-2{grid-template-columns:1fr}
+.stat-row{flex-direction:column}
+.slide{padding:40px 20px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV DOTS -->
+<nav class="slide-nav" id="navDots"></nav>
+
+<!-- ==================== SLIDE 1: TITLE ==================== -->
+<section class="slide title-slide" id="s1">
+<div class="slide-inner">
+  <div class="title-badge">Final Project Presentation</div>
+  <h1 class="title-main">Wearable Stress Detection<br>Using Physiological Signals</h1>
+  <p class="title-sub">Transforming raw Empatica E4 wearable sensor data into machine-learning models that distinguish high-stress from low-stress conditions using LOSO cross-validation.</p>
+  <div class="title-meta">
+    <span class="meta-chip"><span class="dot" style="background:var(--green)"></span>Dataset: PhysioNet v1.0.1</span>
+    <span class="meta-chip"><span class="dot" style="background:var(--accent)"></span>36 Participants</span>
+    <span class="meta-chip"><span class="dot" style="background:var(--amber)"></span>23 Features Extracted</span>
+    <span class="meta-chip"><span class="dot" style="background:var(--cyan)"></span>LOSO Evaluation</span>
+  </div>
+</div>
+</section>
+
+<!-- ==================== SLIDE 2: PROJECT OVERVIEW ==================== -->
+<section class="slide" id="s2">
+<div class="slide-inner">
+  <div class="section-num">Phase 01 &nbsp;·&nbsp; Overview</div>
+  <h2 class="section-title">Project Objective & Dataset</h2>
+  <p class="section-desc">We investigate whether physiological signals recorded by the Empatica E4 wrist-worn device can reliably distinguish high-stress from low-stress states across participants.</p>
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val">36</div><div class="stat-label">Participants</div></div>
+    <div class="stat-box"><div class="stat-val">6</div><div class="stat-label">Sensor Types</div></div>
+    <div class="stat-box"><div class="stat-val">3</div><div class="stat-label">Activities</div></div>
+    <div class="stat-box"><div class="stat-val">94</div><div class="stat-label">Subject-Activity Pairs</div></div>
+  </div>
+
+  <div class="card-grid cols-3">
+    <div class="card">
+      <div class="card-icon" style="background:rgba(99,102,241,.12);color:var(--accent2)">💓</div>
+      <h3>Physiological Sensors</h3>
+      <ul><li>Heart Rate (HR)</li><li>Electrodermal Activity (EDA)</li><li>Skin Temperature (TEMP)</li><li>Blood Volume Pulse (BVP)</li><li>Inter-Beat Interval (IBI)</li><li>3-axis Accelerometer (ACC)</li></ul>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:rgba(52,211,153,.12);color:var(--green)">🏃</div>
+      <h3>Activity Protocols</h3>
+      <ul><li>STRESS — 35 subjects</li><li>AEROBIC — 29 subjects</li><li>ANAEROBIC — 30 subjects</li></ul>
+      <p style="margin-top:10px">Each protocol includes multiple timed stages marked by event tags.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:rgba(251,191,36,.12);color:var(--amber)">📊</div>
+      <h3>Stress Ratings</h3>
+      <ul><li>Self-reported per stage</li><li>Scale: 0–10</li><li>Two cohorts: V1 (S-prefix) &amp; V2 (f-prefix)</li><li>Mapped → High ≥ 5, Low &lt; 5</li></ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ==================== SLIDE 3: DATA LOADING ==================== -->
+<section class="slide" id="s3">
+<div class="slide-inner">
+  <div class="section-num">Phase 02 &nbsp;·&nbsp; Data Loading & Verification</div>
+  <h2 class="section-title">Dataset Loading & Quality Check</h2>
+  <p class="section-desc">Script 01 loads all sensor recordings, verifies participant availability, handles split sessions and duplicate tails, and validates signal integrity.</p>
+
+  <div class="card-grid cols-2">
+    <div class="card">
+      <h3>✅ Loading Results</h3>
+      <ul>
+        <li>94 subject-activity pairs loaded</li>
+        <li>STRESS: 35 subjects detected</li>
+        <li>AEROBIC: 29 subjects detected</li>
+        <li>ANAEROBIC: 30 subjects detected</li>
+        <li>Stress Level V1: 18 × 8 ratings</li>
+        <li>Stress Level V2: 18 × 7 ratings</li>
+        <li>Subject info: 36 × 9 metadata</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>⚠️ Data Issues Detected</h3>
+      <ul>
+        <li>S02 STRESS — duplicate tail truncated in ACC (row 49544), BVP (row 99090), EDA (row 6194), TEMP (row 6194)</li>
+        <li>f07 STRESS — skipped invalid BVP, HR, IBI, TEMP sensors</li>
+        <li>1 entry with missing HR signal</li>
+        <li>All issues handled automatically by the loader</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="img-grid cols-2" style="margin-top:24px">
+    <div class="img-card"><img src="images/02_subject_demographics.png" alt="Demographics"><div class="img-caption">Subject Demographics Distribution</div></div>
+    <div class="img-card"><img src="images/02_signal_quality_heatmap.png" alt="Signal Quality"><div class="img-caption">Signal Quality Heatmap Across Subjects</div></div>
+  </div>
+</div>
+</section>
+
+<!-- ==================== SLIDE 4: EDA ==================== -->
+<section class="slide" id="s4">
+<div class="slide-inner">
+  <div class="section-num">Phase 03 &nbsp;·&nbsp; Exploratory Data Analysis</div>
+  <h2 class="section-title">Understanding the Signal Patterns</h2>
+  <p class="section-desc">Script 02 explores sensor data using statistical summaries and visualisations — helping identify signal distributions, missing values, and stress-related patterns.</p>
+
+  <div class="img-grid cols-2">
+    <div class="img-card"><img src="images/02_stress_level_v1_all.png" alt="Stress V1"><div class="img-caption">Stress Ratings — Cohort V1 (All Stages)</div></div>
+    <div class="img-card"><img src="images/02_stress_level_v2_all.png" alt="Stress V2"><div class="img-caption">Stress Ratings — Cohort V2 (All Stages)</div></div>
+  </div>
+  <div class="img-grid cols-2" style="margin-top:16px">
+    <div class="img-card"><img src="images/02_stress_mean_by_stage.png" alt="Mean by Stage"><div class="img-caption">Mean Stress Rating by Stage</div></div>
+    <div class="img-card"><img src="images/02_subject_signal_sample_S01.png" alt="Signal Sample"><div class="img-caption">Sample Multi-Sensor Signal — Subject S01</div></div>
+  </div>
+</div>
+</section>
+
+<!-- ==================== SLIDE 5: PREPROCESSING ==================== -->
+<section class="slide" id="s5">
+<div class="slide-inner">
+  <div class="section-num">Phase 04 &nbsp;·&nbsp; Data Preprocessing</div>
+  <h2 class="section-title">Signal Cleaning & Segmentation</h2>
+  <p class="section-desc">Raw signals are cleaned, resampled to 1 Hz, and segmented into stage-level windows using event tags from the protocol.</p>
+
+  <div class="card-grid cols-2">
+    <div class="card">
+      <h3>🔧 Cleaning Pipeline</h3>
+      <ul>
+        <li>UTC timestamps → relative seconds (t=0)</li>
+        <li>Resample all regular signals to 1 Hz (mean aggregation)</li>
+        <li>HR clipped to [30, 220] bpm</li>
+        <li>EDA clipped to [0, 60] µS</li>
+        <li>TEMP clipped to [20, 42] °C</li>
+        <li>Linear interpolation for gaps ≤ 5 seconds</li>
+        <li>ACC → activity magnitude (32-sample EMA)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>📐 Stage Segmentation</h3>
+      <ul>
+        <li>V1 STRESS protocol → 8 stages (Baseline, Stroop, Rest, TMCT, etc.)</li>
+        <li>V2 STRESS protocol → 7 stages</li>
+        <li>Tags.csv event marks define stage boundaries</li>
+        <li>IBI sliced by offset_s within window</li>
+        <li>Each stage window → independent feature extraction unit</li>
+        <li>Duplicate tails and split sessions handled</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:20px">
+    <h3>🔀 Preprocessing Flow</h3>
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px">
+      <span class="badge badge-blue">Raw CSV</span> → <span class="badge badge-amber">Timestamp Align</span> → <span class="badge badge-green">Resample 1Hz</span> → <span class="badge badge-amber">Clip Outliers</span> → <span class="badge badge-green">Interpolate</span> → <span class="badge badge-blue">Stage Segment</span> → <span class="badge badge-green">Feature Ready</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ==================== SLIDE 6: FEATURE ENGINEERING ==================== -->
+<section class="slide" id="s6">
+<div class="slide-inner">
+  <div class="section-num">Phase 05 &nbsp;·&nbsp; Feature Engineering</div>
+  <h2 class="section-title">23 Physiological Features Extracted</h2>
+  <p class="section-desc">Script 03 converts raw signals into numerical features across 5 physiological domains. The resulting feature table contains 263 labelled rows from 35 unique participants.</p>
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val">263</div><div class="stat-label">Feature Rows</div></div>
+    <div class="stat-box"><div class="stat-val">23</div><div class="stat-label">Features</div></div>
+    <div class="stat-box"><div class="stat-val">35</div><div class="stat-label">Subjects</div></div>
+    <div class="stat-box"><div class="stat-val">28</div><div class="stat-label">Total Columns</div></div>
+  </div>
+
+  <div class="table-wrap" style="margin-bottom:20px">
+    <table>
+      <thead><tr><th>Domain</th><th>Features</th><th>Count</th><th>Completeness</th></tr></thead>
+      <tbody>
+        <tr><td>Heart Rate (HR)</td><td>mean, std, min, max, range, rmssd_approx</td><td>6</td><td><span class="badge badge-green">97.3%</span></td></tr>
+        <tr><td>Electrodermal (EDA)</td><td>mean, std, slope, range, scl_mean, scr_count</td><td>6</td><td><span class="badge badge-green">100%</span></td></tr>
+        <tr><td>Temperature</td><td>mean, std, slope</td><td>3</td><td><span class="badge badge-green">97.3%</span></td></tr>
+        <tr><td>Acceleration</td><td>mean, std, max</td><td>3</td><td><span class="badge badge-green">100%</span></td></tr>
+        <tr><td>HRV (IBI-based)</td><td>mean_ibi, sdnn, rmssd, pnn50, lf_hf_ratio</td><td>5</td><td><span class="badge badge-amber">80.6%</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="img-grid cols-2">
+    <div class="img-card"><img src="images/03_feature_distributions.png" alt="Distributions"><div class="img-caption">Feature Distributions Across All Samples</div></div>
+    <div class="img-card"><img src="images/03_feature_correlation_matrix.png" alt="Correlation"><div class="img-caption">Feature Correlation Matrix</div></div>
+  </div>
+</div>
+</section>
+
+<!-- ==================== SLIDE 7: LABEL CREATION + STRESS ANALYSIS ==================== -->
+<section class="slide" id="s7">
+<div class="slide-inner">
+  <div class="section-num">Phase 06–08 &nbsp;·&nbsp; Label Creation & Stress Analysis</div>
+  <h2 class="section-title">Stress Labelling & Pattern Analysis</h2>
+  <p class="section-desc">Stress ratings are binarised (≥5 = High, &lt;5 = Low). Script 04 analyses stage-level differences using statistical tests. TMCT and Subtract stages show significantly elevated stress.</p>
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val">162</div><div class="stat-label">Low Stress Samples</div></div>
+    <div class="stat-box"><div class="stat-val">101</div><div class="stat-label">High Stress Samples</div></div>
+    <div class="stat-box"><div class="stat-val">≥ 5</div><div class="stat-label">Threshold</div></div>
+  </div>
+
+  <div class="table-wrap" style="margin-bottom:20px">
+    <table>
+      <thead><tr><th>Stage</th><th>Mean (V1)</th><th>Cohen's d</th><th>Significant?</th></tr></thead>
+      <tbody>
+        <tr><td>Baseline</td><td>3.44</td><td>0.000</td><td>—</td></tr>
+        <tr><td>Stroop</td><td>3.97</td><td>0.277</td><td>No</td></tr>
+        <tr><td>TMCT</td><td>5.08</td><td>0.809</td><td><span class="badge badge-green">Yes (p=0.004)</span></td></tr>
+        <tr><td>Subtract</td><td>4.53</td><td>0.497</td><td><span class="badge badge-green">Yes (p=0.024)</span></td></tr>
+        <tr><td>Real Opinion</td><td>4.14</td><td>0.322</td><td>No (p=0.079)</td></tr>
+        <tr><td>Opposite Opinion</td><td>4.31</td><td>0.383</td><td>No (p=0.084)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="img-grid cols-2">
+    <div class="img-card"><img src="images/03_hrv_stress_boxplot.png" alt="HRV"><div class="img-caption">HRV Features — Low vs High Stress</div></div>
+    <div class="img-card"><img src="images/03_eda_stress_boxplot.png" alt="EDA"><div class="img-caption">EDA Features — Low vs High Stress</div></div>
+  </div>
+  <div class="img-grid cols-2" style="margin-top:16px">
+    <div class="img-card"><img src="images/04_stress_trajectory_v1.png" alt="Trajectory V1"><div class="img-caption">Stress Trajectory — Cohort V1</div></div>
+    <div class="img-card"><img src="images/04_stress_heatmap_v1.png" alt="Heatmap"><div class="img-caption">Stress Heatmap — Individual Subjects (V1)</div></div>
+  </div>
+</div>
+</section>
+
+<!-- ==================== SLIDE 8: MODEL TRAINING ==================== -->
+<section class="slide" id="s8">
+<div class="slide-inner">
+  <div class="section-num">Phase 09 &nbsp;·&nbsp; Model Training</div>
+  <h2 class="section-title">Machine Learning Models</h2>
+  <p class="section-desc">Two classifiers are trained with a scikit-learn pipeline: median imputation → StandardScaler → classifier. Both use class_weight="balanced" to handle imbalanced labels.</p>
+
+  <div class="card-grid cols-2">
+    <div class="card" style="border-left:3px solid var(--accent)">
+      <h3>🌲 Random Forest</h3>
+      <ul>
+        <li>Ensemble of 100 decision trees</li>
+        <li>Bagging with bootstrap sampling</li>
+        <li>Majority vote from all trees</li>
+        <li>Balanced class weights</li>
+        <li>Provides feature importance (Gini)</li>
+        <li>random_state=42 for reproducibility</li>
+      </ul>
+    </div>
+    <div class="card" style="border-left:3px solid var(--cyan)">
+      <h3>⚡ SVM (RBF Kernel)</h3>
+      <ul>
+        <li>Support Vector Machine with RBF kernel</li>
+        <li>C=1.0, gamma=&quot;scale&quot;</li>
+        <li>Learns non-linear decision boundary</li>
+        <li>Balanced class weights</li>
+        <li>Standard scaling critical for SVM</li>
+        <li>random_state=42 for reproducibility</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:20px">
+    <h3>🔄 Training Pipeline</h3>
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px">
+      <span class="badge badge-blue">Feature Matrix (X)</span> → <span class="badge badge-amber">Median Imputation</span> → <span class="badge badge-green">StandardScaler</span> → <span class="badge badge-blue">RF / SVM</span> → <span class="badge badge-green">Predictions</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ==================== SLIDE 9: LOSO EVALUATION ==================== -->
+<section class="slide" id="s9">
+<div class="slide-inner">
+  <div class="section-num">Phase 10 &nbsp;·&nbsp; Testing & Evaluation</div>
+  <h2 class="section-title">LOSO Cross-Validation Results</h2>
+  <p class="section-desc">Leave-One-Subject-Out evaluation: each of 35 subjects is held out once for testing, training on all others. This prevents data leakage between participants.</p>
+
+  <div class="card-grid cols-2" style="margin-bottom:24px">
+    <div class="card" style="border-left:3px solid var(--accent)">
+      <h3>Random Forest Results</h3>
+      <div class="table-wrap" style="margin-top:12px">
+        <table>
+          <thead><tr><th>Metric</th><th>Low Stress</th><th>High Stress</th><th>Overall</th></tr></thead>
+          <tbody>
+            <tr><td>Precision</td><td>0.57</td><td>0.31</td><td>0.44 (macro)</td></tr>
+            <tr><td>Recall</td><td>0.60</td><td>0.29</td><td>0.44 (macro)</td></tr>
+            <tr><td>F1-Score</td><td>0.59</td><td>0.30</td><td>0.44 (macro)</td></tr>
+            <tr><td><strong>Accuracy</strong></td><td colspan="3" style="text-align:center"><strong>47.91%</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--cyan)">
+      <h3>SVM (RBF) Results</h3>
+      <div class="table-wrap" style="margin-top:12px">
+        <table>
+          <thead><tr><th>Metric</th><th>Low Stress</th><th>High Stress</th><th>Overall</th></tr></thead>
+          <tbody>
+            <tr><td>Precision</td><td>0.60</td><td>0.36</td><td>0.48 (macro)</td></tr>
+            <tr><td>Recall</td><td>0.59</td><td>0.37</td><td>0.48 (macro)</td></tr>
+            <tr><td>F1-Score</td><td>0.60</td><td>0.36</td><td>0.48 (macro)</td></tr>
+            <tr><td><strong>Accuracy</strong></td><td colspan="3" style="text-align:center"><strong>50.57%</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="img-grid cols-2">
+    <div class="img-card"><img src="images/05_confusion_matrix_rf.png" alt="CM RF"><div class="img-caption">Confusion Matrix — Random Forest (LOSO)</div></div>
+    <div class="img-card"><img src="images/05_confusion_matrix_svm.png" alt="CM SVM"><div class="img-caption">Confusion Matrix — SVM (LOSO)</div></div>
+  </div>
+  <div class="img-grid cols-2" style="margin-top:16px">
+    <div class="img-card"><img src="images/05_loso_fold_scores.png" alt="Fold Scores"><div class="img-caption">Per-Subject LOSO Fold Scores</div></div>
+    <div class="img-card"><img src="images/05_feature_importance.png" alt="Feature Importance"><div class="img-caption">Top Feature Importances — Random Forest (Gini)</div></div>
+  </div>
+</div>
+</section>
+
+<!-- ==================== SLIDE 10: COMPARISON ==================== -->
+<section class="slide" id="s10">
+<div class="slide-inner">
+  <div class="section-num">Phase 11 &nbsp;·&nbsp; Results Comparison</div>
+  <h2 class="section-title">Model Comparison & Key Findings</h2>
+  <p class="section-desc">SVM (RBF) outperforms Random Forest on both accuracy and F1-macro under LOSO evaluation. The top predictive features are EDA slope, HR RMSSD, and temperature mean.</p>
+
+  <h3 style="margin-bottom:14px;color:var(--white)">Accuracy Comparison</h3>
+  <div class="compare-bar">
+    <div class="label">RF</div>
+    <div class="bar-track"><div class="bar-fill" style="width:47.91%;background:var(--grad1)">47.9%</div></div>
+    <div class="value" style="color:var(--accent2)">0.4791</div>
+  </div>
+  <div class="compare-bar">
+    <div class="label">SVM</div>
+    <div class="bar-track"><div class="bar-fill" style="width:50.57%;background:var(--grad3)">50.6%</div></div>
+    <div class="value" style="color:var(--green)">0.5057</div>
+  </div>
+
+  <h3 style="margin:20px 0 14px;color:var(--white)">F1-Macro Comparison</h3>
+  <div class="compare-bar">
+    <div class="label">RF</div>
+    <div class="bar-track"><div class="bar-fill" style="width:44.18%;background:var(--grad1)">44.2%</div></div>
+    <div class="value" style="color:var(--accent2)">0.4418</div>
+  </div>
+  <div class="compare-bar">
+    <div class="label">SVM</div>
+    <div class="bar-track"><div class="bar-fill" style="width:47.95%;background:var(--grad3)">48.0%</div></div>
+    <div class="value" style="color:var(--green)">0.4795</div>
+  </div>
+
+  <div class="card" style="margin-top:24px">
+    <h3>🏆 Top 5 Predictive Features (by Gini Importance)</h3>
+    <div class="table-wrap" style="margin-top:12px">
+      <table>
+        <thead><tr><th>#</th><th>Feature</th><th>Importance</th><th>Domain</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><strong>eda_slope</strong></td><td>0.0716</td><td><span class="badge badge-blue">EDA</span></td></tr>
+          <tr><td>2</td><td><strong>hr_rmssd_approx</strong></td><td>0.0625</td><td><span class="badge badge-green">HR</span></td></tr>
+          <tr><td>3</td><td><strong>temp_mean</strong></td><td>0.0593</td><td><span class="badge badge-amber">TEMP</span></td></tr>
+          <tr><td>4</td><td><strong>eda_scl_mean</strong></td><td>0.0565</td><td><span class="badge badge-blue">EDA</span></td></tr>
+          <tr><td>5</td><td><strong>eda_mean</strong></td><td>0.0558</td><td><span class="badge badge-blue">EDA</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="img-card" style="margin-top:20px"><img src="images/05_classifier_comparison.png" alt="Comparison"><div class="img-caption">Classifier Comparison Chart — RF vs SVM (LOSO)</div></div>
+</div>
+</section>
+
+<!-- ==================== SLIDE 11: TECH + PIPELINE ==================== -->
+<section class="slide" id="s11">
+<div class="slide-inner">
+  <div class="section-num">Technologies & Pipeline</div>
+  <h2 class="section-title">Technology Stack & Project Structure</h2>
+  <p class="section-desc">The project follows a modular Python pipeline architecture with separate scripts for each phase, reusable source modules, and automated logging.</p>
+
+  <div class="card-grid cols-2" style="margin-bottom:24px">
+    <div class="card">
+      <h3>🛠 Technology Stack</h3>
+      <div class="tech-pills">
+        <span class="tech-pill"><span class="tp-icon">🐍</span>Python 3.13</span>
+        <span class="tech-pill"><span class="tp-icon">🐼</span>Pandas ≥2.0</span>
+        <span class="tech-pill"><span class="tp-icon">🔢</span>NumPy ≥1.24</span>
+        <span class="tech-pill"><span class="tp-icon">📈</span>Matplotlib ≥3.7</span>
+        <span class="tech-pill"><span class="tp-icon">🎨</span>Seaborn ≥0.12</span>
+        <span class="tech-pill"><span class="tp-icon">🤖</span>scikit-learn ≥1.3</span>
+        <span class="tech-pill"><span class="tp-icon">📐</span>SciPy ≥1.10</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>📂 Project Structure</h3>
+      <pre style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--muted);line-height:1.7;margin-top:8px">wearable-data/
+├── scripts/
+│   ├── 01_load_and_verify.py
+│   ├── 02_eda.py
+│   ├── 03_feature_engineering.py
+│   ├── 04_stress_analysis.py
+│   └── 05_model_evaluation.py
+├── src/
+│   ├── loader.py
+│   ├── preprocessing.py
+│   ├── features.py
+│   └── models.py
+├── data/ features/ processed/
+├── reports/figures/ (20 plots)
+├── logs/ (5 step logs)
+└── run_project.bat</pre>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🔄 Complete Pipeline Overview</h3>
+    <div class="timeline" style="margin-top:16px">
+      <div class="tl-item done"><div class="tl-dot"></div><h4>Step 1 — Load & Verify</h4><p>Load all sensor CSVs, validate participants, handle split sessions & duplicates</p></div>
+      <div class="tl-item done"><div class="tl-dot"></div><h4>Step 2 — Exploratory Data Analysis</h4><p>Statistical summaries, demographics, signal quality heatmaps, stress rating charts</p></div>
+      <div class="tl-item done"><div class="tl-dot"></div><h4>Step 3 — Feature Engineering</h4><p>Extract 23 features from HR, EDA, TEMP, ACC, IBI domains → stress_features.csv</p></div>
+      <div class="tl-item done"><div class="tl-dot"></div><h4>Step 4 — Stress Analysis</h4><p>Stage comparisons, Cohen's d, p-values, stress trajectories, heatmaps</p></div>
+      <div class="tl-item done"><div class="tl-dot"></div><h4>Step 5 — Model Evaluation (LOSO)</h4><p>RF + SVM with LOSO CV, confusion matrices, feature importance, comparison plots</p></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ==================== SLIDE 12: LIMITATIONS & FUTURE ==================== -->
+<section class="slide" id="s12">
+<div class="slide-inner">
+  <div class="section-num">Phase 12–13 &nbsp;·&nbsp; Limitations & Future Work</div>
+  <h2 class="section-title">Limitations & Future Enhancements</h2>
+
+  <div class="card-grid cols-2" style="margin-bottom:24px">
+    <div class="card" style="border-left:3px solid var(--red)">
+      <h3>⚠️ Current Limitations</h3>
+      <ul>
+        <li>Relatively small participant group (36 participants, 35 in STRESS protocol)</li>
+        <li>Missing or incomplete sensor recordings for some subjects (e.g., f07)</li>
+        <li>Individual physiological differences make generalisation difficult</li>
+        <li>Exercise/movement artefacts may affect EDA and HR signals</li>
+        <li>Moderate model accuracy (~50%) under strict LOSO evaluation</li>
+        <li>Offline analysis pipeline — not a real-time application</li>
+        <li>Self-reported stress ratings are subjective</li>
+      </ul>
+    </div>
+    <div class="card" style="border-left:3px solid var(--green)">
+      <h3>🚀 Future Enhancements</h3>
+      <ul>
+        <li>Web dashboard for interactive result exploration</li>
+        <li>User login and personal stress-history tracking</li>
+        <li>Live wearable integration (real-time streaming)</li>
+        <li>Real-time stress predictions and alerts</li>
+        <li>Additional behavioural signals (voice, sleep quality)</li>
+        <li>Deep learning models (LSTM, Transformer)</li>
+        <li>Testing with more participants and external datasets</li>
+        <li>Personalised models (fine-tuned per user)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📌 Key Takeaway</h3>
+    <p style="font-size:1rem;line-height:1.7;color:var(--text);margin-top:8px">
+      This project successfully demonstrates a complete end-to-end pipeline — from raw wearable sensor data through feature engineering to LOSO-validated machine learning classification. While the moderate accuracy reflects the genuine difficulty of person-independent stress classification from wrist-worn sensors, the pipeline provides a solid foundation for future improvements with larger datasets, advanced models, and real-time deployment.
+    </p>
+  </div>
+</div>
+</section>
+
+<!-- ==================== SLIDE 13: THANK YOU ==================== -->
+<section class="slide title-slide" id="s13">
+<div class="slide-inner">
+  <div class="title-badge">Thank You</div>
+  <h1 class="title-main">Questions?</h1>
+  <p class="title-sub">Wearable Stress Detection Using Physiological Signals — A complete ML pipeline from sensor data to LOSO-evaluated classification.</p>
+  <div class="title-meta">
+    <span class="meta-chip"><span class="dot" style="background:var(--green)"></span>5 Pipeline Steps ✓</span>
+    <span class="meta-chip"><span class="dot" style="background:var(--accent)"></span>23 Features ✓</span>
+    <span class="meta-chip"><span class="dot" style="background:var(--cyan)"></span>2 Models Evaluated ✓</span>
+    <span class="meta-chip"><span class="dot" style="background:var(--amber)"></span>35-Fold LOSO ✓</span>
+  </div>
+</div>
+</section>
+
+<script>
+// Build nav dots
+const slides=document.querySelectorAll('.slide');
+const nav=document.getElementById('navDots');
+slides.forEach((_,i)=>{const a=document.createElement('a');a.href='#s'+(i+1);nav.appendChild(a)});
+// Highlight active dot on scroll
+const dots=[...nav.querySelectorAll('a')];
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const idx=[...slides].indexOf(e.target);dots.forEach((d,i)=>d.classList.toggle('active',i===idx))}})},{threshold:.5});
+slides.forEach(s=>obs.observe(s));
+// Animate bars on scroll
+const bars=document.querySelectorAll('.bar-fill');
+const barObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.style.width=e.target.style.width;barObs.unobserve(e.target)}})},{threshold:.3});
+bars.forEach(b=>{const w=b.style.width;b.style.width='0';barObs.observe(b);setTimeout(()=>b.style.width=w,300)});
+</script>
+</body>
+</html>

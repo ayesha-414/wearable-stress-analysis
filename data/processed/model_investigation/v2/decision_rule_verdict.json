@@ -1,0 +1,413 @@
+{
+  "final_verdict": "RETAIN_BASELINE",
+  "recommendation": "Retain the existing transparent logistic-regression baseline with abstention. No candidate model cleared all pre-specified criteria in section 9.4.",
+  "primary_dataset": "C:\\Users\\AYESHA\\Downloads\\NeuroTwin_full_project\\data\\features_v2\\stress_features_v2_B.csv",
+  "n_participants": 35,
+  "n_windows": 263,
+  "pre-specified_candidates_evaluated": 13,
+  "decision_rule_per_candidate": [
+    {
+      "model": "Existing LogReg (C=1.0)",
+      "clears_all_criteria": false,
+      "cond_i_ci_lower_bounds_gt_half": {
+        "passed": false,
+        "balanced_accuracy_ci_lower": 0.442,
+        "roc_auc_ci_lower": 0.3869
+      },
+      "cond_ii_beats_majority_baseline": {
+        "passed": false,
+        "balanced_accuracy_vs_majority": 0.0114,
+        "macro_f1_vs_majority": 0.1199,
+        "roc_auc_vs_majority": -0.0165
+      },
+      "cond_iii_participant_auc_binomial": {
+        "passed": false,
+        "n_participants_auc_gt_0.5": 13,
+        "n_participants_total": 22,
+        "binomial_pvalue": 0.2617
+      },
+      "cond_iv_paired_improvement_excludes_zero": {
+        "passed": false,
+        "paired_difference_ci_lower": 0.0,
+        "paired_difference_ci_upper": 0.0
+      },
+      "cond_v_leakage_tests_pass": true,
+      "cond_vi_brier_skill_positive": {
+        "passed": false,
+        "brier_skill": -0.1487
+      }
+    },
+    {
+      "model": "L2 LogReg (Tuned C)",
+      "clears_all_criteria": false,
+      "cond_i_ci_lower_bounds_gt_half": {
+        "passed": false,
+        "balanced_accuracy_ci_lower": 0.4288,
+        "roc_auc_ci_lower": 0.3489
+      },
+      "cond_ii_beats_majority_baseline": {
+        "passed": false,
+        "balanced_accuracy_vs_majority": -0.001,
+        "macro_f1_vs_majority": 0.0858,
+        "roc_auc_vs_majority": -0.0496
+      },
+      "cond_iii_participant_auc_binomial": {
+        "passed": false,
+        "n_participants_auc_gt_0.5": 15,
+        "n_participants_total": 22,
+        "binomial_pvalue": 0.0669
+      },
+      "cond_iv_paired_improvement_excludes_zero": {
+        "passed": false,
+        "paired_difference_ci_lower": -0.0541,
+        "paired_difference_ci_upper": 0.0272
+      },
+      "cond_v_leakage_tests_pass": true,
+      "cond_vi_brier_skill_positive": {
+        "passed": false,
+        "brier_skill": -0.1387
+      }
+    },
+    {
+      "model": "Linear SVM",
+      "clears_all_criteria": false,
+      "cond_i_ci_lower_bounds_gt_half": {
+        "passed": false,
+        "balanced_accuracy_ci_lower": 0.4522,
+        "roc_auc_ci_lower": 0.356
+      },
+      "cond_ii_beats_majority_baseline": {
+        "passed": false,
+        "balanced_accuracy_vs_majority": -0.003,
+        "macro_f1_vs_majority": 0.0612,
+        "roc_auc_vs_majority": -0.0474
+      },
+      "cond_iii_participant_auc_binomial": {
+        "passed": false,
+        "n_participants_auc_gt_0.5": 12,
+        "n_participants_total": 22,
+        "binomial_pvalue": 0.4159
+      },
+      "cond_iv_paired_improvement_excludes_zero": {
+        "passed": false,
+        "paired_difference_ci_lower": -0.0744,
+        "paired_difference_ci_upper": 0.0478
+      },
+      "cond_v_leakage_tests_pass": true,
+      "cond_vi_brier_skill_positive": {
+        "passed": false,
+        "brier_skill": -0.0582
+      }
+    },
+    {
+      "model": "Random Forest (Fixed)",
+      "clears_all_criteria": false,
+      "cond_i_ci_lower_bounds_gt_half": {
+        "passed": false,
+        "balanced_accuracy_ci_lower": 0.4491,
+        "roc_auc_ci_lower": 0.3999
+      },
+      "cond_ii_beats_majority_baseline": {
+        "passed": true,
+        "balanced_accuracy_vs_majority": 0.0238,
+        "macro_f1_vs_majority": 0.131,
+        "roc_auc_vs_majority": 0.0121
+      },
+      "cond_iii_participant_auc_binomial": {
+        "passed": false,
+        "n_participants_auc_gt_0.5": 15,
+        "n_participants_total": 22,
+        "binomial_pvalue": 0.0669
+      },
+      "cond_iv_paired_improvement_excludes_zero": {
+        "passed": false,
+        "paired_difference_ci_lower": -0.0481,
+        "paired_difference_ci_upper": 0.0766
+      },
+      "cond_v_leakage_tests_pass": true,
+      "cond_vi_brier_skill_positive": {
+        "passed": false,
+        "brier_skill": -0.0852
+      }
+    },
+    {
+      "model": "Extra Trees (Fixed)",
+      "clears_all_criteria": false,
+      "cond_i_ci_lower_bounds_gt_half": {
+        "passed": false,
+        "balanced_accuracy_ci_lower": 0.4688,
+        "roc_auc_ci_lower": 0.3164
+      },
+      "cond_ii_beats_majority_baseline": {
+        "passed": false,
+        "balanced_accuracy_vs_majority": 0.0292,
+        "macro_f1_vs_majority": 0.1198,
+        "roc_auc_vs_majority": -0.0509
+      },
+      "cond_iii_participant_auc_binomial": {
+        "passed": false,
+        "n_participants_auc_gt_0.5": 12,
+        "n_participants_total": 22,
+        "binomial_pvalue": 0.4159
+      },
+      "cond_iv_paired_improvement_excludes_zero": {
+        "passed": false,
+        "paired_difference_ci_lower": -0.037,
+        "paired_difference_ci_upper": 0.0688
+      },
+      "cond_v_leakage_tests_pass": true,
+      "cond_vi_brier_skill_positive": {
+        "passed": false,
+        "brier_skill": -0.0726
+      }
+    },
+    {
+      "model": "LogReg + Drop Duplicates",
+      "clears_all_criteria": false,
+      "cond_i_ci_lower_bounds_gt_half": {
+        "passed": false,
+        "balanced_accuracy_ci_lower": 0.4291,
+        "roc_auc_ci_lower": 0.3963
+      },
+      "cond_ii_beats_majority_baseline": {
+        "passed": false,
+        "balanced_accuracy_vs_majority": 0.0034,
+        "macro_f1_vs_majority": 0.111,
+        "roc_auc_vs_majority": -0.0074
+      },
+      "cond_iii_participant_auc_binomial": {
+        "passed": false,
+        "n_participants_auc_gt_0.5": 13,
+        "n_participants_total": 22,
+        "binomial_pvalue": 0.2617
+      },
+      "cond_iv_paired_improvement_excludes_zero": {
+        "passed": false,
+        "paired_difference_ci_lower": -0.0259,
+        "paired_difference_ci_upper": 0.0089
+      },
+      "cond_v_leakage_tests_pass": true,
+      "cond_vi_brier_skill_positive": {
+        "passed": false,
+        "brier_skill": -0.1315
+      }
+    },
+    {
+      "model": "LogReg + In-Fold Feature Selection (k=10)",
+      "clears_all_criteria": false,
+      "cond_i_ci_lower_bounds_gt_half": {
+        "passed": false,
+        "balanced_accuracy_ci_lower": 0.4528,
+        "roc_auc_ci_lower": 0.4082
+      },
+      "cond_ii_beats_majority_baseline": {
+        "passed": true,
+        "balanced_accuracy_vs_majority": 0.0337,
+        "macro_f1_vs_majority": 0.1432,
+        "roc_auc_vs_majority": 0.0119
+      },
+      "cond_iii_participant_auc_binomial": {
+        "passed": false,
+        "n_participants_auc_gt_0.5": 11,
+        "n_participants_total": 22,
+        "binomial_pvalue": 0.5841
+      },
+      "cond_iv_paired_improvement_excludes_zero": {
+        "passed": false,
+        "paired_difference_ci_lower": -0.0227,
+        "paired_difference_ci_upper": 0.0715
+      },
+      "cond_v_leakage_tests_pass": true,
+      "cond_vi_brier_skill_positive": {
+        "passed": false,
+        "brier_skill": -0.0777
+      }
+    },
+    {
+      "model": "LogReg + Robust Scale & Log Skewed",
+      "clears_all_criteria": false,
+      "cond_i_ci_lower_bounds_gt_half": {
+        "passed": false,
+        "balanced_accuracy_ci_lower": 0.4293,
+        "roc_auc_ci_lower": 0.3835
+      },
+      "cond_ii_beats_majority_baseline": {
+        "passed": false,
+        "balanced_accuracy_vs_majority": 0.0015,
+        "macro_f1_vs_majority": 0.1076,
+        "roc_auc_vs_majority": -0.0222
+      },
+      "cond_iii_participant_auc_binomial": {
+        "passed": false,
+        "n_participants_auc_gt_0.5": 12,
+        "n_participants_total": 22,
+        "binomial_pvalue": 0.4159
+      },
+      "cond_iv_paired_improvement_excludes_zero": {
+        "passed": false,
+        "paired_difference_ci_lower": -0.0274,
+        "paired_difference_ci_upper": 0.0072
+      },
+      "cond_v_leakage_tests_pass": true,
+      "cond_vi_brier_skill_positive": {
+        "passed": false,
+        "brier_skill": -0.1595
+      }
+    },
+    {
+      "model": "LogReg + Balanced Class Weight",
+      "clears_all_criteria": false,
+      "cond_i_ci_lower_bounds_gt_half": {
+        "passed": false,
+        "balanced_accuracy_ci_lower": 0.415,
+        "roc_auc_ci_lower": 0.4023
+      },
+      "cond_ii_beats_majority_baseline": {
+        "passed": true,
+        "balanced_accuracy_vs_majority": 0.0012,
+        "macro_f1_vs_majority": 0.1167,
+        "roc_auc_vs_majority": 0.0014
+      },
+      "cond_iii_participant_auc_binomial": {
+        "passed": false,
+        "n_participants_auc_gt_0.5": 13,
+        "n_participants_total": 22,
+        "binomial_pvalue": 0.2617
+      },
+      "cond_iv_paired_improvement_excludes_zero": {
+        "passed": false,
+        "paired_difference_ci_lower": -0.0643,
+        "paired_difference_ci_upper": 0.0433
+      },
+      "cond_v_leakage_tests_pass": true,
+      "cond_vi_brier_skill_positive": {
+        "passed": false,
+        "brier_skill": -0.1852
+      }
+    },
+    {
+      "model": "LogReg + Inner Fold Threshold Selection",
+      "clears_all_criteria": false,
+      "cond_i_ci_lower_bounds_gt_half": {
+        "passed": false,
+        "balanced_accuracy_ci_lower": 0.3903,
+        "roc_auc_ci_lower": 0.3869
+      },
+      "cond_ii_beats_majority_baseline": {
+        "passed": false,
+        "balanced_accuracy_vs_majority": -0.0188,
+        "macro_f1_vs_majority": 0.0952,
+        "roc_auc_vs_majority": -0.0165
+      },
+      "cond_iii_participant_auc_binomial": {
+        "passed": false,
+        "n_participants_auc_gt_0.5": 13,
+        "n_participants_total": 22,
+        "binomial_pvalue": 0.2617
+      },
+      "cond_iv_paired_improvement_excludes_zero": {
+        "passed": false,
+        "paired_difference_ci_lower": -0.0992,
+        "paired_difference_ci_upper": 0.0369
+      },
+      "cond_v_leakage_tests_pass": true,
+      "cond_vi_brier_skill_positive": {
+        "passed": false,
+        "brier_skill": -0.1487
+      }
+    },
+    {
+      "model": "LogReg + Test-Exclusive Baseline Relative",
+      "clears_all_criteria": false,
+      "cond_i_ci_lower_bounds_gt_half": {
+        "passed": false,
+        "balanced_accuracy_ci_lower": 0.3612,
+        "roc_auc_ci_lower": 0.2707
+      },
+      "cond_ii_beats_majority_baseline": {
+        "passed": false,
+        "balanced_accuracy_vs_majority": -0.05,
+        "macro_f1_vs_majority": 0.0556,
+        "roc_auc_vs_majority": -0.1255
+      },
+      "cond_iii_participant_auc_binomial": {
+        "passed": false,
+        "n_participants_auc_gt_0.5": 12,
+        "n_participants_total": 22,
+        "binomial_pvalue": 0.4159
+      },
+      "cond_iv_paired_improvement_excludes_zero": {
+        "passed": false,
+        "paired_difference_ci_lower": -0.1749,
+        "paired_difference_ci_upper": 0.0592
+      },
+      "cond_v_leakage_tests_pass": true,
+      "cond_vi_brier_skill_positive": {
+        "passed": false,
+        "brier_skill": -0.3872
+      }
+    },
+    {
+      "model": "LogReg + Nested Platt Calibration",
+      "clears_all_criteria": false,
+      "cond_i_ci_lower_bounds_gt_half": {
+        "passed": false,
+        "balanced_accuracy_ci_lower": 0.5,
+        "roc_auc_ci_lower": 0.1798
+      },
+      "cond_ii_beats_majority_baseline": {
+        "passed": false,
+        "balanced_accuracy_vs_majority": 0.0,
+        "macro_f1_vs_majority": 0.0,
+        "roc_auc_vs_majority": -0.2381
+      },
+      "cond_iii_participant_auc_binomial": {
+        "passed": false,
+        "n_participants_auc_gt_0.5": 11,
+        "n_participants_total": 22,
+        "binomial_pvalue": 0.5841
+      },
+      "cond_iv_paired_improvement_excludes_zero": {
+        "passed": false,
+        "paired_difference_ci_lower": -0.0816,
+        "paired_difference_ci_upper": 0.0579
+      },
+      "cond_v_leakage_tests_pass": true,
+      "cond_vi_brier_skill_positive": {
+        "passed": false,
+        "brier_skill": -0.0436
+      }
+    },
+    {
+      "model": "RBF SVM",
+      "clears_all_criteria": false,
+      "cond_i_ci_lower_bounds_gt_half": {
+        "passed": false,
+        "balanced_accuracy_ci_lower": 0.4746,
+        "roc_auc_ci_lower": 0.3062
+      },
+      "cond_ii_beats_majority_baseline": {
+        "passed": false,
+        "balanced_accuracy_vs_majority": 0.0013,
+        "macro_f1_vs_majority": 0.0595,
+        "roc_auc_vs_majority": -0.0897
+      },
+      "cond_iii_participant_auc_binomial": {
+        "passed": false,
+        "n_participants_auc_gt_0.5": 11,
+        "n_participants_total": 22,
+        "binomial_pvalue": 0.5841
+      },
+      "cond_iv_paired_improvement_excludes_zero": {
+        "passed": false,
+        "paired_difference_ci_lower": -0.0755,
+        "paired_difference_ci_upper": 0.0579
+      },
+      "cond_v_leakage_tests_pass": true,
+      "cond_vi_brier_skill_positive": {
+        "passed": false,
+        "brier_skill": -0.0727
+      }
+    }
+  ]
+}

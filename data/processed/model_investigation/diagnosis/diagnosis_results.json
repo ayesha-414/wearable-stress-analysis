@@ -1,0 +1,516 @@
+{
+  "seed": 20261102,
+  "bootstrap_draws": 2000,
+  "n_windows": 263,
+  "n_participants": 35,
+  "threshold": 5.0,
+  "A_labels": {
+    "high_overall": 101,
+    "prevalence": 0.384,
+    "by_cohort": {
+      "V1": {
+        "sum": 61,
+        "count": 144,
+        "mean": 0.424
+      },
+      "V2": {
+        "sum": 40,
+        "count": 119,
+        "mean": 0.336
+      }
+    },
+    "by_stage": {
+      "Baseline": {
+        "sum": 12,
+        "count": 35,
+        "mean": 0.343
+      },
+      "First Rest": {
+        "sum": 6,
+        "count": 35,
+        "mean": 0.171
+      },
+      "Opposite Opinion": {
+        "sum": 15,
+        "count": 35,
+        "mean": 0.429
+      },
+      "Real Opinion": {
+        "sum": 12,
+        "count": 35,
+        "mean": 0.343
+      },
+      "Second Rest": {
+        "sum": 8,
+        "count": 35,
+        "mean": 0.229
+      },
+      "Stroop": {
+        "sum": 6,
+        "count": 18,
+        "mean": 0.333
+      },
+      "Subtract": {
+        "sum": 19,
+        "count": 35,
+        "mean": 0.543
+      },
+      "TMCT": {
+        "sum": 23,
+        "count": 35,
+        "mean": 0.657
+      }
+    },
+    "mean_rating_by_stage": {
+      "V1": {
+        "Baseline": 3.44,
+        "First Rest": 3.22,
+        "Opposite Opinion": 4.31,
+        "Real Opinion": 4.14,
+        "Second Rest": 3.67,
+        "Stroop": 3.97,
+        "Subtract": 4.53,
+        "TMCT": 5.08
+      },
+      "V2": {
+        "Baseline": 3.41,
+        "First Rest": 2.65,
+        "Opposite Opinion": 4.0,
+        "Real Opinion": 3.59,
+        "Second Rest": 2.47,
+        "Stroop": NaN,
+        "Subtract": 4.29,
+        "TMCT": 6.29
+      }
+    },
+    "subjects_never_high": 9,
+    "subjects_always_high": 4,
+    "subjects_both_classes": 22,
+    "windows_per_subject": {
+      "8": 18,
+      "7": 17
+    },
+    "rating_value_counts": {
+      "0.0": 2,
+      "0.5": 2,
+      "1.0": 32,
+      "1.5": 2,
+      "2.0": 29,
+      "3.0": 52,
+      "4.0": 42,
+      "4.5": 1,
+      "5.0": 41,
+      "5.5": 2,
+      "6.0": 27,
+      "7.0": 18,
+      "8.0": 8,
+      "9.0": 4,
+      "10.0": 1
+    },
+    "duplicate_feature_rows": 0
+  },
+  "B_stage_signature": {
+    "V1|Baseline": {
+      "hr_mean": 81.224,
+      "eda_mean": 4.66,
+      "temp_mean": 32.775,
+      "acc_mean": 1.957,
+      "stress_level": 3.444
+    },
+    "V1|First Rest": {
+      "hr_mean": 81.727,
+      "eda_mean": 5.456,
+      "temp_mean": 32.783,
+      "acc_mean": 2.209,
+      "stress_level": 3.222
+    },
+    "V1|Opposite Opinion": {
+      "hr_mean": 78.945,
+      "eda_mean": 5.444,
+      "temp_mean": 33.182,
+      "acc_mean": 2.779,
+      "stress_level": 4.306
+    },
+    "V1|Real Opinion": {
+      "hr_mean": 82.174,
+      "eda_mean": 5.365,
+      "temp_mean": 33.186,
+      "acc_mean": 2.85,
+      "stress_level": 4.139
+    },
+    "V1|Second Rest": {
+      "hr_mean": 83.116,
+      "eda_mean": 5.231,
+      "temp_mean": 33.025,
+      "acc_mean": 1.21,
+      "stress_level": 3.667
+    },
+    "V1|Stroop": {
+      "hr_mean": 75.05,
+      "eda_mean": 5.414,
+      "temp_mean": 32.875,
+      "acc_mean": 1.831,
+      "stress_level": 3.972
+    },
+    "V1|Subtract": {
+      "hr_mean": 76.86,
+      "eda_mean": 5.783,
+      "temp_mean": 33.175,
+      "acc_mean": 3.098,
+      "stress_level": 4.528
+    },
+    "V1|TMCT": {
+      "hr_mean": 72.851,
+      "eda_mean": 5.016,
+      "temp_mean": 33.004,
+      "acc_mean": 2.159,
+      "stress_level": 5.083
+    },
+    "V2|Baseline": {
+      "hr_mean": 80.308,
+      "eda_mean": 2.932,
+      "temp_mean": 32.1,
+      "acc_mean": 2.024,
+      "stress_level": 3.412
+    },
+    "V2|First Rest": {
+      "hr_mean": 83.305,
+      "eda_mean": 3.197,
+      "temp_mean": 32.128,
+      "acc_mean": 1.933,
+      "stress_level": 2.647
+    },
+    "V2|Opposite Opinion": {
+      "hr_mean": 76.134,
+      "eda_mean": 1.364,
+      "temp_mean": 32.255,
+      "acc_mean": 1.729,
+      "stress_level": 4.0
+    },
+    "V2|Real Opinion": {
+      "hr_mean": 83.184,
+      "eda_mean": 2.206,
+      "temp_mean": 32.152,
+      "acc_mean": 3.551,
+      "stress_level": 3.588
+    },
+    "V2|Second Rest": {
+      "hr_mean": 82.841,
+      "eda_mean": 1.912,
+      "temp_mean": 32.177,
+      "acc_mean": 3.76,
+      "stress_level": 2.471
+    },
+    "V2|Subtract": {
+      "hr_mean": 81.949,
+      "eda_mean": 1.517,
+      "temp_mean": 32.311,
+      "acc_mean": 3.219,
+      "stress_level": 4.294
+    },
+    "V2|TMCT": {
+      "hr_mean": 78.553,
+      "eda_mean": 2.139,
+      "temp_mean": 32.162,
+      "acc_mean": 1.85,
+      "stress_level": 6.294
+    }
+  },
+  "C_features": {
+    "n_features": 23,
+    "pairs_spearman_ge_0.9": [
+      [
+        "hr_mean",
+        "hr_min",
+        0.919
+      ],
+      [
+        "hr_std",
+        "hr_range",
+        0.972
+      ],
+      [
+        "eda_mean",
+        "eda_scl_mean",
+        1.0
+      ],
+      [
+        "eda_std",
+        "eda_range",
+        0.989
+      ],
+      [
+        "acc_std",
+        "acc_max",
+        0.964
+      ],
+      [
+        "hrv_rmssd",
+        "hrv_pnn50",
+        0.923
+      ]
+    ],
+    "median_icc1": 0.426,
+    "icc1_ge_0.5": [
+      "hr_mean",
+      "hr_min",
+      "eda_mean",
+      "eda_std",
+      "eda_range",
+      "eda_scl_mean",
+      "temp_mean",
+      "hrv_mean_ibi",
+      "hrv_sdnn",
+      "hrv_rmssd",
+      "hrv_pnn50"
+    ],
+    "missing_windows_by_feature_gt_0": {
+      "hr_mean": 0.027,
+      "hr_std": 0.027,
+      "hr_min": 0.027,
+      "hr_max": 0.027,
+      "hr_range": 0.027,
+      "hr_diff_rms": 0.027,
+      "temp_mean": 0.027,
+      "temp_std": 0.027,
+      "temp_slope": 0.027,
+      "hrv_mean_ibi": 0.194,
+      "hrv_sdnn": 0.194,
+      "hrv_rmssd": 0.194,
+      "hrv_pnn50": 0.194,
+      "hrv_lf_hf_ratio": 0.194
+    },
+    "windows_missing_any_hrv": 51,
+    "windows_missing_hr": 7,
+    "events_per_parameter": 4.39
+  },
+  "C_within_subject_effects_n_subjects": 22,
+  "C_features_with_ci_excluding_0": [
+    "hr_mean",
+    "hr_min",
+    "eda_slope",
+    "hrv_mean_ibi"
+  ],
+  "D_baseline_existing_logreg": {
+    "pooled": {
+      "accuracy": 0.5703,
+      "majority_accuracy": 0.616,
+      "balanced_accuracy": 0.5599,
+      "sensitivity": 0.5149,
+      "specificity": 0.6049,
+      "auc": 0.5393,
+      "brier": 0.2761
+    },
+    "cluster_bootstrap_95ci": {
+      "accuracy": [
+        0.4812,
+        0.6542
+      ],
+      "majority_accuracy": [
+        0.4942,
+        0.7346
+      ],
+      "balanced_accuracy": [
+        0.4675,
+        0.6468
+      ],
+      "sensitivity": [
+        0.3495,
+        0.6667
+      ],
+      "specificity": [
+        0.4857,
+        0.7213
+      ],
+      "auc": [
+        0.4082,
+        0.6603
+      ],
+      "brier": [
+        0.2361,
+        0.3225
+      ],
+      "acc_minus_majority": [
+        -0.1769,
+        0.0989
+      ]
+    },
+    "per_subject": {
+      "n_better_than_majority": 10,
+      "n_equal": 8,
+      "n_worse": 17,
+      "mean_acc": 0.577,
+      "median_acc": 0.571,
+      "sd_acc": 0.267,
+      "n_with_auc": 22,
+      "mean_auc": 0.51,
+      "median_auc": 0.483,
+      "n_auc_above_0.5": 9
+    }
+  },
+  "D_dummy_accuracy": {
+    "most_frequent": 0.616,
+    "prior(predict_proba=training prevalence), Brier": 0.2441,
+    "stratified_random(mean of 200 draws)": 0.5164,
+    "uniform_random(mean of 200 draws)": 0.4998
+  },
+  "E_remapping_hypothesis_H1": {
+    "n_windows_compared": 192,
+    "n_participants": 35,
+    "excluded_note": "windows whose notebook-consistent counterpart has no computed features were excluded",
+    "prevalence_high_original_pairing": 0.365,
+    "prevalence_high_hypothesised_pairing": 0.354,
+    "original_pairing_same_windows": {
+      "accuracy": 0.5729,
+      "majority_accuracy": 0.6354,
+      "balanced_accuracy": 0.5665,
+      "sensitivity": 0.5429,
+      "specificity": 0.5902,
+      "auc": 0.5457,
+      "brier": 0.2724
+    },
+    "hypothesised_pairing_same_windows": {
+      "accuracy": 0.5677,
+      "majority_accuracy": 0.6458,
+      "balanced_accuracy": 0.5524,
+      "sensitivity": 0.5,
+      "specificity": 0.6048,
+      "auc": 0.574,
+      "brier": 0.2622
+    },
+    "ci95_original": {
+      "accuracy": [
+        0.487,
+        0.6578
+      ],
+      "auc": [
+        0.426,
+        0.6602
+      ],
+      "acc_minus_majority": [
+        -0.2022,
+        0.0863
+      ]
+    },
+    "ci95_hypothesised": {
+      "accuracy": [
+        0.474,
+        0.6546
+      ],
+      "auc": [
+        0.4584,
+        0.6778
+      ],
+      "acc_minus_majority": [
+        -0.2128,
+        0.0479
+      ]
+    },
+    "paired_auc_difference_mean": 0.0253,
+    "paired_auc_difference_ci95": [
+      -0.0931,
+      0.1539
+    ],
+    "mean_rating_by_hypothesised_true_stage": {
+      "V1": {
+        "Baseline": 3.44,
+        "First Rest": 3.22,
+        "Real Opinion": NaN,
+        "Second Rest": 3.67,
+        "Stroop": 3.97,
+        "Subtract": NaN,
+        "TMCT": 5.08
+      },
+      "V2": {
+        "Baseline": 3.41,
+        "First Rest": 2.65,
+        "Real Opinion": 3.59,
+        "Second Rest": 2.47,
+        "Stroop": NaN,
+        "Subtract": 4.29,
+        "TMCT": 6.29
+      }
+    },
+    "mean_hr_by_project_window_then_true_stage": {
+      "V1": {
+        "Baseline": 81.2,
+        "First Rest": 75.1,
+        "Real Opinion": NaN,
+        "Second Rest": 72.9,
+        "Stroop": 81.7,
+        "Subtract": NaN,
+        "TMCT": 83.1
+      },
+      "V2": {
+        "Baseline": 80.3,
+        "First Rest": 78.6,
+        "Real Opinion": 82.8,
+        "Second Rest": 76.1,
+        "Stroop": NaN,
+        "Subtract": 81.9,
+        "TMCT": 83.3
+      }
+    },
+    "caveat": "Windows are still the project's (possibly shifted, HR 10 s late) windows; only the pairing of window to label is changed. A proper test needs features recomputed from raw data."
+  },
+  "E2_task_vs_rest_diagnostic": {
+    "n_windows": 192,
+    "task_prevalence_by_project_names": 0.453,
+    "task_prevalence_by_hypothesised_names": 0.453,
+    "auc_by_project_names": 0.7741,
+    "auc_by_hypothesised_names": 0.8687,
+    "ci95_auc_project_names": [
+      0.7383,
+      0.8123
+    ],
+    "ci95_auc_hypothesised_names": [
+      0.8262,
+      0.9113
+    ],
+    "paired_auc_difference_mean": 0.0942,
+    "paired_auc_difference_ci95": [
+      0.0465,
+      0.1413
+    ],
+    "balanced_accuracy_project_names": 0.7286,
+    "balanced_accuracy_hypothesised_names": 0.7938,
+    "note": "Objective protocol-condition target used ONLY as a diagnostic of the mapping hypothesis; it is not proposed as the model target."
+  },
+  "E3_duration_confound": {
+    "source_of_durations": "stage-level medians from the raw-data alignment diagnostic (not per-window)",
+    "duration_range_s": [
+      24,
+      853
+    ],
+    "spearman_logduration_vs_feature_top8": {
+      "temp_std": 0.785,
+      "hr_range": 0.744,
+      "hr_std": 0.646,
+      "eda_scr_count": 0.528,
+      "hr_min": -0.332,
+      "eda_range": 0.322,
+      "acc_max": 0.301,
+      "eda_std": 0.294
+    },
+    "loso_auc_duration_only_predicting_self_report_label": 0.4957,
+    "loso_auc_duration_only_predicting_task_vs_rest_project_names": 0.8204,
+    "loso_auc_duration_only_predicting_task_vs_rest_hypothesised_names": 0.9014,
+    "caveat": "A duration-only model is a diagnostic of confounding, not a proposed model."
+  },
+  "F_ece_instability": {
+    "n_random_inner_fold_assignments": 8,
+    "recalibrated_ECE_5bins_range": [
+      0.0614,
+      0.1059
+    ],
+    "recalibrated_ECE_10bins_range": [
+      0.0614,
+      0.1059
+    ],
+    "recalibrated_Brier_range": [
+      0.2473,
+      0.2505
+    ],
+    "training_prior_Brier": 0.2441
+  }
+}

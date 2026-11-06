@@ -1,0 +1,16 @@
+stage,mean,std,vs_baseline_p,cohens_d,significant,protocol
+Baseline,3.444,2.036,,0.0,False,V1
+Stroop,3.972,1.77,0.1279,0.277,False,V1
+First Rest,3.222,1.734,0.7551,-0.118,False,V1
+TMCT,5.083,2.016,0.0035,0.809,True,V1
+Second Rest,3.667,1.839,0.4716,0.115,False,V1
+Real Opinion,4.139,2.274,0.0794,0.322,False,V1
+Opposite Opinion,4.306,2.444,0.0844,0.383,False,V1
+Subtract,4.528,2.317,0.0241,0.497,True,V1
+Baseline,3.278,1.934,,0.0,False,V2
+TMCT,6.389,2.062,0.0002,1.556,True,V2
+First Rest,2.611,1.539,0.1156,-0.381,False,V2
+Real Opinion,3.556,1.423,0.6229,0.164,False,V2
+Opposite Opinion,4.167,1.724,0.0554,0.485,False,V2
+Second Rest,2.389,1.42,0.0227,-0.524,True,V2
+Subtract,4.556,1.723,0.0106,0.698,True,V2

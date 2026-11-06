@@ -1,0 +1,16 @@
+[browser]
+gatherUsageStats = false
+
+[server]
+headless = true
+
+[client]
+# Hide Streamlit's automatic file-based page list (dashboard/pages/*.py are modules, not standalone pages)
+showSidebarNavigation = false
+
+[theme]
+base = "dark"
+primaryColor = "#00E5FF"
+backgroundColor = "#050716"
+secondaryBackgroundColor = "#0C1232"
+textColor = "#F2F6FF"

@@ -1,0 +1,30 @@
+{
+  "aurora_night_dark_tokens": {
+    "text_primary_vs_bg": 16.82492744915535,
+    "text_primary_vs_surface1": 15.1681784931255,
+    "text_primary_vs_surface2": 13.210949429841804,
+    "text_muted_vs_bg": 9.60622685809348,
+    "text_muted_vs_surface1": 8.660302641384229,
+    "text_muted_vs_surface2": 7.542818690741644,
+    "teal_vs_bg": 11.634799917861352,
+    "violet_vs_bg": 8.848870042704787,
+    "peach_vs_bg": 10.959856331855965,
+    "gold_vs_bg": 14.117925825548298,
+    "sage_vs_bg": 12.146129276340424
+  },
+  "aurora_dawn_light_tokens": {
+    "text_primary_vs_bg": 14.272420339082105,
+    "text_primary_vs_surface1": 15.232560247821445,
+    "text_primary_vs_surface2": 12.755924057168514,
+    "text_muted_vs_bg": 6.875549898794555,
+    "text_muted_vs_surface1": 7.338084612285619,
+    "text_muted_vs_surface2": 6.144997854367878,
+    "teal_vs_bg": 4.880025126388687,
+    "violet_vs_bg": 6.356095528535407,
+    "peach_vs_bg": 5.525792096647189,
+    "gold_vs_bg": 5.98068128358166,
+    "sage_vs_bg": 5.009236671220197
+  },
+  "wcag_requirement": ">= 4.5:1 for body text (WCAG AA)",
+  "all_passed": true
+}

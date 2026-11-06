@@ -1,0 +1,16 @@
+cohort,stage,n,mean_rating,pct_high
+V1,Baseline,18,3.444,0.333
+V1,First Rest,18,3.222,0.222
+V1,Opposite Opinion,18,4.306,0.5
+V1,Real Opinion,18,4.139,0.444
+V1,Second Rest,18,3.667,0.389
+V1,Stroop,18,3.972,0.333
+V1,Subtract,18,4.528,0.556
+V1,TMCT,18,5.083,0.611
+V2,Baseline,17,3.412,0.353
+V2,First Rest,17,2.647,0.118
+V2,Opposite Opinion,17,4.0,0.353
+V2,Real Opinion,17,3.588,0.235
+V2,Second Rest,17,2.471,0.059
+V2,Subtract,17,4.294,0.529
+V2,TMCT,17,6.294,0.706

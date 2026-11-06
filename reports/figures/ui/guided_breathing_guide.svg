@@ -1,0 +1,32 @@
+
+    <div style="text-align: center; padding: 1rem 0;">
+        <svg width="220" height="220" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" aria-label="Paced breathing visual">
+            <defs>
+                <radialGradient id="breathGrad" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#38E1CC" stop-opacity="0.7" />
+                    <stop offset="70%" stop-color="#B3A5FF" stop-opacity="0.3" />
+                    <stop offset="100%" stop-color="#0A0F1F" stop-opacity="0" />
+                </radialGradient>
+            </defs>
+            <style>
+                @keyframes paceCycle {
+                    0%   { transform: scale(0.65); } /* Inhale start */
+                    28%  { transform: scale(1.10); } /* Inhale end (4s / 14s) */
+                    57%  { transform: scale(1.10); } /* Hold end (4s / 14s) */
+                    100% { transform: scale(0.65); } /* Exhale end (6s / 14s) */
+                }
+                .breath-circle {
+                    transform-origin: 110px 110px;
+                    animation: paceCycle 14s ease-in-out infinite;
+                }
+            </style>
+            <circle cx="110" cy="110" r="95" fill="none" stroke="rgba(56, 225, 204, 0.25)" stroke-width="1.5" stroke-dasharray="4 4" />
+            <circle cx="110" cy="110" r="75" fill="url(#breathGrad)" class="breath-circle" />
+            <circle cx="110" cy="110" r="30" fill="none" stroke="#EAF1FF" stroke-width="1.5" opacity="0.8" />
+            <text x="110" y="114" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#EAF1FF" font-weight="600">Breathe</text>
+        </svg>
+        <div style="font-size: 0.85rem; color: #FFD98A; margin-top: 0.5rem; font-weight: 500;">
+            Safety notice: Stop if you feel dizzy or lightheaded; never hold your breath uncomfortably.
+        </div>
+    </div>
+    

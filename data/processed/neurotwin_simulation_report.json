@@ -1,0 +1,15 @@
+{
+  "label": "SIMULATED USERS - software verification only; not evidence of effectiveness.",
+  "n_simulated_users": 40,
+  "rounds_per_user": 30,
+  "seed": 7,
+  "metric": "share of simulated 'helped' answers to the top suggestion in the last 10 rounds",
+  "static_mean": 0.515,
+  "adaptive_mean": 0.755,
+  "paired_difference_mean": 0.24,
+  "paired_difference_95ci": [
+    0.183,
+    0.297
+  ],
+  "caveat": "The simulated users' preferences were invented by the script, so this only verifies that the adaptation code does what it is specified to do."
+}

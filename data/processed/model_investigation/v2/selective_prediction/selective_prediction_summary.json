@@ -1,0 +1,14 @@
+{
+  "model": "Existing LogReg (C=1.0)",
+  "total_windows": 263,
+  "quality_abstained_windows": 7,
+  "in_fold_chosen_confidence_threshold": 0.23,
+  "total_abstained_windows": 167,
+  "final_coverage": 0.365,
+  "full_coverage_balanced_accuracy": 0.5114,
+  "selective_balanced_accuracy": 0.6023,
+  "full_coverage_accuracy": 0.5703,
+  "selective_accuracy": 0.6354,
+  "fallback_message": "Insufficient physiological evidence to provide a reliable estimate.",
+  "recommendation_guardrail": "No recommendation may treat an estimate as proof of stress."
+}

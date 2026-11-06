@@ -1,0 +1,21 @@
+
+    <svg width="100%" height="42" viewBox="0 0 320 42" xmlns="http://www.w3.org/2000/svg" aria-label="Evidence meter: Insufficient Evidence (Abstained)">
+        <defs>
+            <linearGradient id="mistGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#A9B8DC" stop-opacity="0.1" />
+                <stop offset="50%" stop-color="#A9B8DC" stop-opacity="0.4" />
+                <stop offset="100%" stop-color="#A9B8DC" stop-opacity="0.1" />
+            </linearGradient>
+            <filter id="mistBlur" x="-10%" y="-30%" width="120%" height="160%">
+                <feGaussianBlur stdDeviation="3" />
+            </filter>
+        </defs>
+        <!-- Background track -->
+        <rect x="10" y="8" width="300" height="12" rx="6" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+        <!-- Soft mist band representing uncertainty span -->
+        <rect x="20" y="7" width="30" height="14" rx="7" fill="url(#mistGrad)" filter="url(#mistBlur)" />
+        <rect x="20" y="9" width="30" height="10" rx="5" fill="#A9B8DC" opacity="0.28" />
+        <!-- Text label -->
+        <text x="12" y="34" font-family="-apple-system, sans-serif" font-size="11" fill="#A9B8DC" font-weight="600">Insufficient Evidence (Abstained)</text>
+    </svg>
+    

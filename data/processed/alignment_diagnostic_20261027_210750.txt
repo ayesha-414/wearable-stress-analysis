@@ -1,0 +1,1237 @@
+
+==============================================================================
+WEARABLE ALIGNMENT DIAGNOSTIC (read-only)
+==============================================================================
+Generated (local time): 2026-10-27 21:07:35
+Python: 3.13.14
+Project root : C:\Users\AYESHA\Downloads\wearable-data
+STRESS folder: C:\Users\AYESHA\Downloads\wearable-data\Wearable_Dataset\STRESS
+
+Assumptions:
+  A1. A file's header timestamp = time of its first data row.
+  A2. Naive datetime strings are treated as UTC (only differences matter).
+  A3. Project stage spans are indices into tags.csv (as src/preprocessing.py uses them).
+  A4. Stress_Level_v*.csv column order is assumed chronological (hint only).
+  Tolerances: start offset > 0.5s, end mismatch > 2.0s are flagged.
+Nothing is corrected, merged or modelled. Findings below are measurements.
+
+==============================================================================
+1. DATASET AUTHORS' NOTEBOOK vs PROJECT STAGE MAPPING
+==============================================================================
+  Notebook prepends a start time as tags[0] (np.insert(tags_vector,0,...)): True  (argument: utc_start_dict[folder_name])
+  That start time is read from EDA.csv header: True
+  Tag counts stated in notebook markdown: {'V1': 12, 'V2': 9}
+  Task spans parsed from notebook (axvspan): yes
+  The notebook defines ONLY task spans; it defines no Baseline / rest spans.
+
+Cohort  Stage             Notebook idx  = tags.csv idx  Project idx  Match?   
+------  ----------------  ------------  --------------  -----------  ---------
+V1      Stroop            T[3]->T[4]    2->3            3->4         DIFFERENT
+V1      TMCT              T[5]->T[6]    4->5            5->6         DIFFERENT
+V1      Real Opinion      T[7]->T[8]    6->7            7->8         DIFFERENT
+V1      Opposite Opinion  T[9]->T[10]   8->9            9->10        DIFFERENT
+V1      Subtract          T[11]->T[12]  10->11          11->12       DIFFERENT
+V2      TMCT              T[2]->T[3]    1->2            2->3         DIFFERENT
+V2      Real Opinion      T[4]->T[5]    3->4            4->5         DIFFERENT
+V2      Opposite Opinion  T[6]->T[7]    5->6            6->7         DIFFERENT
+V2      Subtract          T[8]->T[9]    7->8            7->8         same     
+
+  Reading: both use the EDA header time as time zero, so this is an INDEX
+  difference, not a clock-origin difference. The notebook being the authors'
+  code is provenance, not proof; sections 4-7 gather measured evidence.
+
+Loaded 36 subject id(s) from 37 folder(s).
+
+==============================================================================
+2. FILE INVENTORY (per recording folder)
+==============================================================================
+Recording  Coh  EDA  HR  BVP  TEMP  ACC  IBI  tags 
+---------  ---  ---  --  ---  ----  ---  ---  -----
+S01        V1   ok   ok  ok   ok    ok   ok   ok   
+S02        V1   ok   ok  ok   ok    ok   ok   ok   
+S03        V1   ok   ok  ok   ok    ok   ok   ok   
+S04        V1   ok   ok  ok   ok    ok   ok   ok   
+S05        V1   ok   ok  ok   ok    ok   ok   ok   
+S06        V1   ok   ok  ok   ok    ok   ok   ok   
+S07        V1   ok   ok  ok   ok    ok   ok   ok   
+S08        V1   ok   ok  ok   ok    ok   ok   ok   
+S09        V1   ok   ok  ok   ok    ok   ok   ok   
+S10        V1   ok   ok  ok   ok    ok   ok   ok   
+S11        V1   ok   ok  ok   ok    ok   ok   ok   
+S12        V1   ok   ok  ok   ok    ok   ok   ok   
+S13        V1   ok   ok  ok   ok    ok   ok   ok   
+S14        V1   ok   ok  ok   ok    ok   ok   ok   
+S15        V1   ok   ok  ok   ok    ok   ok   ok   
+S16        V1   ok   ok  ok   ok    ok   ok   ok   
+S17        V1   ok   ok  ok   ok    ok   ok   ok   
+S18        V1   ok   ok  ok   ok    ok   ok   ok   
+f01        V2   ok   ok  ok   ok    ok   ok   ok   
+f02        V2   ok   ok  ok   ok    ok   ok   ok   
+f03        V2   ok   ok  ok   ok    ok   ok   ok   
+f04        V2   ok   ok  ok   ok    ok   ok   ok   
+f05        V2   ok   ok  ok   ok    ok   ok   ok   
+f06        V2   ok   ok  ok   ok    ok   ok   ok   
+f07        V2   ok   ok  ok   ok    ok   ok   ok   
+f08        V2   ok   ok  ok   ok    ok   ok   ok   
+f09        V2   ok   ok  ok   ok    ok   ok   ok   
+f10        V2   ok   ok  ok   ok    ok   ok   ok   
+f11        V2   ok   ok  ok   ok    ok   ok   ok   
+f12        V2   ok   ok  ok   ok    ok   ok   ok   
+f13        V2   ok   ok  ok   ok    ok   ok   ok   
+f14_a      V2   ok   ok  ok   ok    ok   ok   EMPTY
+f14_b      V2   ok   ok  ok   ok    ok   ok   ok   
+f15        V2   ok   ok  ok   ok    ok   ok   ok   
+f16        V2   ok   ok  ok   ok    ok   ok   ok   
+f17        V2   ok   ok  ok   ok    ok   ok   ok   
+f18        V2   ok   ok  ok   ok    ok   ok   ok   
+
+==============================================================================
+3. RAW HEADER TIMING
+==============================================================================
+3a. Start time of each signal relative to EDA start (seconds; MISS = unusable)
+Recording  EDA start (UTC)      dHR    dBVP  dTEMP  dACC  dIBI         
+---------  -------------------  -----  ----  -----  ----  -------------
+S01        2013-02-20 17:55:19  +10.0  +0.0  +0.0   +0.0  +0.0         
+S02        2013-02-20 18:49:29  +10.0  +0.0  +0.0   +0.0  -1684532894.2
+S03        2013-03-06 17:04:13  +10.0  +0.0  +0.0   +0.0  +0.0         
+S04        2013-02-24 12:23:49  +10.0  +0.0  +0.0   +0.0  +0.0         
+S05        2013-02-23 11:46:26  +10.0  +0.0  +0.0   +0.0  +0.0         
+S06        2013-02-23 12:22:59  +10.0  +0.0  +0.0   +0.0  +0.0         
+S07        2013-02-24 11:47:55  +10.0  +0.0  +0.0   +0.0  +0.0         
+S08        2013-02-23 16:02:04  +10.0  +0.0  +0.0   +0.0  +0.0         
+S09        2013-02-24 11:15:28  +10.0  +0.0  +0.0   +0.0  +0.0         
+S10        2013-02-23 18:03:27  +10.0  +0.0  +0.0   +0.0  +0.0         
+S11        2013-02-24 09:51:45  +10.0  +0.0  +0.0   +0.0  +0.0         
+S12        2013-02-24 10:26:36  +10.0  +0.0  +0.0   +0.0  +0.0         
+S13        2013-02-24 17:05:44  +10.0  +0.0  +0.0   +0.0  +0.0         
+S14        2013-02-24 17:37:41  +10.0  +0.0  +0.0   +0.0  +0.0         
+S15        2013-02-25 11:35:59  +10.0  +0.0  +0.0   +0.0  +0.0         
+S16        2013-02-25 14:15:54  +10.0  +0.0  +0.0   +0.0  +0.0         
+S17        2013-02-25 18:40:08  +10.0  +0.0  +0.0   +0.0  +0.0         
+S18        2013-02-25 19:17:36  +10.0  +0.0  +0.0   +0.0  +0.0         
+f01        2013-06-12 16:18:58  +10.0  +0.0  +0.0   +0.0  +0.0         
+f02        2013-06-12 17:26:25  +10.0  +0.0  +0.0   +0.0  +0.0         
+f03        2013-06-12 18:28:42  +10.0  +0.0  +0.0   +0.0  +0.0         
+f04        2013-06-15 19:44:24  +10.0  +0.0  +0.0   +0.0  +0.0         
+f05        2013-07-02 10:07:30  +10.0  +0.0  +0.0   +0.0  +0.0         
+f06        2013-07-11 16:04:59  +10.0  +0.0  +0.0   +0.0  +0.0         
+f07        2013-07-12 20:01:45  +10.0  +0.0  +0.0   +0.0  +0.0         
+f08        2013-07-03 19:16:37  +10.0  +0.0  +0.0   +0.0  +0.0         
+f09        2013-06-30 12:03:41  +10.0  +0.0  +0.0   +0.0  +0.0         
+f10        2013-06-30 09:59:44  +10.0  +0.0  +0.0   +0.0  +0.0         
+f11        2013-07-14 18:02:40  +10.0  +0.0  +0.0   +0.0  +0.0         
+f12        2013-07-01 15:21:17  +10.0  +0.0  +0.0   +0.0  +0.0         
+f13        2013-07-03 10:51:24  +10.0  +0.0  +0.0   +0.0  +0.0         
+f14_a      2013-07-12 22:46:39  +10.0  +0.0  +0.0   +0.0  +0.0         
+f14_b      2013-07-12 22:59:54  +10.0  +0.0  +0.0   +0.0  +0.0         
+f15        2013-07-13 17:19:47  +10.0  +0.0  +0.0   +0.0  +0.0         
+f16        2013-07-19 10:52:55  +10.0  +0.0  +0.0   +0.0  +0.0         
+f17        2013-07-20 16:00:52  +10.0  +0.0  +0.0   +0.0  +0.0         
+f18        2013-07-21 19:25:10  +10.0  +0.0  +0.0   +0.0  +0.0         
+
+3b. Sampling rates found (flagged 'x' when different from the documented rate)
+Recording  EDA  HR  BVP  TEMP  ACC
+---------  ---  --  ---  ----  ---
+S01        4    1   64   4     32 
+S02        4    1   64   4     32 
+S03        4    1   64   4     32 
+S04        4    1   64   4     32 
+S05        4    1   64   4     32 
+S06        4    1   64   4     32 
+S07        4    1   64   4     32 
+S08        4    1   64   4     32 
+S09        4    1   64   4     32 
+S10        4    1   64   4     32 
+S11        4    1   64   4     32 
+S12        4    1   64   4     32 
+S13        4    1   64   4     32 
+S14        4    1   64   4     32 
+S15        4    1   64   4     32 
+S16        4    1   64   4     32 
+S17        4    1   64   4     32 
+S18        4    1   64   4     32 
+f01        4    1   64   4     32 
+f02        4    1   64   4     32 
+f03        4    1   64   4     32 
+f04        4    1   64   4     32 
+f05        4    1   64   4     32 
+f06        4    1   64   4     32 
+f07        4    1   64   4     32 
+f08        4    1   64   4     32 
+f09        4    1   64   4     32 
+f10        4    1   64   4     32 
+f11        4    1   64   4     32 
+f12        4    1   64   4     32 
+f13        4    1   64   4     32 
+f14_a      4    1   64   4     32 
+f14_b      4    1   64   4     32 
+f15        4    1   64   4     32 
+f16        4    1   64   4     32 
+f17        4    1   64   4     32 
+f18        4    1   64   4     32 
+
+3c. Durations (s) = rows / fs; IBI = last offset. d_end = signal end - EDA end.
+Recording  EDA   HR         BVP        TEMP       ACC        IBI               
+---------  ----  ---------  ---------  ---------  ---------  ------------------
+S01        2224  2215 (+0)  2224 (-0)  2224 (-0)  2224 (-0)  2170 (-54)        
+S02        3096  3078 (-8)  3096 (+0)  3096 (+0)  3096 (+0)  1525 (-1684534465)
+S03        1586  1576 (+0)  1586 (+0)  1586 (+0)  1586 (+0)  1568 (-18)        
+S04        1732  1724 (+2)  1733 (+1)  1732 (-0)  1733 (+1)  1702 (-31)        
+S05        1581  1571 (+0)  1581 (-0)  1580 (-1)  1581 (+0)  1478 (-103)       
+S06        1443  1434 (+1)  1444 (+1)  1444 (+1)  1444 (+1)  1439 (-4)         
+S07        1428  1419 (+1)  1429 (+1)  1428 (+0)  1429 (+1)  1424 (-4)         
+S08        1428  1419 (+1)  1429 (+1)  1428 (+0)  1429 (+1)  1305 (-123)       
+S09        1448  1439 (+2)  1449 (+1)  1448 (+0)  1449 (+1)  1412 (-35)        
+S10        1658  1649 (+2)  1658 (+1)  1658 (+0)  1658 (+1)  1616 (-42)        
+S11        1401  1392 (+1)  1401 (+0)  1400 (-1)  1401 (+0)  1390 (-11)        
+S12        1604  1594 (+0)  1603 (-0)  1602 (-2)  1603 (-0)  1595 (-8)         
+S13        1623  1614 (+1)  1623 (+0)  1622 (-1)  1623 (+0)  1608 (-15)        
+S14        1686  1676 (+0)  1686 (-0)  1684 (-2)  1686 (-0)  1608 (-78)        
+S15        1634  1624 (+0)  1633 (-0)  1632 (-2)  1633 (-0)  1586 (-47)        
+S16        1664  1654 (+0)  1663 (-0)  1662 (-2)  1663 (-0)  1629 (-35)        
+S17        1611  1601 (+0)  1611 (-0)  1610 (-1)  1611 (-0)  1579 (-32)        
+S18        1630  1621 (+0)  1631 (+0)  1630 (-0)  1631 (+0)  1612 (-19)        
+f01        3252  3243 (+1)  3252 (+0)  3248 (-4)  3252 (+0)  3242 (-10)        
+f02        2976  2966 (+0)  2977 (+1)  2978 (+2)  2975 (-1)  2887 (-89)        
+f03        3597  3586 (-1)  3596 (-1)  3594 (-3)  3596 (-1)  3465 (-132)       
+f04        3648  3637 (-1)  3647 (-1)  3646 (-2)  3647 (-1)  3561 (-87)        
+f05        4593  4583 (+0)  4592 (-0)  4598 (+5)  4592 (-1)  4567 (-26)        
+f06        3172  3163 (+0)  3174 (+1)  3172 (-0)  3172 (-0)  3084 (-89)        
+f07        3456  3448 (+2)  3458 (+2)  3456 (+0)  3458 (+2)  2413 (-1043)      
+f08        3182  3171 (-0)  3182 (+0)  3180 (-2)  3181 (-1)  3130 (-51)        
+f09        3232  3224 (+2)  3234 (+2)  3232 (-0)  3233 (+1)  3204 (-29)        
+f10        2734  2723 (-2)  2733 (-1)  2730 (-4)  2732 (-2)  2634 (-101)       
+f11        3122  3113 (+2)  3124 (+2)  3122 (+0)  3123 (+1)  3094 (-28)        
+f12        4809  4798 (-1)  4809 (+0)  4808 (-1)  4808 (-1)  4784 (-25)        
+f13        3866  3852 (-4)  3862 (-3)  3860 (-6)  3861 (-4)  3363 (-503)       
+f14_a      704   694 (+0)   704 (+0)   704 (+0)   704 (+0)   693 (-11)         
+f14_b      2170  2159 (-2)  2168 (-2)  2168 (-2)  2169 (-2)  2078 (-92)        
+f15        4220  4210 (+0)  4220 (+0)  4220 (+0)  4220 (+1)  4200 (-19)        
+f16        3238  3231 (+2)  3240 (+2)  3236 (-2)  3240 (+2)  3217 (-22)        
+f17        3440  3432 (+2)  3441 (+2)  3442 (+2)  3442 (+2)  3389 (-50)        
+f18        3138  3132 (+4)  3142 (+4)  3140 (+2)  3141 (+3)  3110 (-28)        
+
+==============================================================================
+4. TAGS (button presses), relative to EDA start
+==============================================================================
+Recording  Coh  n_tags  expected  check   1st tag  last tag  post-last  EDA dur
+---------  ---  ------  --------  ------  -------  --------  ---------  -------
+S01        V1   13      12        COUNT!  371      1962      262        2224   
+S02        V1   13      12        COUNT!  1        1296      1800       3096   
+S03        V1   13      12        COUNT!  278      1516      70         1586   
+S04        V1   13      12        COUNT!  181      1709      24         1732   
+S05        V1   13      12        COUNT!  196      1537      44         1581   
+S06        V1   13      12        COUNT!  55       1409      34         1443   
+S07        V1   13      12        COUNT!  115      1394      34         1428   
+S08        V1   13      12        COUNT!  44       1372      56         1428   
+S09        V1   13      12        COUNT!  154      1408      40         1448   
+S10        V1   13      12        COUNT!  67       1532      126        1658   
+S11        V1   13      12        COUNT!  24       1337      64         1401   
+S12        V1   13      12        COUNT!  105      1549      54         1604   
+S13        V1   13      12        COUNT!  173      1598      25         1623   
+S14        V1   13      12        COUNT!  202      1653      33         1686   
+S15        V1   13      12        COUNT!  198      1599      34         1634   
+S16        V1   13      12        COUNT!  330      1641      22         1664   
+S17        V1   13      12        COUNT!  302      1593      18         1611   
+S18        V1   13      12        COUNT!  237      1604      26         1630   
+f01        V2   9       9         ok      287      2999      253        3252   
+f02        V2   9       9         ok      851      2709      267        2976   
+f03        V2   9       9         ok      785      3332      265        3597   
+f04        V2   9       9         ok      1009     3215      433        3648   
+f05        V2   9       9         ok      2172     4338      255        4593   
+f06        V2   9       9         ok      587      2792      380        3172   
+f07        V2   9       9         ok      783      2995      461        3456   
+f08        V2   9       9         ok      523      2593      588        3182   
+f09        V2   9       9         ok      745      2867      366        3232   
+f10        V2   9       9         ok      229      2377      358        2734   
+f11        V2   9       9         ok      720      2894      228        3122   
+f12        V2   9       9         ok      2337     4488      321        4809   
+f13        V2   9       9         ok      1094     3448      418        3866   
+f14_a      V2   0       split     n/a     NA       NA        NA         NA     
+f14_b      V2   9       split     ok      142      2001      170        2170   
+f15        V2   9       9         ok      2010     3974      246        4220   
+f16        V2   9       9         ok      861      2910      328        3238   
+f17        V2   9       9         ok      728      2932      508        3440   
+f18        V2   9       9         ok      975      2846      292        3138   
+  (1st tag = seconds from EDA start to first press; post-last = EDA end - last tag)
+
+==============================================================================
+5. MAPPING EVIDENCE: project vs notebook (measured, no verdict)
+==============================================================================
+5a. Project window vs notebook window, stages the notebook defines
+  Cohort V1
+Stage             project idx  notebook idx  n   med start diff(s)  med end diff(s)  #unbounded  #skipped  med IoU
+----------------  -----------  ------------  --  -----------------  ---------------  ----------  --------  -------
+Stroop            3->4         2->3          18  +109               +326             0           0         0.00   
+TMCT              5->6         4->5          18  +137               +308             0           0         0.00   
+Real Opinion      7->8         6->7          18  +32                +34              0           0         0.00   
+Opposite Opinion  9->10        8->9          18  +31                +31              0           0         0.00   
+Subtract          11->12       10->11        18  +32                +34              0           0         0.00   
+
+  Cohort V2
+Stage             project idx  notebook idx  n   med start diff(s)  med end diff(s)  #unbounded  #skipped  med IoU
+----------------  -----------  ------------  --  -----------------  ---------------  ----------  --------  -------
+TMCT              2->3         1->2          17  +261               +853             0           0         0.00   
+Real Opinion      4->5         3->4          17  +38                +24              0           0         0.00   
+Opposite Opinion  6->7         5->6          17  +38                +807             0           0         0.00   
+Subtract          7->8         7->8          17  +0                 +0               0           0         1.00   
+
+5b. Chronological order implied by the project map vs Stress_Level column order
+  V1 project order (by tag index): ['Baseline', 'First Rest', 'Stroop', 'Second Rest', 'TMCT', 'Real Opinion', 'Opposite Opinion', 'Subtract']
+  V1 Stress_Level_v1.csv columns             : ['Baseline', 'Stroop', 'First Rest', 'TMCT', 'Second Rest', 'Real Opinion', 'Opposite Opinion', 'Subtract']
+  V1 identical order: False   (assumption A4: column order is chronological)
+  V2 project order (by tag index): ['Baseline', 'First Rest', 'TMCT', 'Second Rest', 'Real Opinion', 'Opposite Opinion', 'Subtract']
+  V2 Stress_Level_v2.csv columns             : ['Baseline', 'TMCT', 'First Rest', 'Real Opinion', 'Opposite Opinion', 'Second Rest', 'Subtract']
+  V2 identical order: False   (assumption A4: column order is chronological)
+
+5c. Structural facts
+  V1: highest tag index the project needs = 12 (needs 13 tags to be bounded); expected tags = 12; observed counts = {13: 18}
+  V2: highest tag index the project needs = 8 (needs 9 tags to be bounded); expected tags = 9; observed counts = {9: 17}
+
+5d. Inter-tag intervals: duration spread and median EDA / HR (absolute-time slices)
+    'pre' = EDA start -> tag 0; 'last' = last tag -> EDA end.
+    Low spread (CV) is consistent with a fixed-length protocol step; it does not prove it.
+  Cohort V1
+Interval  project stage(s)  notebook task     n   med dur  min  max   CV%  med EDA  med HR
+--------  ----------------  ----------------  --  -------  ---  ----  ---  -------  ------
+pre       -                 -                 18  177      1    371   62   1.22     82.6  
+0->1      Baseline          -                 18  190      163  247   10   0.97     74.6  
+1->2      Baseline          -                 18  103      71   175   23   1.31     81.7  
+2->3      First Rest        Stroop            18  109      92   152   12   1.88     83.0  
+3->4      Stroop            -                 18  326      232  440   17   1.54     74.1  
+4->5      Second Rest       TMCT              18  137      125  169   10   2.12     84.0  
+5->6      TMCT              -                 18  308      227  369   12   2.08     74.0  
+6->7      -                 Real Opinion      18  32       28   35    6    1.58     78.3  
+7->8      Real Opinion      -                 18  34       19   61    30   1.57     83.2  
+8->9      -                 Opposite Opinion  18  31       27   37    7    1.92     80.5  
+9->10     Opposite Opinion  -                 18  31       23   49    25   1.81     78.9  
+10->11    -                 Subtract          18  32       31   34    3    2.05     73.8  
+11->12    Subtract          -                 18  34       12   44    31   2.51     76.7  
+last      Subtract          -                 18  37       18   1800  262  2.62     77.8  
+
+  Cohort V2
+Interval  project stage(s)  notebook task     n   med dur  min  max   CV%  med EDA  med HR
+--------  ----------------  ----------------  --  -------  ---  ----  ---  -------  ------
+pre       -                 -                 17  785      229  2337  61   0.24     80.3  
+0->1      Baseline          -                 17  98       77   164   22   0.32     79.5  
+1->2      First Rest        TMCT              17  261      217  452   20   0.60     84.6  
+2->3      TMCT              -                 17  853      778  1086  9    0.44     75.2  
+3->4      Second Rest       Real Opinion      17  38       29   45    10   0.39     79.8  
+4->5      Real Opinion      -                 17  24       18   62    37   0.58     81.8  
+5->6      -                 Opposite Opinion  17  38       30   48    11   1.08     80.8  
+6->7      Opposite Opinion  -                 17  807      439  1169  19   0.57     73.2  
+7->8      Subtract          Subtract          17  38       26   65    20   0.38     80.0  
+last      -                 -                 17  328      228  588   28   0.58     79.5  
+
+
+==============================================================================
+6. SENSOR WINDOW vs EDA-BASED TAG BOUNDARIES (project logic replicated)
+==============================================================================
+Project selection rule (from src/preprocessing.py):
+  EDA/HR/TEMP/BVP: index = int(t - THIS SIGNAL's own first timestamp);
+                   window = index in [int(tag_i_rel), int(tag_j_rel)]
+                   where tag_rel = tag_utc - EDA first timestamp.
+  IBI            : offset_s (relative to IBI's OWN header time) in [t0, t1).
+  ACC            : chunk counter (32 samples = 1 'second') from ACC's own start.
+So a signal whose header starts D seconds after EDA is read D seconds EARLY
+relative to the EDA-based boundaries:  shift = signal_start - EDA_start.
+A 'synthetic 10 s offset' therefore appears exactly when a header starts 10 s after EDA.
+
+6a. Distribution of (signal start - EDA start) across recordings
+Signal  n recordings  n offset  values (seconds x count) 
+------  ------------  --------  -------------------------
+HR      37            37        +10s x37                 
+BVP     37            0         +0s x37                  
+TEMP    37            0         +0s x37                  
+ACC     37            0         +0s x37                  
+IBI     37            1         -1.68453e+09s x1, +0s x36
+
+6b. Recordings with any offset > tolerance or ACC fs != 32 Hz
+Recording  shift HR  shift BVP  shift TEMP  shift ACC  shift IBI      shortest window(s)  worst % of it misplaced  ACC fs/32
+---------  --------  ---------  ----------  ---------  -------------  ------------------  -----------------------  ---------
+S01        +10.0     +0.0       +0.0        +0.0       +0.0           15                  67                       1.000    
+S02        +10.0     +0.0       +0.0        +0.0       -1684532894.2  16                  100                      1.000    
+S03        +10.0     +0.0       +0.0        +0.0       +0.0           19                  53                       1.000    
+S04        +10.0     +0.0       +0.0        +0.0       +0.0           44                  23                       1.000    
+S05        +10.0     +0.0       +0.0        +0.0       +0.0           12                  83                       1.000    
+S06        +10.0     +0.0       +0.0        +0.0       +0.0           13                  77                       1.000    
+S07        +10.0     +0.0       +0.0        +0.0       +0.0           36                  28                       1.000    
+S08        +10.0     +0.0       +0.0        +0.0       +0.0           26                  38                       1.000    
+S09        +10.0     +0.0       +0.0        +0.0       +0.0           36                  28                       1.000    
+S10        +10.0     +0.0       +0.0        +0.0       +0.0           27                  37                       1.000    
+S11        +10.0     +0.0       +0.0        +0.0       +0.0           32                  31                       1.000    
+S12        +10.0     +0.0       +0.0        +0.0       +0.0           34                  29                       1.000    
+S13        +10.0     +0.0       +0.0        +0.0       +0.0           31                  32                       1.000    
+S14        +10.0     +0.0       +0.0        +0.0       +0.0           25                  40                       1.000    
+S15        +10.0     +0.0       +0.0        +0.0       +0.0           31                  32                       1.000    
+S16        +10.0     +0.0       +0.0        +0.0       +0.0           23                  43                       1.000    
+S17        +10.0     +0.0       +0.0        +0.0       +0.0           21                  48                       1.000    
+S18        +10.0     +0.0       +0.0        +0.0       +0.0           22                  45                       1.000    
+f01        +10.0     +0.0       +0.0        +0.0       +0.0           21                  48                       1.000    
+f02        +10.0     +0.0       +0.0        +0.0       +0.0           31                  32                       1.000    
+f03        +10.0     +0.0       +0.0        +0.0       +0.0           19                  53                       1.000    
+f04        +10.0     +0.0       +0.0        +0.0       +0.0           36                  28                       1.000    
+f05        +10.0     +0.0       +0.0        +0.0       +0.0           19                  53                       1.000    
+f06        +10.0     +0.0       +0.0        +0.0       +0.0           28                  36                       1.000    
+f07        +10.0     +0.0       +0.0        +0.0       +0.0           27                  37                       1.000    
+f08        +10.0     +0.0       +0.0        +0.0       +0.0           35                  29                       1.000    
+f09        +10.0     +0.0       +0.0        +0.0       +0.0           22                  45                       1.000    
+f10        +10.0     +0.0       +0.0        +0.0       +0.0           30                  33                       1.000    
+f11        +10.0     +0.0       +0.0        +0.0       +0.0           24                  42                       1.000    
+f12        +10.0     +0.0       +0.0        +0.0       +0.0           27                  37                       1.000    
+f13        +10.0     +0.0       +0.0        +0.0       +0.0           29                  34                       1.000    
+f14_a      +10.0     +0.0       +0.0        +0.0       +0.0           NA                  NA                       1.000    
+f14_b      +10.0     +0.0       +0.0        +0.0       +0.0           NA                  NA                       1.000    
+f15        +10.0     +0.0       +0.0        +0.0       +0.0           22                  45                       1.000    
+f16        +10.0     +0.0       +0.0        +0.0       +0.0           24                  42                       1.000    
+f17        +10.0     +0.0       +0.0        +0.0       +0.0           24                  42                       1.000    
+f18        +10.0     +0.0       +0.0        +0.0       +0.0           18                  56                       1.000    
+  ('worst % misplaced' = max |shift| / shortest bounded project window, capped at 100.)
+
+==============================================================================
+7. SUBTRACT WINDOW AND BASELINE BOUNDARIES
+==============================================================================
+7a. Subtract window under the project logic
+  Rule: if the stage's end index == number of tags, t1 = None and the window runs
+  to the END OF THE SIGNAL.
+Subject  Coh  n_tags  project idx  status   t0(s)  project len(s)  notebook len(s)  med other stages(s)
+-------  ---  ------  -----------  -------  -----  --------------  ---------------  -------------------
+S01      V1   13      11->12       bounded  1947   15              32               125                
+S02      V1   13      11->12       bounded  1280   16              33               127                
+S03      V1   13      11->12       bounded  1482   34              33               128                
+S04      V1   13      11->12       bounded  1665   44              32               137                
+S05      V1   13      11->12       bounded  1525   12              32               169                
+S06      V1   13      11->12       bounded  1396   13              34               140                
+S07      V1   13      11->12       bounded  1358   36              31               129                
+S08      V1   13      11->12       bounded  1338   34              32               155                
+S09      V1   13      11->12       bounded  1372   36              31               131                
+S10      V1   13      11->12       bounded  1493   39              31               135                
+S11      V1   13      11->12       bounded  1300   37              32               152                
+S12      V1   13      11->12       bounded  1515   34              31               131                
+S13      V1   13      11->12       bounded  1562   36              32               127                
+S14      V1   13      11->12       bounded  1616   37              34               137                
+S15      V1   13      11->12       bounded  1568   31              34               162                
+S16      V1   13      11->12       bounded  1609   32              33               152                
+S17      V1   13      11->12       bounded  1559   34              33               159                
+S18      V1   13      11->12       bounded  1566   38              32               158                
+f01      V2   9       7->8         bounded  2973   26              26               286                
+f02      V2   9       7->8         bounded  2678   31              31               228                
+f03      V2   9       7->8         bounded  3297   35              35               212                
+f04      V2   9       7->8         bounded  3179   36              36               184                
+f05      V2   9       7->8         bounded  4290   48              48               170                
+f06      V2   9       7->8         bounded  2753   39              39               164                
+f07      V2   9       7->8         bounded  2952   43              43               162                
+f08      V2   9       7->8         bounded  2553   40              40               194                
+f09      V2   9       7->8         bounded  2829   38              38               182                
+f10      V2   9       7->8         bounded  2334   43              43               182                
+f11      V2   9       7->8         bounded  2857   37              37               202                
+f12      V2   9       7->8         bounded  4450   38              38               171                
+f13      V2   9       7->8         bounded  3407   41              41               162                
+f15      V2   9       7->8         bounded  3909   65              65               176                
+f16      V2   9       7->8         bounded  2874   36              36               162                
+f17      V2   9       7->8         bounded  2886   46              46               201                
+f18      V2   9       7->8         bounded  2810   36              36               161                
+
+7b. Baseline boundaries
+  V1: project Baseline = tags 0->2. It starts at the first button press,
+      NOT at the session start; the pre-tag period (EDA start -> tag 0) is excluded.
+Candidate interval  n   median(s)  min(s)  max(s)
+------------------  --  ---------  ------  ------
+EDA start -> tag 0  18  177        1       371   
+tag 0 -> tag 1      18  190        163     247   
+tag 1 -> tag 2      18  103        71      175   
+      Project Baseline spans 2 inter-tag interval(s) in V1.
+  V2: project Baseline = tags 0->1. It starts at the first button press,
+      NOT at the session start; the pre-tag period (EDA start -> tag 0) is excluded.
+Candidate interval  n   median(s)  min(s)  max(s)
+------------------  --  ---------  ------  ------
+EDA start -> tag 0  17  785        229     2337  
+tag 0 -> tag 1      17  98         77      164   
+tag 1 -> tag 2      17  261        217     452   
+      Project Baseline spans 1 inter-tag interval(s) in V2.
+  The two cohorts use a different number of intervals for the stage called 'Baseline'.
+  The notebook gives no Baseline definition, so this cannot be checked against it.
+
+==============================================================================
+8. SPLIT RECORDINGS (e.g. f14_a / f14_b): facts for a correct merge
+==============================================================================
+--- f14: folders found = ['f14_a', 'f14_b']
+  No 'f14' folder exists -> loaders that only iterate over existing folders
+  will never see this subject unless split parts are mapped to it explicitly.
+Part   Signal  status  start (UTC)          end (UTC)                dur(s)  rows  
+-----  ------  ------  -------------------  -----------------------  ------  ------
+f14_a  EDA     ok      2013-07-12 22:46:39  2013-07-12 22:58:22.500  704     2814  
+f14_a  HR      ok      2013-07-12 22:46:49  2013-07-12 22:58:23      694     694   
+f14_a  BVP     ok      2013-07-12 22:46:39  2013-07-12 22:58:22.656  704     45034 
+f14_a  TEMP    ok      2013-07-12 22:46:39  2013-07-12 22:58:23      704     2816  
+f14_a  ACC     ok      2013-07-12 22:46:39  2013-07-12 22:58:22.688  704     22518 
+f14_a  IBI     ok      2013-07-12 22:46:39  2013-07-12 22:58:11.859  693     450   
+f14_b  EDA     ok      2013-07-12 22:59:54  2013-07-12 23:36:04.500  2170    8682  
+f14_b  HR      ok      2013-07-12 23:00:04  2013-07-12 23:36:03      2159    2159  
+f14_b  BVP     ok      2013-07-12 22:59:54  2013-07-12 23:36:02.203  2168    138765
+f14_b  TEMP    ok      2013-07-12 22:59:54  2013-07-12 23:36:02      2168    8672  
+f14_b  ACC     ok      2013-07-12 22:59:54  2013-07-12 23:36:02.812  2169    69402 
+f14_b  IBI     ok      2013-07-12 22:59:54  2013-07-12 23:34:32.016  2078    1410  
+
+Part   n_tags  tag times (UTC)                                                                                                                                                                              rel. own EDA start (s)                           
+-----  ------  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  -------------------------------------------------
+f14_a  0       -                                                                                                                                                                                            -                                                
+f14_b  9       2013-07-12 23:02:16, 2013-07-12 23:03:46, 2013-07-12 23:07:52, 2013-07-12 23:19:43, 2013-07-12 23:20:22, 2013-07-12 23:21:04, 2013-07-12 23:21:53, 2013-07-12 23:32:32, 2013-07-12 23:33:15  142, 232, 478, 1189, 1228, 1270, 1319, 1958, 2001
+
+  Gap = start(f14_b) - end(f14_a); positive = unrecorded time, negative = overlap
+Signal  gap (s)  verdict              
+------  -------  ---------------------
+EDA     +91.5    GAP (unrecorded time)
+HR      +101.0   GAP (unrecorded time)
+BVP     +91.3    GAP (unrecorded time)
+TEMP    +91.0    GAP (unrecorded time)
+ACC     +91.3    GAP (unrecorded time)
+IBI     +102.1   GAP (unrecorded time)
+
+  Tags inside their own part's EDA interval: 9/9
+  Combined tag count = 9; expected for V2 = 9 -> consistent
+  Tags chronological across parts (in part order): True
+  DIAGNOSTIC merged tag times relative to FIRST part's EDA start (s): 937, 1027, 1273, 1984, 2023, 2065, 2114, 2753, 2796
+
+Mapping   Stage             window (s from part-A EDA start)  t0 in  t1 in  touches gap?
+--------  ----------------  --------------------------------  -----  -----  ------------
+project   Baseline          937..1027                         B      B      no          
+project   TMCT              1273..1984                        B      B      no          
+project   First Rest        1027..1273                        B      B      no          
+project   Real Opinion      2023..2065                        B      B      no          
+project   Opposite Opinion  2114..2753                        B      B      no          
+project   Second Rest       1984..2023                        B      B      no          
+project   Subtract          2753..2796                        B      B      no          
+notebook  TMCT              1027..1273                        B      B      no          
+notebook  Real Opinion      1984..2023                        B      B      no          
+notebook  Opposite Opinion  2065..2114                        B      B      no          
+notebook  Subtract          2753..2796                        B      B      no          
+
+  Requirements for a correct merge (derived from the facts above; NOT applied):
+   - Align parts on ABSOLUTE UTC time, never by appending rows by index.
+   - Leave any positive gap as missing data; do not interpolate across it.
+   - IBI offsets are relative to each part's own IBI header: convert to UTC per part first.
+   - Merge tags chronologically and measure them from ONE reference (part A's EDA start).
+   - Windows touching the gap need an explicit decision (drop or trim).
+   data_constraints.txt: �	f14: Bluetooth connection was lost during registration. The baseline is in file f14_a, and the rest of the protocol is in file f14_b.
+   From code review (not measured here): src/loader.load_all() iterates only over existing
+   folders, so a subject that exists only as '_a'/'_b' parts is not loaded; and concatenated
+   IBI keeps per-part offsets, which restart near 0 in the second part.
+
+==============================================================================
+9. LABEL FILES vs FOLDERS
+==============================================================================
+  Stress_Level_v1.csv: 18 subjects; folders found for this cohort: 18
+  Stress_Level_v2.csv: 18 subjects; folders found for this cohort: 18
+
+==============================================================================
+APPENDIX A (file only): raw header values and full tag lists
+==============================================================================
+[S01]
+  EDA   status=ok         hdr=('2013-02-20 17:55:19', '4.0') start=2013-02-20 17:55:19 fs=4.0 rows=8898 issues=[]
+  HR    status=ok         hdr=('2013-02-20 17:55:29', '1.0') start=2013-02-20 17:55:29 fs=1.0 rows=2215 issues=[]
+  BVP   status=ok         hdr=('2013-02-20 17:55:19', '64.0') start=2013-02-20 17:55:19 fs=64.0 rows=142351 issues=[]
+  TEMP  status=ok         hdr=('2013-02-20 17:55:19', '4.0') start=2013-02-20 17:55:19 fs=4.0 rows=8896 issues=[]
+  ACC   status=ok         hdr=('2013-02-20 17:55:19,2013-02-20 17:55:19,2013-02-20 17:55:19', '32.0,32.0,32.0') start=2013-02-20 17:55:19 fs=32.0 rows=71178 issues=[]
+  IBI   status=ok         hdr=('2013-02-20 17:55:19,2013-02-20 17:55:19', '') start=2013-02-20 17:55:19 fs=- rows=870 issues=[]
+  tags  n=13
+    tag[0] 2013-02-20 18:01:30  rel_EDA=371.0s
+    tag[1] 2013-02-20 18:05:37  rel_EDA=618.0s
+    tag[2] 2013-02-20 18:08:32  rel_EDA=793.0s
+    tag[3] 2013-02-20 18:10:17  rel_EDA=898.0s
+    tag[4] 2013-02-20 18:17:37  rel_EDA=1338.0s
+    tag[5] 2013-02-20 18:19:42  rel_EDA=1463.0s
+    tag[6] 2013-02-20 18:24:49  rel_EDA=1770.0s
+    tag[7] 2013-02-20 18:25:17  rel_EDA=1798.0s
+    tag[8] 2013-02-20 18:25:55  rel_EDA=1836.0s
+    tag[9] 2013-02-20 18:26:32  rel_EDA=1873.0s
+    tag[10] 2013-02-20 18:27:14  rel_EDA=1915.0s
+    tag[11] 2013-02-20 18:27:46  rel_EDA=1947.0s
+    tag[12] 2013-02-20 18:28:01  rel_EDA=1962.0s
+[S02]
+  EDA   status=ok         hdr=('2013-02-20 18:49:29', '4.0') start=2013-02-20 18:49:29 fs=4.0 rows=12384 issues=[]
+  HR    status=ok         hdr=('2013-02-20 18:49:39', '1.0') start=2013-02-20 18:49:39 fs=1.0 rows=3078 issues=[]
+  BVP   status=ok         hdr=('2013-02-20 18:49:29', '64.0') start=2013-02-20 18:49:29 fs=64.0 rows=198176 issues=[]
+  TEMP  status=ok         hdr=('2013-02-20 18:49:29', '4.0') start=2013-02-20 18:49:29 fs=4.0 rows=12384 issues=[]
+  ACC   status=ok         hdr=('2013-02-20 18:49:29,2013-02-20 18:49:29,2013-02-20 18:49:29', '32.0,32.0,32.0') start=2013-02-20 18:49:29 fs=32.0 rows=99084 issues=[]
+  IBI   status=ok         hdr=('1959-10-05 21:01:14.828125,1959-10-05 21:01:14.828125', '') start=BAD fs=- rows=3059 issues=['1 malformed rows', '40 non-increasing offsets']
+  tags  n=13
+    tag[0] 2013-02-20 18:49:30  rel_EDA=1.0s
+    tag[1] 2013-02-20 18:52:42  rel_EDA=193.0s
+    tag[2] 2013-02-20 18:54:08  rel_EDA=279.0s
+    tag[3] 2013-02-20 18:56:04  rel_EDA=395.0s
+    tag[4] 2013-02-20 19:00:13  rel_EDA=644.0s
+    tag[5] 2013-02-20 19:02:20  rel_EDA=771.0s
+    tag[6] 2013-02-20 19:08:15  rel_EDA=1126.0s
+    tag[7] 2013-02-20 19:08:50  rel_EDA=1161.0s
+    tag[8] 2013-02-20 19:09:18  rel_EDA=1189.0s
+    tag[9] 2013-02-20 19:09:52  rel_EDA=1223.0s
+    tag[10] 2013-02-20 19:10:16  rel_EDA=1247.0s
+    tag[11] 2013-02-20 19:10:49  rel_EDA=1280.0s
+    tag[12] 2013-02-20 19:11:05  rel_EDA=1296.0s
+[S03]
+  EDA   status=ok         hdr=('2013-03-06 17:04:13', '4.0') start=2013-03-06 17:04:13 fs=4.0 rows=6342 issues=[]
+  HR    status=ok         hdr=('2013-03-06 17:04:23', '1.0') start=2013-03-06 17:04:23 fs=1.0 rows=1576 issues=[]
+  BVP   status=ok         hdr=('2013-03-06 17:04:13', '64.0') start=2013-03-06 17:04:13 fs=64.0 rows=101486 issues=[]
+  TEMP  status=ok         hdr=('2013-03-06 17:04:13', '4.0') start=2013-03-06 17:04:13 fs=4.0 rows=6344 issues=[]
+  ACC   status=ok         hdr=('2013-03-06 17:04:13,2013-03-06 17:04:13,2013-03-06 17:04:13', '32.0,32.0,32.0') start=2013-03-06 17:04:13 fs=32.0 rows=50748 issues=[]
+  IBI   status=ok         hdr=('2013-03-06 17:04:13,2013-03-06 17:04:13', '') start=2013-03-06 17:04:13 fs=- rows=660 issues=[]
+  tags  n=13
+    tag[0] 2013-03-06 17:08:51  rel_EDA=278.0s
+    tag[1] 2013-03-06 17:11:58  rel_EDA=465.0s
+    tag[2] 2013-03-06 17:13:25  rel_EDA=552.0s
+    tag[3] 2013-03-06 17:15:09  rel_EDA=656.0s
+    tag[4] 2013-03-06 17:19:25  rel_EDA=912.0s
+    tag[5] 2013-03-06 17:21:33  rel_EDA=1040.0s
+    tag[6] 2013-03-06 17:26:28  rel_EDA=1335.0s
+    tag[7] 2013-03-06 17:27:02  rel_EDA=1369.0s
+    tag[8] 2013-03-06 17:27:21  rel_EDA=1388.0s
+    tag[9] 2013-03-06 17:27:52  rel_EDA=1419.0s
+    tag[10] 2013-03-06 17:28:22  rel_EDA=1449.0s
+    tag[11] 2013-03-06 17:28:55  rel_EDA=1482.0s
+    tag[12] 2013-03-06 17:29:29  rel_EDA=1516.0s
+[S04]
+  EDA   status=ok         hdr=('2013-02-24 12:23:49', '4.0') start=2013-02-24 12:23:49 fs=4.0 rows=6930 issues=[]
+  HR    status=ok         hdr=('2013-02-24 12:23:59', '1.0') start=2013-02-24 12:23:59 fs=1.0 rows=1724 issues=[]
+  BVP   status=ok         hdr=('2013-02-24 12:23:49', '64.0') start=2013-02-24 12:23:49 fs=64.0 rows=110924 issues=[]
+  TEMP  status=ok         hdr=('2013-02-24 12:23:49', '4.0') start=2013-02-24 12:23:49 fs=4.0 rows=6928 issues=[]
+  ACC   status=ok         hdr=('2013-02-24 12:23:49,2013-02-24 12:23:49,2013-02-24 12:23:49', '32.0,32.0,32.0') start=2013-02-24 12:23:49 fs=32.0 rows=55458 issues=[]
+  IBI   status=ok         hdr=('2013-02-24 12:23:49,2013-02-24 12:23:49', '') start=2013-02-24 12:23:49 fs=- rows=1080 issues=[]
+  tags  n=13
+    tag[0] 2013-02-24 12:26:50  rel_EDA=181.0s
+    tag[1] 2013-02-24 12:29:50  rel_EDA=361.0s
+    tag[2] 2013-02-24 12:32:28  rel_EDA=519.0s
+    tag[3] 2013-02-24 12:34:04  rel_EDA=615.0s
+    tag[4] 2013-02-24 12:40:18  rel_EDA=989.0s
+    tag[5] 2013-02-24 12:42:35  rel_EDA=1126.0s
+    tag[6] 2013-02-24 12:48:19  rel_EDA=1470.0s
+    tag[7] 2013-02-24 12:48:51  rel_EDA=1502.0s
+    tag[8] 2013-02-24 12:49:42  rel_EDA=1553.0s
+    tag[9] 2013-02-24 12:50:14  rel_EDA=1585.0s
+    tag[10] 2013-02-24 12:51:02  rel_EDA=1633.0s
+    tag[11] 2013-02-24 12:51:34  rel_EDA=1665.0s
+    tag[12] 2013-02-24 12:52:18  rel_EDA=1709.0s
+[S05]
+  EDA   status=ok         hdr=('2013-02-23 11:46:26', '4.0') start=2013-02-23 11:46:26 fs=4.0 rows=6324 issues=[]
+  HR    status=ok         hdr=('2013-02-23 11:46:36', '1.0') start=2013-02-23 11:46:36 fs=1.0 rows=1571 issues=[]
+  BVP   status=ok         hdr=('2013-02-23 11:46:26', '64.0') start=2013-02-23 11:46:26 fs=64.0 rows=101178 issues=[]
+  TEMP  status=ok         hdr=('2013-02-23 11:46:26', '4.0') start=2013-02-23 11:46:26 fs=4.0 rows=6320 issues=[]
+  ACC   status=ok         hdr=('2013-02-23 11:46:26,2013-02-23 11:46:26,2013-02-23 11:46:26', '32.0,32.0,32.0') start=2013-02-23 11:46:26 fs=32.0 rows=50592 issues=[]
+  IBI   status=ok         hdr=('2013-02-23 11:46:26,2013-02-23 11:46:26', '') start=2013-02-23 11:46:26 fs=- rows=780 issues=[]
+  tags  n=13
+    tag[0] 2013-02-23 11:49:42  rel_EDA=196.0s
+    tag[1] 2013-02-23 11:52:45  rel_EDA=379.0s
+    tag[2] 2013-02-23 11:54:24  rel_EDA=478.0s
+    tag[3] 2013-02-23 11:56:16  rel_EDA=590.0s
+    tag[4] 2013-02-23 12:01:52  rel_EDA=926.0s
+    tag[5] 2013-02-23 12:04:41  rel_EDA=1095.0s
+    tag[6] 2013-02-23 12:08:28  rel_EDA=1322.0s
+    tag[7] 2013-02-23 12:09:02  rel_EDA=1356.0s
+    tag[8] 2013-02-23 12:10:03  rel_EDA=1417.0s
+    tag[9] 2013-02-23 12:10:34  rel_EDA=1448.0s
+    tag[10] 2013-02-23 12:11:19  rel_EDA=1493.0s
+    tag[11] 2013-02-23 12:11:51  rel_EDA=1525.0s
+    tag[12] 2013-02-23 12:12:03  rel_EDA=1537.0s
+[S06]
+  EDA   status=ok         hdr=('2013-02-23 12:22:59', '4.0') start=2013-02-23 12:22:59 fs=4.0 rows=5772 issues=[]
+  HR    status=ok         hdr=('2013-02-23 12:23:09', '1.0') start=2013-02-23 12:23:09 fs=1.0 rows=1434 issues=[]
+  BVP   status=ok         hdr=('2013-02-23 12:22:59', '64.0') start=2013-02-23 12:22:59 fs=64.0 rows=92400 issues=[]
+  TEMP  status=ok         hdr=('2013-02-23 12:22:59', '4.0') start=2013-02-23 12:22:59 fs=4.0 rows=5776 issues=[]
+  ACC   status=ok         hdr=('2013-02-23 12:22:59,2013-02-23 12:22:59,2013-02-23 12:22:59', '32.0,32.0,32.0') start=2013-02-23 12:22:59 fs=32.0 rows=46200 issues=[]
+  IBI   status=ok         hdr=('2013-02-23 12:22:59,2013-02-23 12:22:59', '') start=2013-02-23 12:22:59 fs=- rows=1260 issues=[]
+  tags  n=13
+    tag[0] 2013-02-23 12:23:54  rel_EDA=55.0s
+    tag[1] 2013-02-23 12:27:07  rel_EDA=248.0s
+    tag[2] 2013-02-23 12:28:33  rel_EDA=334.0s
+    tag[3] 2013-02-23 12:30:41  rel_EDA=462.0s
+    tag[4] 2013-02-23 12:36:15  rel_EDA=796.0s
+    tag[5] 2013-02-23 12:38:35  rel_EDA=936.0s
+    tag[6] 2013-02-23 12:43:40  rel_EDA=1241.0s
+    tag[7] 2013-02-23 12:44:12  rel_EDA=1273.0s
+    tag[8] 2013-02-23 12:44:45  rel_EDA=1306.0s
+    tag[9] 2013-02-23 12:45:13  rel_EDA=1334.0s
+    tag[10] 2013-02-23 12:45:41  rel_EDA=1362.0s
+    tag[11] 2013-02-23 12:46:15  rel_EDA=1396.0s
+    tag[12] 2013-02-23 12:46:28  rel_EDA=1409.0s
+[S07]
+  EDA   status=ok         hdr=('2013-02-24 11:47:55', '4.0') start=2013-02-24 11:47:55 fs=4.0 rows=5712 issues=[]
+  HR    status=ok         hdr=('2013-02-24 11:48:05', '1.0') start=2013-02-24 11:48:05 fs=1.0 rows=1419 issues=[]
+  BVP   status=ok         hdr=('2013-02-24 11:47:55', '64.0') start=2013-02-24 11:47:55 fs=64.0 rows=91432 issues=[]
+  TEMP  status=ok         hdr=('2013-02-24 11:47:55', '4.0') start=2013-02-24 11:47:55 fs=4.0 rows=5712 issues=[]
+  ACC   status=ok         hdr=('2013-02-24 11:47:55,2013-02-24 11:47:55,2013-02-24 11:47:55', '32.0,32.0,32.0') start=2013-02-24 11:47:55 fs=32.0 rows=45714 issues=[]
+  IBI   status=ok         hdr=('2013-02-24 11:47:55,2013-02-24 11:47:55', '') start=2013-02-24 11:47:55 fs=- rows=990 issues=[]
+  tags  n=13
+    tag[0] 2013-02-24 11:49:50  rel_EDA=115.0s
+    tag[1] 2013-02-24 11:52:33  rel_EDA=278.0s
+    tag[2] 2013-02-24 11:54:24  rel_EDA=389.0s
+    tag[3] 2013-02-24 11:56:07  rel_EDA=492.0s
+    tag[4] 2013-02-24 12:00:39  rel_EDA=764.0s
+    tag[5] 2013-02-24 12:02:48  rel_EDA=893.0s
+    tag[6] 2013-02-24 12:07:33  rel_EDA=1178.0s
+    tag[7] 2013-02-24 12:08:05  rel_EDA=1210.0s
+    tag[8] 2013-02-24 12:08:43  rel_EDA=1248.0s
+    tag[9] 2013-02-24 12:09:15  rel_EDA=1280.0s
+    tag[10] 2013-02-24 12:10:02  rel_EDA=1327.0s
+    tag[11] 2013-02-24 12:10:33  rel_EDA=1358.0s
+    tag[12] 2013-02-24 12:11:09  rel_EDA=1394.0s
+[S08]
+  EDA   status=ok         hdr=('2013-02-23 16:02:04', '4.0') start=2013-02-23 16:02:04 fs=4.0 rows=5712 issues=[]
+  HR    status=ok         hdr=('2013-02-23 16:02:14', '1.0') start=2013-02-23 16:02:14 fs=1.0 rows=1419 issues=[]
+  BVP   status=ok         hdr=('2013-02-23 16:02:04', '64.0') start=2013-02-23 16:02:04 fs=64.0 rows=91443 issues=[]
+  TEMP  status=ok         hdr=('2013-02-23 16:02:04', '4.0') start=2013-02-23 16:02:04 fs=4.0 rows=5712 issues=[]
+  ACC   status=ok         hdr=('2013-02-23 16:02:04,2013-02-23 16:02:04,2013-02-23 16:02:04', '32.0,32.0,32.0') start=2013-02-23 16:02:04 fs=32.0 rows=45720 issues=[]
+  IBI   status=ok         hdr=('2013-02-23 16:02:04,2013-02-23 16:02:04', '') start=2013-02-23 16:02:04 fs=- rows=660 issues=[]
+  tags  n=13
+    tag[0] 2013-02-23 16:02:48  rel_EDA=44.0s
+    tag[1] 2013-02-23 16:05:44  rel_EDA=220.0s
+    tag[2] 2013-02-23 16:08:09  rel_EDA=365.0s
+    tag[3] 2013-02-23 16:09:54  rel_EDA=470.0s
+    tag[4] 2013-02-23 16:14:43  rel_EDA=759.0s
+    tag[5] 2013-02-23 16:17:18  rel_EDA=914.0s
+    tag[6] 2013-02-23 16:21:46  rel_EDA=1182.0s
+    tag[7] 2013-02-23 16:22:18  rel_EDA=1214.0s
+    tag[8] 2013-02-23 16:22:44  rel_EDA=1240.0s
+    tag[9] 2013-02-23 16:23:17  rel_EDA=1273.0s
+    tag[10] 2013-02-23 16:23:50  rel_EDA=1306.0s
+    tag[11] 2013-02-23 16:24:22  rel_EDA=1338.0s
+    tag[12] 2013-02-23 16:24:56  rel_EDA=1372.0s
+[S09]
+  EDA   status=ok         hdr=('2013-02-24 11:15:28', '4.0') start=2013-02-24 11:15:28 fs=4.0 rows=5790 issues=[]
+  HR    status=ok         hdr=('2013-02-24 11:15:38', '1.0') start=2013-02-24 11:15:38 fs=1.0 rows=1439 issues=[]
+  BVP   status=ok         hdr=('2013-02-24 11:15:28', '64.0') start=2013-02-24 11:15:28 fs=64.0 rows=92708 issues=[]
+  TEMP  status=ok         hdr=('2013-02-24 11:15:28', '4.0') start=2013-02-24 11:15:28 fs=4.0 rows=5792 issues=[]
+  ACC   status=ok         hdr=('2013-02-24 11:15:28,2013-02-24 11:15:28,2013-02-24 11:15:28', '32.0,32.0,32.0') start=2013-02-24 11:15:28 fs=32.0 rows=46356 issues=[]
+  IBI   status=ok         hdr=('2013-02-24 11:15:28,2013-02-24 11:15:28', '') start=2013-02-24 11:15:28 fs=- rows=1680 issues=[]
+  tags  n=13
+    tag[0] 2013-02-24 11:18:02  rel_EDA=154.0s
+    tag[1] 2013-02-24 11:21:14  rel_EDA=346.0s
+    tag[2] 2013-02-24 11:22:53  rel_EDA=445.0s
+    tag[3] 2013-02-24 11:24:32  rel_EDA=544.0s
+    tag[4] 2013-02-24 11:28:34  rel_EDA=786.0s
+    tag[5] 2013-02-24 11:30:45  rel_EDA=917.0s
+    tag[6] 2013-02-24 11:35:23  rel_EDA=1195.0s
+    tag[7] 2013-02-24 11:35:55  rel_EDA=1227.0s
+    tag[8] 2013-02-24 11:36:41  rel_EDA=1273.0s
+    tag[9] 2013-02-24 11:37:13  rel_EDA=1305.0s
+    tag[10] 2013-02-24 11:37:49  rel_EDA=1341.0s
+    tag[11] 2013-02-24 11:38:20  rel_EDA=1372.0s
+    tag[12] 2013-02-24 11:38:56  rel_EDA=1408.0s
+[S10]
+  EDA   status=ok         hdr=('2013-02-23 18:03:27', '4.0') start=2013-02-23 18:03:27 fs=4.0 rows=6630 issues=[]
+  HR    status=ok         hdr=('2013-02-23 18:03:37', '1.0') start=2013-02-23 18:03:37 fs=1.0 rows=1649 issues=[]
+  BVP   status=ok         hdr=('2013-02-23 18:03:27', '64.0') start=2013-02-23 18:03:27 fs=64.0 rows=106128 issues=[]
+  TEMP  status=ok         hdr=('2013-02-23 18:03:27', '4.0') start=2013-02-23 18:03:27 fs=4.0 rows=6632 issues=[]
+  ACC   status=ok         hdr=('2013-02-23 18:03:27,2013-02-23 18:03:27,2013-02-23 18:03:27', '32.0,32.0,32.0') start=2013-02-23 18:03:27 fs=32.0 rows=53064 issues=[]
+  IBI   status=ok         hdr=('2013-02-23 18:03:27,2013-02-23 18:03:27', '') start=2013-02-23 18:03:27 fs=- rows=1470 issues=[]
+  tags  n=13
+    tag[0] 2013-02-23 18:04:34  rel_EDA=67.0s
+    tag[1] 2013-02-23 18:07:38  rel_EDA=251.0s
+    tag[2] 2013-02-23 18:09:27  rel_EDA=360.0s
+    tag[3] 2013-02-23 18:11:24  rel_EDA=477.0s
+    tag[4] 2013-02-23 18:17:26  rel_EDA=839.0s
+    tag[5] 2013-02-23 18:19:41  rel_EDA=974.0s
+    tag[6] 2013-02-23 18:25:50  rel_EDA=1343.0s
+    tag[7] 2013-02-23 18:26:19  rel_EDA=1372.0s
+    tag[8] 2013-02-23 18:26:53  rel_EDA=1406.0s
+    tag[9] 2013-02-23 18:27:22  rel_EDA=1435.0s
+    tag[10] 2013-02-23 18:27:49  rel_EDA=1462.0s
+    tag[11] 2013-02-23 18:28:20  rel_EDA=1493.0s
+    tag[12] 2013-02-23 18:28:59  rel_EDA=1532.0s
+[S11]
+  EDA   status=ok         hdr=('2013-02-24 09:51:45', '4.0') start=2013-02-24 09:51:45 fs=4.0 rows=5604 issues=[]
+  HR    status=ok         hdr=('2013-02-24 09:51:55', '1.0') start=2013-02-24 09:51:55 fs=1.0 rows=1392 issues=[]
+  BVP   status=ok         hdr=('2013-02-24 09:51:45', '64.0') start=2013-02-24 09:51:45 fs=64.0 rows=89672 issues=[]
+  TEMP  status=ok         hdr=('2013-02-24 09:51:45', '4.0') start=2013-02-24 09:51:45 fs=4.0 rows=5600 issues=[]
+  ACC   status=ok         hdr=('2013-02-24 09:51:45,2013-02-24 09:51:45,2013-02-24 09:51:45', '32.0,32.0,32.0') start=2013-02-24 09:51:45 fs=32.0 rows=44838 issues=[]
+  IBI   status=ok         hdr=('2013-02-24 09:51:45,2013-02-24 09:51:45', '') start=2013-02-24 09:51:45 fs=- rows=870 issues=[]
+  tags  n=13
+    tag[0] 2013-02-24 09:52:09  rel_EDA=24.0s
+    tag[1] 2013-02-24 09:54:59  rel_EDA=194.0s
+    tag[2] 2013-02-24 09:56:48  rel_EDA=303.0s
+    tag[3] 2013-02-24 09:59:20  rel_EDA=455.0s
+    tag[4] 2013-02-24 10:03:59  rel_EDA=734.0s
+    tag[5] 2013-02-24 10:06:30  rel_EDA=885.0s
+    tag[6] 2013-02-24 10:10:40  rel_EDA=1135.0s
+    tag[7] 2013-02-24 10:11:11  rel_EDA=1166.0s
+    tag[8] 2013-02-24 10:11:50  rel_EDA=1205.0s
+    tag[9] 2013-02-24 10:12:21  rel_EDA=1236.0s
+    tag[10] 2013-02-24 10:12:53  rel_EDA=1268.0s
+    tag[11] 2013-02-24 10:13:25  rel_EDA=1300.0s
+    tag[12] 2013-02-24 10:14:02  rel_EDA=1337.0s
+[S12]
+  EDA   status=ok         hdr=('2013-02-24 10:26:36', '4.0') start=2013-02-24 10:26:36 fs=4.0 rows=6414 issues=[]
+  HR    status=ok         hdr=('2013-02-24 10:26:46', '1.0') start=2013-02-24 10:26:46 fs=1.0 rows=1594 issues=[]
+  BVP   status=ok         hdr=('2013-02-24 10:26:36', '64.0') start=2013-02-24 10:26:36 fs=64.0 rows=102619 issues=[]
+  TEMP  status=ok         hdr=('2013-02-24 10:26:36', '4.0') start=2013-02-24 10:26:36 fs=4.0 rows=6408 issues=[]
+  ACC   status=ok         hdr=('2013-02-24 10:26:36,2013-02-24 10:26:36,2013-02-24 10:26:36', '32.0,32.0,32.0') start=2013-02-24 10:26:36 fs=32.0 rows=51306 issues=[]
+  IBI   status=ok         hdr=('2013-02-24 10:26:36,2013-02-24 10:26:36', '') start=2013-02-24 10:26:36 fs=- rows=1410 issues=[]
+  tags  n=13
+    tag[0] 2013-02-24 10:28:21  rel_EDA=105.0s
+    tag[1] 2013-02-24 10:31:40  rel_EDA=304.0s
+    tag[2] 2013-02-24 10:33:23  rel_EDA=407.0s
+    tag[3] 2013-02-24 10:35:12  rel_EDA=516.0s
+    tag[4] 2013-02-24 10:41:07  rel_EDA=871.0s
+    tag[5] 2013-02-24 10:43:18  rel_EDA=1002.0s
+    tag[6] 2013-02-24 10:48:57  rel_EDA=1341.0s
+    tag[7] 2013-02-24 10:49:27  rel_EDA=1371.0s
+    tag[8] 2013-02-24 10:50:04  rel_EDA=1408.0s
+    tag[9] 2013-02-24 10:50:31  rel_EDA=1435.0s
+    tag[10] 2013-02-24 10:51:20  rel_EDA=1484.0s
+    tag[11] 2013-02-24 10:51:51  rel_EDA=1515.0s
+    tag[12] 2013-02-24 10:52:25  rel_EDA=1549.0s
+[S13]
+  EDA   status=ok         hdr=('2013-02-24 17:05:44', '4.0') start=2013-02-24 17:05:44 fs=4.0 rows=6492 issues=[]
+  HR    status=ok         hdr=('2013-02-24 17:05:54', '1.0') start=2013-02-24 17:05:54 fs=1.0 rows=1614 issues=[]
+  BVP   status=ok         hdr=('2013-02-24 17:05:44', '64.0') start=2013-02-24 17:05:44 fs=64.0 rows=103895 issues=[]
+  TEMP  status=ok         hdr=('2013-02-24 17:05:44', '4.0') start=2013-02-24 17:05:44 fs=4.0 rows=6488 issues=[]
+  ACC   status=ok         hdr=('2013-02-24 17:05:44,2013-02-24 17:05:44,2013-02-24 17:05:44', '32.0,32.0,32.0') start=2013-02-24 17:05:44 fs=32.0 rows=51948 issues=[]
+  IBI   status=ok         hdr=('2013-02-24 17:05:44,2013-02-24 17:05:44', '') start=2013-02-24 17:05:44 fs=- rows=960 issues=[]
+  tags  n=13
+    tag[0] 2013-02-24 17:08:37  rel_EDA=173.0s
+    tag[1] 2013-02-24 17:12:06  rel_EDA=382.0s
+    tag[2] 2013-02-24 17:14:05  rel_EDA=501.0s
+    tag[3] 2013-02-24 17:15:58  rel_EDA=614.0s
+    tag[4] 2013-02-24 17:21:59  rel_EDA=975.0s
+    tag[5] 2013-02-24 17:24:06  rel_EDA=1102.0s
+    tag[6] 2013-02-24 17:29:03  rel_EDA=1399.0s
+    tag[7] 2013-02-24 17:29:32  rel_EDA=1428.0s
+    tag[8] 2013-02-24 17:30:13  rel_EDA=1469.0s
+    tag[9] 2013-02-24 17:30:43  rel_EDA=1499.0s
+    tag[10] 2013-02-24 17:31:14  rel_EDA=1530.0s
+    tag[11] 2013-02-24 17:31:46  rel_EDA=1562.0s
+    tag[12] 2013-02-24 17:32:22  rel_EDA=1598.0s
+[S14]
+  EDA   status=ok         hdr=('2013-02-24 17:37:41', '4.0') start=2013-02-24 17:37:41 fs=4.0 rows=6744 issues=[]
+  HR    status=ok         hdr=('2013-02-24 17:37:51', '1.0') start=2013-02-24 17:37:51 fs=1.0 rows=1676 issues=[]
+  BVP   status=ok         hdr=('2013-02-24 17:37:41', '64.0') start=2013-02-24 17:37:41 fs=64.0 rows=107888 issues=[]
+  TEMP  status=ok         hdr=('2013-02-24 17:37:41', '4.0') start=2013-02-24 17:37:41 fs=4.0 rows=6736 issues=[]
+  ACC   status=ok         hdr=('2013-02-24 17:37:41,2013-02-24 17:37:41,2013-02-24 17:37:41', '32.0,32.0,32.0') start=2013-02-24 17:37:41 fs=32.0 rows=53940 issues=[]
+  IBI   status=ok         hdr=('2013-02-24 17:37:41,2013-02-24 17:37:41', '') start=2013-02-24 17:37:41 fs=- rows=1530 issues=[]
+  tags  n=13
+    tag[0] 2013-02-24 17:41:03  rel_EDA=202.0s
+    tag[1] 2013-02-24 17:44:33  rel_EDA=412.0s
+    tag[2] 2013-02-24 17:46:39  rel_EDA=538.0s
+    tag[3] 2013-02-24 17:48:28  rel_EDA=647.0s
+    tag[4] 2013-02-24 17:54:20  rel_EDA=999.0s
+    tag[5] 2013-02-24 17:56:37  rel_EDA=1136.0s
+    tag[6] 2013-02-24 18:02:09  rel_EDA=1468.0s
+    tag[7] 2013-02-24 18:02:39  rel_EDA=1498.0s
+    tag[8] 2013-02-24 18:03:09  rel_EDA=1528.0s
+    tag[9] 2013-02-24 18:03:38  rel_EDA=1557.0s
+    tag[10] 2013-02-24 18:04:03  rel_EDA=1582.0s
+    tag[11] 2013-02-24 18:04:37  rel_EDA=1616.0s
+    tag[12] 2013-02-24 18:05:14  rel_EDA=1653.0s
+[S15]
+  EDA   status=ok         hdr=('2013-02-25 11:35:59', '4.0') start=2013-02-25 11:35:59 fs=4.0 rows=6534 issues=[]
+  HR    status=ok         hdr=('2013-02-25 11:36:09', '1.0') start=2013-02-25 11:36:09 fs=1.0 rows=1624 issues=[]
+  BVP   status=ok         hdr=('2013-02-25 11:35:59', '64.0') start=2013-02-25 11:35:59 fs=64.0 rows=104533 issues=[]
+  TEMP  status=ok         hdr=('2013-02-25 11:35:59', '4.0') start=2013-02-25 11:35:59 fs=4.0 rows=6528 issues=[]
+  ACC   status=ok         hdr=('2013-02-25 11:35:59,2013-02-25 11:35:59,2013-02-25 11:35:59', '32.0,32.0,32.0') start=2013-02-25 11:35:59 fs=32.0 rows=52266 issues=[]
+  IBI   status=ok         hdr=('2013-02-25 11:35:59,2013-02-25 11:35:59', '') start=2013-02-25 11:35:59 fs=- rows=690 issues=[]
+  tags  n=13
+    tag[0] 2013-02-25 11:39:17  rel_EDA=198.0s
+    tag[1] 2013-02-25 11:42:44  rel_EDA=405.0s
+    tag[2] 2013-02-25 11:43:55  rel_EDA=476.0s
+    tag[3] 2013-02-25 11:45:45  rel_EDA=586.0s
+    tag[4] 2013-02-25 11:51:36  rel_EDA=937.0s
+    tag[5] 2013-02-25 11:54:18  rel_EDA=1099.0s
+    tag[6] 2013-02-25 11:59:28  rel_EDA=1409.0s
+    tag[7] 2013-02-25 12:00:00  rel_EDA=1441.0s
+    tag[8] 2013-02-25 12:00:31  rel_EDA=1472.0s
+    tag[9] 2013-02-25 12:01:02  rel_EDA=1503.0s
+    tag[10] 2013-02-25 12:01:33  rel_EDA=1534.0s
+    tag[11] 2013-02-25 12:02:07  rel_EDA=1568.0s
+    tag[12] 2013-02-25 12:02:38  rel_EDA=1599.0s
+[S16]
+  EDA   status=ok         hdr=('2013-02-25 14:15:54', '4.0') start=2013-02-25 14:15:54 fs=4.0 rows=6654 issues=[]
+  HR    status=ok         hdr=('2013-02-25 14:16:04', '1.0') start=2013-02-25 14:16:04 fs=1.0 rows=1654 issues=[]
+  BVP   status=ok         hdr=('2013-02-25 14:15:54', '64.0') start=2013-02-25 14:15:54 fs=64.0 rows=106447 issues=[]
+  TEMP  status=ok         hdr=('2013-02-25 14:15:54', '4.0') start=2013-02-25 14:15:54 fs=4.0 rows=6648 issues=[]
+  ACC   status=ok         hdr=('2013-02-25 14:15:54,2013-02-25 14:15:54,2013-02-25 14:15:54', '32.0,32.0,32.0') start=2013-02-25 14:15:54 fs=32.0 rows=53226 issues=[]
+  IBI   status=ok         hdr=('2013-02-25 14:15:54,2013-02-25 14:15:54', '') start=2013-02-25 14:15:54 fs=- rows=1350 issues=[]
+  tags  n=13
+    tag[0] 2013-02-25 14:21:24  rel_EDA=330.0s
+    tag[1] 2013-02-25 14:24:37  rel_EDA=523.0s
+    tag[2] 2013-02-25 14:26:20  rel_EDA=626.0s
+    tag[3] 2013-02-25 14:28:01  rel_EDA=727.0s
+    tag[4] 2013-02-25 14:31:53  rel_EDA=959.0s
+    tag[5] 2013-02-25 14:34:25  rel_EDA=1111.0s
+    tag[6] 2013-02-25 14:40:11  rel_EDA=1457.0s
+    tag[7] 2013-02-25 14:40:42  rel_EDA=1488.0s
+    tag[8] 2013-02-25 14:41:17  rel_EDA=1523.0s
+    tag[9] 2013-02-25 14:41:47  rel_EDA=1553.0s
+    tag[10] 2013-02-25 14:42:10  rel_EDA=1576.0s
+    tag[11] 2013-02-25 14:42:43  rel_EDA=1609.0s
+    tag[12] 2013-02-25 14:43:15  rel_EDA=1641.0s
+[S17]
+  EDA   status=ok         hdr=('2013-02-25 18:40:08', '4.0') start=2013-02-25 18:40:08 fs=4.0 rows=6444 issues=[]
+  HR    status=ok         hdr=('2013-02-25 18:40:18', '1.0') start=2013-02-25 18:40:18 fs=1.0 rows=1601 issues=[]
+  BVP   status=ok         hdr=('2013-02-25 18:40:08', '64.0') start=2013-02-25 18:40:08 fs=64.0 rows=103092 issues=[]
+  TEMP  status=ok         hdr=('2013-02-25 18:40:08', '4.0') start=2013-02-25 18:40:08 fs=4.0 rows=6440 issues=[]
+  ACC   status=ok         hdr=('2013-02-25 18:40:08,2013-02-25 18:40:08,2013-02-25 18:40:08', '32.0,32.0,32.0') start=2013-02-25 18:40:08 fs=32.0 rows=51546 issues=[]
+  IBI   status=ok         hdr=('2013-02-25 18:40:08,2013-02-25 18:40:08', '') start=2013-02-25 18:40:08 fs=- rows=930 issues=[]
+  tags  n=13
+    tag[0] 2013-02-25 18:45:10  rel_EDA=302.0s
+    tag[1] 2013-02-25 18:48:04  rel_EDA=476.0s
+    tag[2] 2013-02-25 18:49:46  rel_EDA=578.0s
+    tag[3] 2013-02-25 18:51:18  rel_EDA=670.0s
+    tag[4] 2013-02-25 18:55:56  rel_EDA=948.0s
+    tag[5] 2013-02-25 18:58:35  rel_EDA=1107.0s
+    tag[6] 2013-02-25 19:03:44  rel_EDA=1416.0s
+    tag[7] 2013-02-25 19:04:15  rel_EDA=1447.0s
+    tag[8] 2013-02-25 19:04:36  rel_EDA=1468.0s
+    tag[9] 2013-02-25 19:05:07  rel_EDA=1499.0s
+    tag[10] 2013-02-25 19:05:34  rel_EDA=1526.0s
+    tag[11] 2013-02-25 19:06:07  rel_EDA=1559.0s
+    tag[12] 2013-02-25 19:06:41  rel_EDA=1593.0s
+[S18]
+  EDA   status=ok         hdr=('2013-02-25 19:17:36', '4.0') start=2013-02-25 19:17:36 fs=4.0 rows=6522 issues=[]
+  HR    status=ok         hdr=('2013-02-25 19:17:46', '1.0') start=2013-02-25 19:17:46 fs=1.0 rows=1621 issues=[]
+  BVP   status=ok         hdr=('2013-02-25 19:17:36', '64.0') start=2013-02-25 19:17:36 fs=64.0 rows=104368 issues=[]
+  TEMP  status=ok         hdr=('2013-02-25 19:17:36', '4.0') start=2013-02-25 19:17:36 fs=4.0 rows=6520 issues=[]
+  ACC   status=ok         hdr=('2013-02-25 19:17:36,2013-02-25 19:17:36,2013-02-25 19:17:36', '32.0,32.0,32.0') start=2013-02-25 19:17:36 fs=32.0 rows=52188 issues=[]
+  IBI   status=ok         hdr=('2013-02-25 19:17:36,2013-02-25 19:17:36', '') start=2013-02-25 19:17:36 fs=- rows=1440 issues=[]
+  tags  n=13
+    tag[0] 2013-02-25 19:21:33  rel_EDA=237.0s
+    tag[1] 2013-02-25 19:24:37  rel_EDA=421.0s
+    tag[2] 2013-02-25 19:26:13  rel_EDA=517.0s
+    tag[3] 2013-02-25 19:28:07  rel_EDA=631.0s
+    tag[4] 2013-02-25 19:33:24  rel_EDA=948.0s
+    tag[5] 2013-02-25 19:36:02  rel_EDA=1106.0s
+    tag[6] 2013-02-25 19:41:16  rel_EDA=1420.0s
+    tag[7] 2013-02-25 19:41:49  rel_EDA=1453.0s
+    tag[8] 2013-02-25 19:42:11  rel_EDA=1475.0s
+    tag[9] 2013-02-25 19:42:41  rel_EDA=1505.0s
+    tag[10] 2013-02-25 19:43:10  rel_EDA=1534.0s
+    tag[11] 2013-02-25 19:43:42  rel_EDA=1566.0s
+    tag[12] 2013-02-25 19:44:20  rel_EDA=1604.0s
+[f01]
+  EDA   status=ok         hdr=('2013-06-12 16:18:58', '4.0') start=2013-06-12 16:18:58 fs=4.0 rows=13008 issues=[]
+  HR    status=ok         hdr=('2013-06-12 16:19:08', '1.0') start=2013-06-12 16:19:08 fs=1.0 rows=3243 issues=[]
+  BVP   status=ok         hdr=('2013-06-12 16:18:58', '64.0') start=2013-06-12 16:18:58 fs=64.0 rows=208153 issues=[]
+  TEMP  status=ok         hdr=('2013-06-12 16:18:58', '4.0') start=2013-06-12 16:18:58 fs=4.0 rows=12992 issues=[]
+  ACC   status=ok         hdr=('2013-06-12 16:18:58,2013-06-12 16:18:58,2013-06-12 16:18:58', '32.0,32.0,32.0') start=2013-06-12 16:18:58 fs=32.0 rows=104070 issues=[]
+  IBI   status=ok         hdr=('2013-06-12 16:18:58,2013-06-12 16:18:58', '') start=2013-06-12 16:18:58 fs=- rows=2558 issues=[]
+  tags  n=9
+    tag[0] 2013-06-12 16:23:45  rel_EDA=287.0s
+    tag[1] 2013-06-12 16:25:46  rel_EDA=408.0s
+    tag[2] 2013-06-12 16:33:18  rel_EDA=860.0s
+    tag[3] 2013-06-12 16:47:32  rel_EDA=1714.0s
+    tag[4] 2013-06-12 16:48:09  rel_EDA=1751.0s
+    tag[5] 2013-06-12 16:48:30  rel_EDA=1772.0s
+    tag[6] 2013-06-12 16:49:02  rel_EDA=1804.0s
+    tag[7] 2013-06-12 17:08:31  rel_EDA=2973.0s
+    tag[8] 2013-06-12 17:08:57  rel_EDA=2999.0s
+[f02]
+  EDA   status=ok         hdr=('2013-06-12 17:26:25', '4.0') start=2013-06-12 17:26:25 fs=4.0 rows=11904 issues=[]
+  HR    status=ok         hdr=('2013-06-12 17:26:35', '1.0') start=2013-06-12 17:26:35 fs=1.0 rows=2966 issues=[]
+  BVP   status=ok         hdr=('2013-06-12 17:26:25', '64.0') start=2013-06-12 17:26:25 fs=64.0 rows=190520 issues=[]
+  TEMP  status=ok         hdr=('2013-06-12 17:26:25', '4.0') start=2013-06-12 17:26:25 fs=4.0 rows=11912 issues=[]
+  ACC   status=ok         hdr=('2013-06-12 17:26:25,2013-06-12 17:26:25,2013-06-12 17:26:25', '32.0,32.0,32.0') start=2013-06-12 17:26:25 fs=32.0 rows=95208 issues=[]
+  IBI   status=ok         hdr=('2013-06-12 17:26:25,2013-06-12 17:26:25', '') start=2013-06-12 17:26:25 fs=- rows=1920 issues=[]
+  tags  n=9
+    tag[0] 2013-06-12 17:40:36  rel_EDA=851.0s
+    tag[1] 2013-06-12 17:41:54  rel_EDA=929.0s
+    tag[2] 2013-06-12 17:48:13  rel_EDA=1308.0s
+    tag[3] 2013-06-12 18:01:25  rel_EDA=2100.0s
+    tag[4] 2013-06-12 18:02:07  rel_EDA=2142.0s
+    tag[5] 2013-06-12 18:03:09  rel_EDA=2204.0s
+    tag[6] 2013-06-12 18:03:44  rel_EDA=2239.0s
+    tag[7] 2013-06-12 18:11:03  rel_EDA=2678.0s
+    tag[8] 2013-06-12 18:11:34  rel_EDA=2709.0s
+[f03]
+  EDA   status=ok         hdr=('2013-06-12 18:28:42', '4.0') start=2013-06-12 18:28:42 fs=4.0 rows=14388 issues=[]
+  HR    status=ok         hdr=('2013-06-12 18:28:52', '1.0') start=2013-06-12 18:28:52 fs=1.0 rows=3586 issues=[]
+  BVP   status=ok         hdr=('2013-06-12 18:28:42', '64.0') start=2013-06-12 18:28:42 fs=64.0 rows=230142 issues=[]
+  TEMP  status=ok         hdr=('2013-06-12 18:28:42', '4.0') start=2013-06-12 18:28:42 fs=4.0 rows=14376 issues=[]
+  ACC   status=ok         hdr=('2013-06-12 18:28:42,2013-06-12 18:28:42,2013-06-12 18:28:42', '32.0,32.0,32.0') start=2013-06-12 18:28:42 fs=32.0 rows=115062 issues=[]
+  IBI   status=ok         hdr=('2013-06-12 18:28:42,2013-06-12 18:28:42', '') start=2013-06-12 18:28:42 fs=- rows=1950 issues=[]
+  tags  n=9
+    tag[0] 2013-06-12 18:41:47  rel_EDA=785.0s
+    tag[1] 2013-06-12 18:44:31  rel_EDA=949.0s
+    tag[2] 2013-06-12 18:48:52  rel_EDA=1210.0s
+    tag[3] 2013-06-12 19:06:58  rel_EDA=2296.0s
+    tag[4] 2013-06-12 19:07:27  rel_EDA=2325.0s
+    tag[5] 2013-06-12 19:07:46  rel_EDA=2344.0s
+    tag[6] 2013-06-12 19:08:17  rel_EDA=2375.0s
+    tag[7] 2013-06-12 19:23:39  rel_EDA=3297.0s
+    tag[8] 2013-06-12 19:24:14  rel_EDA=3332.0s
+[f04]
+  EDA   status=ok         hdr=('2013-06-15 19:44:24', '4.0') start=2013-06-15 19:44:24 fs=4.0 rows=14592 issues=[]
+  HR    status=ok         hdr=('2013-06-15 19:44:34', '1.0') start=2013-06-15 19:44:34 fs=1.0 rows=3637 issues=[]
+  BVP   status=ok         hdr=('2013-06-15 19:44:24', '64.0') start=2013-06-15 19:44:24 fs=64.0 rows=233387 issues=[]
+  TEMP  status=ok         hdr=('2013-06-15 19:44:24', '4.0') start=2013-06-15 19:44:24 fs=4.0 rows=14584 issues=[]
+  ACC   status=ok         hdr=('2013-06-15 19:44:24,2013-06-15 19:44:24,2013-06-15 19:44:24', '32.0,32.0,32.0') start=2013-06-15 19:44:24 fs=32.0 rows=116700 issues=[]
+  IBI   status=ok         hdr=('2013-06-15 19:44:24,2013-06-15 19:44:24', '') start=2013-06-15 19:44:24 fs=- rows=3458 issues=[]
+  tags  n=9
+    tag[0] 2013-06-15 20:01:13  rel_EDA=1009.0s
+    tag[1] 2013-06-15 20:02:55  rel_EDA=1111.0s
+    tag[2] 2013-06-15 20:07:20  rel_EDA=1376.0s
+    tag[3] 2013-06-15 20:21:40  rel_EDA=2236.0s
+    tag[4] 2013-06-15 20:22:20  rel_EDA=2276.0s
+    tag[5] 2013-06-15 20:23:01  rel_EDA=2317.0s
+    tag[6] 2013-06-15 20:23:39  rel_EDA=2355.0s
+    tag[7] 2013-06-15 20:37:23  rel_EDA=3179.0s
+    tag[8] 2013-06-15 20:37:59  rel_EDA=3215.0s
+[f05]
+  EDA   status=ok         hdr=('2013-07-02 10:07:30', '4.0') start=2013-07-02 10:07:30 fs=4.0 rows=18372 issues=[]
+  HR    status=ok         hdr=('2013-07-02 10:07:40', '1.0') start=2013-07-02 10:07:40 fs=1.0 rows=4583 issues=[]
+  BVP   status=ok         hdr=('2013-07-02 10:07:30', '64.0') start=2013-07-02 10:07:30 fs=64.0 rows=293920 issues=[]
+  TEMP  status=ok         hdr=('2013-07-02 10:07:30', '4.0') start=2013-07-02 10:07:30 fs=4.0 rows=18392 issues=[]
+  ACC   status=ok         hdr=('2013-07-02 10:07:30,2013-07-02 10:07:30,2013-07-02 10:07:30', '32.0,32.0,32.0') start=2013-07-02 10:07:30 fs=32.0 rows=146958 issues=[]
+  IBI   status=ok         hdr=('2013-07-02 10:07:30,2013-07-02 10:07:30', '') start=2013-07-02 10:07:30 fs=- rows=4846 issues=[]
+  tags  n=9
+    tag[0] 2013-07-02 10:43:42  rel_EDA=2172.0s
+    tag[1] 2013-07-02 10:45:13  rel_EDA=2263.0s
+    tag[2] 2013-07-02 10:49:23  rel_EDA=2513.0s
+    tag[3] 2013-07-02 11:04:04  rel_EDA=3394.0s
+    tag[4] 2013-07-02 11:04:46  rel_EDA=3436.0s
+    tag[5] 2013-07-02 11:05:05  rel_EDA=3455.0s
+    tag[6] 2013-07-02 11:05:45  rel_EDA=3495.0s
+    tag[7] 2013-07-02 11:19:00  rel_EDA=4290.0s
+    tag[8] 2013-07-02 11:19:48  rel_EDA=4338.0s
+[f06]
+  EDA   status=ok         hdr=('2013-07-11 16:04:59', '4.0') start=2013-07-11 16:04:59 fs=4.0 rows=12690 issues=[]
+  HR    status=ok         hdr=('2013-07-11 16:05:09', '1.0') start=2013-07-11 16:05:09 fs=1.0 rows=3163 issues=[]
+  BVP   status=ok         hdr=('2013-07-11 16:04:59', '64.0') start=2013-07-11 16:04:59 fs=64.0 rows=203126 issues=[]
+  TEMP  status=ok         hdr=('2013-07-11 16:04:59', '4.0') start=2013-07-11 16:04:59 fs=4.0 rows=12688 issues=[]
+  ACC   status=ok         hdr=('2013-07-11 16:04:59,2013-07-11 16:04:59,2013-07-11 16:04:59', '32.0,32.0,32.0') start=2013-07-11 16:04:59 fs=32.0 rows=101508 issues=[]
+  IBI   status=ok         hdr=('2013-07-11 16:04:59,2013-07-11 16:04:59', '') start=2013-07-11 16:04:59 fs=- rows=2468 issues=[]
+  tags  n=9
+    tag[0] 2013-07-11 16:14:46  rel_EDA=587.0s
+    tag[1] 2013-07-11 16:16:12  rel_EDA=673.0s
+    tag[2] 2013-07-11 16:20:13  rel_EDA=914.0s
+    tag[3] 2013-07-11 16:34:26  rel_EDA=1767.0s
+    tag[4] 2013-07-11 16:35:07  rel_EDA=1808.0s
+    tag[5] 2013-07-11 16:35:35  rel_EDA=1836.0s
+    tag[6] 2013-07-11 16:36:14  rel_EDA=1875.0s
+    tag[7] 2013-07-11 16:50:52  rel_EDA=2753.0s
+    tag[8] 2013-07-11 16:51:31  rel_EDA=2792.0s
+[f07]
+  EDA   status=ok         hdr=('2013-07-12 20:01:45', '4.0') start=2013-07-12 20:01:45 fs=4.0 rows=13824 issues=[]
+  HR    status=ok         hdr=('2013-07-12 20:01:55', '1.0') start=2013-07-12 20:01:55 fs=1.0 rows=3448 issues=[]
+  BVP   status=ok         hdr=('2013-07-12 20:01:45', '64.0') start=2013-07-12 20:01:45 fs=64.0 rows=221342 issues=[]
+  TEMP  status=ok         hdr=('2013-07-12 20:01:45', '4.0') start=2013-07-12 20:01:45 fs=4.0 rows=13824 issues=[]
+  ACC   status=ok         hdr=('2013-07-12 20:01:45,2013-07-12 20:01:45,2013-07-12 20:01:45', '32.0,32.0,32.0') start=2013-07-12 20:01:45 fs=32.0 rows=110652 issues=[]
+  IBI   status=ok         hdr=('2013-07-12 20:01:45,2013-07-12 20:01:45', '') start=2013-07-12 20:01:45 fs=- rows=60 issues=[]
+  tags  n=9
+    tag[0] 2013-07-12 20:14:48  rel_EDA=783.0s
+    tag[1] 2013-07-12 20:16:05  rel_EDA=860.0s
+    tag[2] 2013-07-12 20:20:12  rel_EDA=1107.0s
+    tag[3] 2013-07-12 20:34:08  rel_EDA=1943.0s
+    tag[4] 2013-07-12 20:34:48  rel_EDA=1983.0s
+    tag[5] 2013-07-12 20:35:15  rel_EDA=2010.0s
+    tag[6] 2013-07-12 20:35:57  rel_EDA=2052.0s
+    tag[7] 2013-07-12 20:50:57  rel_EDA=2952.0s
+    tag[8] 2013-07-12 20:51:40  rel_EDA=2995.0s
+[f08]
+  EDA   status=ok         hdr=('2013-07-03 19:16:37', '4.0') start=2013-07-03 19:16:37 fs=4.0 rows=12726 issues=[]
+  HR    status=ok         hdr=('2013-07-03 19:16:47', '1.0') start=2013-07-03 19:16:47 fs=1.0 rows=3171 issues=[]
+  BVP   status=ok         hdr=('2013-07-03 19:16:37', '64.0') start=2013-07-03 19:16:37 fs=64.0 rows=203632 issues=[]
+  TEMP  status=ok         hdr=('2013-07-03 19:16:37', '4.0') start=2013-07-03 19:16:37 fs=4.0 rows=12720 issues=[]
+  ACC   status=ok         hdr=('2013-07-03 19:16:37,2013-07-03 19:16:37,2013-07-03 19:16:37', '32.0,32.0,32.0') start=2013-07-03 19:16:37 fs=32.0 rows=101784 issues=[]
+  IBI   status=ok         hdr=('2013-07-03 19:16:37,2013-07-03 19:16:37', '') start=2013-07-03 19:16:37 fs=- rows=2438 issues=[]
+  tags  n=9
+    tag[0] 2013-07-03 19:25:20  rel_EDA=523.0s
+    tag[1] 2013-07-03 19:26:58  rel_EDA=621.0s
+    tag[2] 2013-07-03 19:31:47  rel_EDA=910.0s
+    tag[3] 2013-07-03 19:46:20  rel_EDA=1783.0s
+    tag[4] 2013-07-03 19:46:56  rel_EDA=1819.0s
+    tag[5] 2013-07-03 19:47:31  rel_EDA=1854.0s
+    tag[6] 2013-07-03 19:48:08  rel_EDA=1891.0s
+    tag[7] 2013-07-03 19:59:10  rel_EDA=2553.0s
+    tag[8] 2013-07-03 19:59:50  rel_EDA=2593.0s
+[f09]
+  EDA   status=ok         hdr=('2013-06-30 12:03:41', '4.0') start=2013-06-30 12:03:41 fs=4.0 rows=12930 issues=[]
+  HR    status=ok         hdr=('2013-06-30 12:03:51', '1.0') start=2013-06-30 12:03:51 fs=1.0 rows=3224 issues=[]
+  BVP   status=ok         hdr=('2013-06-30 12:03:41', '64.0') start=2013-06-30 12:03:41 fs=64.0 rows=206987 issues=[]
+  TEMP  status=ok         hdr=('2013-06-30 12:03:41', '4.0') start=2013-06-30 12:03:41 fs=4.0 rows=12928 issues=[]
+  ACC   status=ok         hdr=('2013-06-30 12:03:41,2013-06-30 12:03:41,2013-06-30 12:03:41', '32.0,32.0,32.0') start=2013-06-30 12:03:41 fs=32.0 rows=103470 issues=[]
+  IBI   status=ok         hdr=('2013-06-30 12:03:41,2013-06-30 12:03:41', '') start=2013-06-30 12:03:41 fs=- rows=2588 issues=[]
+  tags  n=9
+    tag[0] 2013-06-30 12:16:06  rel_EDA=745.0s
+    tag[1] 2013-06-30 12:17:44  rel_EDA=843.0s
+    tag[2] 2013-06-30 12:22:11  rel_EDA=1110.0s
+    tag[3] 2013-06-30 12:35:50  rel_EDA=1929.0s
+    tag[4] 2013-06-30 12:36:28  rel_EDA=1967.0s
+    tag[5] 2013-06-30 12:36:50  rel_EDA=1989.0s
+    tag[6] 2013-06-30 12:37:30  rel_EDA=2029.0s
+    tag[7] 2013-06-30 12:50:50  rel_EDA=2829.0s
+    tag[8] 2013-06-30 12:51:28  rel_EDA=2867.0s
+[f10]
+  EDA   status=ok         hdr=('2013-06-30 09:59:44', '4.0') start=2013-06-30 09:59:44 fs=4.0 rows=10938 issues=[]
+  HR    status=ok         hdr=('2013-06-30 09:59:54', '1.0') start=2013-06-30 09:59:54 fs=1.0 rows=2723 issues=[]
+  BVP   status=ok         hdr=('2013-06-30 09:59:44', '64.0') start=2013-06-30 09:59:44 fs=64.0 rows=174933 issues=[]
+  TEMP  status=ok         hdr=('2013-06-30 09:59:44', '4.0') start=2013-06-30 09:59:44 fs=4.0 rows=10920 issues=[]
+  ACC   status=ok         hdr=('2013-06-30 09:59:44,2013-06-30 09:59:44,2013-06-30 09:59:44', '32.0,32.0,32.0') start=2013-06-30 09:59:44 fs=32.0 rows=87432 issues=[]
+  IBI   status=ok         hdr=('2013-06-30 09:59:44,2013-06-30 09:59:44', '') start=2013-06-30 09:59:44 fs=- rows=2588 issues=[]
+  tags  n=9
+    tag[0] 2013-06-30 10:03:33  rel_EDA=229.0s
+    tag[1] 2013-06-30 10:05:22  rel_EDA=338.0s
+    tag[2] 2013-06-30 10:09:37  rel_EDA=593.0s
+    tag[3] 2013-06-30 10:23:41  rel_EDA=1437.0s
+    tag[4] 2013-06-30 10:24:22  rel_EDA=1478.0s
+    tag[5] 2013-06-30 10:24:52  rel_EDA=1508.0s
+    tag[6] 2013-06-30 10:25:36  rel_EDA=1552.0s
+    tag[7] 2013-06-30 10:38:38  rel_EDA=2334.0s
+    tag[8] 2013-06-30 10:39:21  rel_EDA=2377.0s
+[f11]
+  EDA   status=ok         hdr=('2013-07-14 18:02:40', '4.0') start=2013-07-14 18:02:40 fs=4.0 rows=12486 issues=[]
+  HR    status=ok         hdr=('2013-07-14 18:02:50', '1.0') start=2013-07-14 18:02:50 fs=1.0 rows=3113 issues=[]
+  BVP   status=ok         hdr=('2013-07-14 18:02:40', '64.0') start=2013-07-14 18:02:40 fs=64.0 rows=199914 issues=[]
+  TEMP  status=ok         hdr=('2013-07-14 18:02:40', '4.0') start=2013-07-14 18:02:40 fs=4.0 rows=12488 issues=[]
+  ACC   status=ok         hdr=('2013-07-14 18:02:40,2013-07-14 18:02:40,2013-07-14 18:02:40', '32.0,32.0,32.0') start=2013-07-14 18:02:40 fs=32.0 rows=99924 issues=[]
+  IBI   status=ok         hdr=('2013-07-14 18:02:40,2013-07-14 18:02:40', '') start=2013-07-14 18:02:40 fs=- rows=3668 issues=[]
+  tags  n=9
+    tag[0] 2013-07-14 18:14:40  rel_EDA=720.0s
+    tag[1] 2013-07-14 18:16:25  rel_EDA=825.0s
+    tag[2] 2013-07-14 18:21:24  rel_EDA=1124.0s
+    tag[3] 2013-07-14 18:35:14  rel_EDA=1954.0s
+    tag[4] 2013-07-14 18:35:48  rel_EDA=1988.0s
+    tag[5] 2013-07-14 18:36:12  rel_EDA=2012.0s
+    tag[6] 2013-07-14 18:36:50  rel_EDA=2050.0s
+    tag[7] 2013-07-14 18:50:17  rel_EDA=2857.0s
+    tag[8] 2013-07-14 18:50:54  rel_EDA=2894.0s
+[f12]
+  EDA   status=ok         hdr=('2013-07-01 15:21:17', '4.0') start=2013-07-01 15:21:17 fs=4.0 rows=19236 issues=[]
+  HR    status=ok         hdr=('2013-07-01 15:21:27', '1.0') start=2013-07-01 15:21:27 fs=1.0 rows=4798 issues=[]
+  BVP   status=ok         hdr=('2013-07-01 15:21:17', '64.0') start=2013-07-01 15:21:17 fs=64.0 rows=307791 issues=[]
+  TEMP  status=ok         hdr=('2013-07-01 15:21:17', '4.0') start=2013-07-01 15:21:17 fs=4.0 rows=19232 issues=[]
+  ACC   status=ok         hdr=('2013-07-01 15:21:17,2013-07-01 15:21:17,2013-07-01 15:21:17', '32.0,32.0,32.0') start=2013-07-01 15:21:17 fs=32.0 rows=153852 issues=[]
+  IBI   status=ok         hdr=('2013-07-01 15:21:17,2013-07-01 15:21:17', '') start=2013-07-01 15:21:17 fs=- rows=5086 issues=[]
+  tags  n=9
+    tag[0] 2013-07-01 16:00:14  rel_EDA=2337.0s
+    tag[1] 2013-07-01 16:01:45  rel_EDA=2428.0s
+    tag[2] 2013-07-01 16:05:56  rel_EDA=2679.0s
+    tag[3] 2013-07-01 16:20:16  rel_EDA=3539.0s
+    tag[4] 2013-07-01 16:20:54  rel_EDA=3577.0s
+    tag[5] 2013-07-01 16:21:21  rel_EDA=3604.0s
+    tag[6] 2013-07-01 16:21:58  rel_EDA=3641.0s
+    tag[7] 2013-07-01 16:35:27  rel_EDA=4450.0s
+    tag[8] 2013-07-01 16:36:05  rel_EDA=4488.0s
+[f13]
+  EDA   status=ok         hdr=('2013-07-03 10:51:24', '4.0') start=2013-07-03 10:51:24 fs=4.0 rows=15462 issues=[]
+  HR    status=ok         hdr=('2013-07-03 10:51:34', '1.0') start=2013-07-03 10:51:34 fs=1.0 rows=3852 issues=[]
+  BVP   status=ok         hdr=('2013-07-03 10:51:24', '64.0') start=2013-07-03 10:51:24 fs=64.0 rows=247181 issues=[]
+  TEMP  status=ok         hdr=('2013-07-03 10:51:24', '4.0') start=2013-07-03 10:51:24 fs=4.0 rows=15440 issues=[]
+  ACC   status=ok         hdr=('2013-07-03 10:51:24,2013-07-03 10:51:24,2013-07-03 10:51:24', '32.0,32.0,32.0') start=2013-07-03 10:51:24 fs=32.0 rows=123558 issues=[]
+  IBI   status=ok         hdr=('2013-07-03 10:51:24,2013-07-03 10:51:24', '') start=2013-07-03 10:51:24 fs=- rows=1080 issues=[]
+  tags  n=9
+    tag[0] 2013-07-03 11:09:38  rel_EDA=1094.0s
+    tag[1] 2013-07-03 11:11:24  rel_EDA=1200.0s
+    tag[2] 2013-07-03 11:15:01  rel_EDA=1417.0s
+    tag[3] 2013-07-03 11:32:25  rel_EDA=2461.0s
+    tag[4] 2013-07-03 11:33:02  rel_EDA=2498.0s
+    tag[5] 2013-07-03 11:33:31  rel_EDA=2527.0s
+    tag[6] 2013-07-03 11:34:09  rel_EDA=2565.0s
+    tag[7] 2013-07-03 11:48:11  rel_EDA=3407.0s
+    tag[8] 2013-07-03 11:48:52  rel_EDA=3448.0s
+[f14_a]
+  EDA   status=ok         hdr=('2013-07-12 22:46:39', '4.0') start=2013-07-12 22:46:39 fs=4.0 rows=2814 issues=[]
+  HR    status=ok         hdr=('2013-07-12 22:46:49', '1.0') start=2013-07-12 22:46:49 fs=1.0 rows=694 issues=[]
+  BVP   status=ok         hdr=('2013-07-12 22:46:39', '64.0') start=2013-07-12 22:46:39 fs=64.0 rows=45034 issues=[]
+  TEMP  status=ok         hdr=('2013-07-12 22:46:39', '4.0') start=2013-07-12 22:46:39 fs=4.0 rows=2816 issues=[]
+  ACC   status=ok         hdr=('2013-07-12 22:46:39,2013-07-12 22:46:39,2013-07-12 22:46:39', '32.0,32.0,32.0') start=2013-07-12 22:46:39 fs=32.0 rows=22518 issues=[]
+  IBI   status=ok         hdr=('2013-07-12 22:46:39,2013-07-12 22:46:39', '') start=2013-07-12 22:46:39 fs=- rows=450 issues=[]
+  tags  n=0
+[f14_b]
+  EDA   status=ok         hdr=('2013-07-12 22:59:54', '4.0') start=2013-07-12 22:59:54 fs=4.0 rows=8682 issues=[]
+  HR    status=ok         hdr=('2013-07-12 23:00:04', '1.0') start=2013-07-12 23:00:04 fs=1.0 rows=2159 issues=[]
+  BVP   status=ok         hdr=('2013-07-12 22:59:54', '64.0') start=2013-07-12 22:59:54 fs=64.0 rows=138765 issues=[]
+  TEMP  status=ok         hdr=('2013-07-12 22:59:54', '4.0') start=2013-07-12 22:59:54 fs=4.0 rows=8672 issues=[]
+  ACC   status=ok         hdr=('2013-07-12 22:59:54,2013-07-12 22:59:54,2013-07-12 22:59:54', '32.0,32.0,32.0') start=2013-07-12 22:59:54 fs=32.0 rows=69402 issues=[]
+  IBI   status=ok         hdr=('2013-07-12 22:59:54,2013-07-12 22:59:54', '') start=2013-07-12 22:59:54 fs=- rows=1410 issues=[]
+  tags  n=9
+    tag[0] 2013-07-12 23:02:16  rel_EDA=142.0s
+    tag[1] 2013-07-12 23:03:46  rel_EDA=232.0s
+    tag[2] 2013-07-12 23:07:52  rel_EDA=478.0s
+    tag[3] 2013-07-12 23:19:43  rel_EDA=1189.0s
+    tag[4] 2013-07-12 23:20:22  rel_EDA=1228.0s
+    tag[5] 2013-07-12 23:21:04  rel_EDA=1270.0s
+    tag[6] 2013-07-12 23:21:53  rel_EDA=1319.0s
+    tag[7] 2013-07-12 23:32:32  rel_EDA=1958.0s
+    tag[8] 2013-07-12 23:33:15  rel_EDA=2001.0s
+[f15]
+  EDA   status=ok         hdr=('2013-07-13 17:19:47', '4.0') start=2013-07-13 17:19:47 fs=4.0 rows=16878 issues=[]
+  HR    status=ok         hdr=('2013-07-13 17:19:57', '1.0') start=2013-07-13 17:19:57 fs=1.0 rows=4210 issues=[]
+  BVP   status=ok         hdr=('2013-07-13 17:19:47', '64.0') start=2013-07-13 17:19:47 fs=64.0 rows=270072 issues=[]
+  TEMP  status=ok         hdr=('2013-07-13 17:19:47', '4.0') start=2013-07-13 17:19:47 fs=4.0 rows=16880 issues=[]
+  ACC   status=ok         hdr=('2013-07-13 17:19:47,2013-07-13 17:19:47,2013-07-13 17:19:47', '32.0,32.0,32.0') start=2013-07-13 17:19:47 fs=32.0 rows=135042 issues=[]
+  IBI   status=ok         hdr=('2013-07-13 17:19:47,2013-07-13 17:19:47', '') start=2013-07-13 17:19:47 fs=- rows=3278 issues=[]
+  tags  n=9
+    tag[0] 2013-07-13 17:53:17  rel_EDA=2010.0s
+    tag[1] 2013-07-13 17:54:44  rel_EDA=2097.0s
+    tag[2] 2013-07-13 17:59:08  rel_EDA=2361.0s
+    tag[3] 2013-07-13 18:12:42  rel_EDA=3175.0s
+    tag[4] 2013-07-13 18:13:20  rel_EDA=3213.0s
+    tag[5] 2013-07-13 18:13:42  rel_EDA=3235.0s
+    tag[6] 2013-07-13 18:14:21  rel_EDA=3274.0s
+    tag[7] 2013-07-13 18:24:56  rel_EDA=3909.0s
+    tag[8] 2013-07-13 18:26:01  rel_EDA=3974.0s
+[f16]
+  EDA   status=ok         hdr=('2013-07-19 10:52:55', '4.0') start=2013-07-19 10:52:55 fs=4.0 rows=12954 issues=[]
+  HR    status=ok         hdr=('2013-07-19 10:53:05', '1.0') start=2013-07-19 10:53:05 fs=1.0 rows=3231 issues=[]
+  BVP   status=ok         hdr=('2013-07-19 10:52:55', '64.0') start=2013-07-19 10:52:55 fs=64.0 rows=207361 issues=[]
+  TEMP  status=ok         hdr=('2013-07-19 10:52:55', '4.0') start=2013-07-19 10:52:55 fs=4.0 rows=12944 issues=[]
+  ACC   status=ok         hdr=('2013-07-19 10:52:55,2013-07-19 10:52:55,2013-07-19 10:52:55', '32.0,32.0,32.0') start=2013-07-19 10:52:55 fs=32.0 rows=103686 issues=[]
+  IBI   status=ok         hdr=('2013-07-19 10:52:55,2013-07-19 10:52:55', '') start=2013-07-19 10:52:55 fs=- rows=1530 issues=[]
+  tags  n=9
+    tag[0] 2013-07-19 11:07:16  rel_EDA=861.0s
+    tag[1] 2013-07-19 11:08:37  rel_EDA=942.0s
+    tag[2] 2013-07-19 11:12:41  rel_EDA=1186.0s
+    tag[3] 2013-07-19 11:28:16  rel_EDA=2121.0s
+    tag[4] 2013-07-19 11:29:00  rel_EDA=2165.0s
+    tag[5] 2013-07-19 11:29:24  rel_EDA=2189.0s
+    tag[6] 2013-07-19 11:29:54  rel_EDA=2219.0s
+    tag[7] 2013-07-19 11:40:49  rel_EDA=2874.0s
+    tag[8] 2013-07-19 11:41:25  rel_EDA=2910.0s
+[f17]
+  EDA   status=ok         hdr=('2013-07-20 16:00:52', '4.0') start=2013-07-20 16:00:52 fs=4.0 rows=13758 issues=[]
+  HR    status=ok         hdr=('2013-07-20 16:01:02', '1.0') start=2013-07-20 16:01:02 fs=1.0 rows=3432 issues=[]
+  BVP   status=ok         hdr=('2013-07-20 16:00:52', '64.0') start=2013-07-20 16:00:52 fs=64.0 rows=220253 issues=[]
+  TEMP  status=ok         hdr=('2013-07-20 16:00:52', '4.0') start=2013-07-20 16:00:52 fs=4.0 rows=13768 issues=[]
+  ACC   status=ok         hdr=('2013-07-20 16:00:52,2013-07-20 16:00:52,2013-07-20 16:00:52', '32.0,32.0,32.0') start=2013-07-20 16:00:52 fs=32.0 rows=110142 issues=[]
+  IBI   status=ok         hdr=('2013-07-20 16:00:52,2013-07-20 16:00:52', '') start=2013-07-20 16:00:52 fs=- rows=2498 issues=[]
+  tags  n=9
+    tag[0] 2013-07-20 16:13:00  rel_EDA=728.0s
+    tag[1] 2013-07-20 16:15:16  rel_EDA=864.0s
+    tag[2] 2013-07-20 16:19:42  rel_EDA=1130.0s
+    tag[3] 2013-07-20 16:33:22  rel_EDA=1950.0s
+    tag[4] 2013-07-20 16:34:07  rel_EDA=1995.0s
+    tag[5] 2013-07-20 16:34:31  rel_EDA=2019.0s
+    tag[6] 2013-07-20 16:35:19  rel_EDA=2067.0s
+    tag[7] 2013-07-20 16:48:58  rel_EDA=2886.0s
+    tag[8] 2013-07-20 16:49:44  rel_EDA=2932.0s
+[f18]
+  EDA   status=ok         hdr=('2013-07-21 19:25:10', '4.0') start=2013-07-21 19:25:10 fs=4.0 rows=12552 issues=[]
+  HR    status=ok         hdr=('2013-07-21 19:25:20', '1.0') start=2013-07-21 19:25:20 fs=1.0 rows=3132 issues=[]
+  BVP   status=ok         hdr=('2013-07-21 19:25:10', '64.0') start=2013-07-21 19:25:10 fs=64.0 rows=201080 issues=[]
+  TEMP  status=ok         hdr=('2013-07-21 19:25:10', '4.0') start=2013-07-21 19:25:10 fs=4.0 rows=12560 issues=[]
+  ACC   status=ok         hdr=('2013-07-21 19:25:10,2013-07-21 19:25:10,2013-07-21 19:25:10', '32.0,32.0,32.0') start=2013-07-21 19:25:10 fs=32.0 rows=100524 issues=[]
+  IBI   status=ok         hdr=('2013-07-21 19:25:10,2013-07-21 19:25:10', '') start=2013-07-21 19:25:10 fs=- rows=2558 issues=[]
+  tags  n=9
+    tag[0] 2013-07-21 19:41:25  rel_EDA=975.0s
+    tag[1] 2013-07-21 19:42:51  rel_EDA=1061.0s
+    tag[2] 2013-07-21 19:46:47  rel_EDA=1297.0s
+    tag[3] 2013-07-21 19:59:45  rel_EDA=2075.0s
+    tag[4] 2013-07-21 20:00:22  rel_EDA=2112.0s
+    tag[5] 2013-07-21 20:00:40  rel_EDA=2130.0s
+    tag[6] 2013-07-21 20:01:17  rel_EDA=2167.0s
+    tag[7] 2013-07-21 20:12:00  rel_EDA=2810.0s
+    tag[8] 2013-07-21 20:12:36  rel_EDA=2846.0s
+
+==============================================================================
+10. SUMMARY OF FLAGS
+==============================================================================
+Category           n flags  n places  where (first 12)                                              
+-----------------  -------  --------  --------------------------------------------------------------
+DURATION_MISMATCH  59       37        S01, S02, S03, S04, S05, S06, S07, S08, S09, S10, S11, S12 ...
+FILE_EMPTY         1        1         f14_a                                                         
+FILE_MALFORMED     1        1         S02                                                           
+MAPPING_DIFF       10       2         V1, V2                                                        
+SPLIT_SESSION      1        1         f14                                                           
+START_OFFSET       38       37        S01, S02, S03, S04, S05, S06, S07, S08, S09, S10, S11, S12 ...
+TAG_COUNT          18       18        S01, S02, S03, S04, S05, S06, S07, S08, S09, S10, S11, S12 ...
+WINDOW_SHIFT       37       37        S01, S02, S03, S04, S05, S06, S07, S08, S09, S10, S11, S12 ...
+
+Flags are observations only. Nothing was changed. Share this report to decide fixes.

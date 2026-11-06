@@ -1,0 +1,172 @@
+{
+  "Majority Baseline": [
+    [
+      162,
+      0
+    ],
+    [
+      101,
+      0
+    ]
+  ],
+  "Dummy (Prior)": [
+    [
+      162,
+      0
+    ],
+    [
+      101,
+      0
+    ]
+  ],
+  "Dummy (Stratified)": [
+    [
+      108,
+      54
+    ],
+    [
+      67,
+      34
+    ]
+  ],
+  "Dummy (Uniform)": [
+    [
+      0,
+      162
+    ],
+    [
+      0,
+      101
+    ]
+  ],
+  "Existing LogReg (C=1.0)": [
+    [
+      124,
+      38
+    ],
+    [
+      75,
+      26
+    ]
+  ],
+  "L2 LogReg (Tuned C)": [
+    [
+      136,
+      26
+    ],
+    [
+      85,
+      16
+    ]
+  ],
+  "Linear SVM": [
+    [
+      145,
+      17
+    ],
+    [
+      91,
+      10
+    ]
+  ],
+  "Random Forest (Fixed)": [
+    [
+      128,
+      34
+    ],
+    [
+      75,
+      26
+    ]
+  ],
+  "Extra Trees (Fixed)": [
+    [
+      141,
+      21
+    ],
+    [
+      82,
+      19
+    ]
+  ],
+  "LogReg + Drop Duplicates": [
+    [
+      123,
+      39
+    ],
+    [
+      76,
+      25
+    ]
+  ],
+  "LogReg + In-Fold Feature Selection (k=10)": [
+    [
+      128,
+      34
+    ],
+    [
+      73,
+      28
+    ]
+  ],
+  "LogReg + Robust Scale & Log Skewed": [
+    [
+      124,
+      38
+    ],
+    [
+      77,
+      24
+    ]
+  ],
+  "LogReg + Balanced Class Weight": [
+    [
+      87,
+      75
+    ],
+    [
+      54,
+      47
+    ]
+  ],
+  "LogReg + Inner Fold Threshold Selection": [
+    [
+      111,
+      51
+    ],
+    [
+      73,
+      28
+    ]
+  ],
+  "LogReg + Test-Exclusive Baseline Relative": [
+    [
+      97,
+      42
+    ],
+    [
+      71,
+      18
+    ]
+  ],
+  "LogReg + Nested Platt Calibration": [
+    [
+      162,
+      0
+    ],
+    [
+      101,
+      0
+    ]
+  ],
+  "RBF SVM": [
+    [
+      148,
+      14
+    ],
+    [
+      92,
+      9
+    ]
+  ]
+}

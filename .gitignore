@@ -1,0 +1,23 @@
+
+# Local dataset and user data
+Wearable_Dataset/
+data/raw/
+uploads/
+
+# Python temporary files
+__pycache__/
+.pytest_cache/
+.venv/
+venv/
+*.pyc
+
+# Local databases and secrets
+*.db
+*.sqlite
+*.sqlite3
+.env
+.env.*
+
+# Logs
+logs/
+*.log

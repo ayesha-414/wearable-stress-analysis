@@ -1,0 +1,15 @@
+{
+  "gate": "A1_stage_boundary_and_hr_audit",
+  "gate_passed": true,
+  "v1_valid_recordings": 18,
+  "v1_total_recordings": 18,
+  "v1_notebook_consistent_rate": 1.0,
+  "v2_valid_recordings": 17,
+  "v2_total_recordings": 18,
+  "v2_notebook_consistent_rate": 0.9444,
+  "hr_starts_10s_after_eda_in_all_recordings": true,
+  "hr_diff_seconds_unique": [
+    10.0
+  ],
+  "output_directory": "C:\\Users\\AYESHA\\Downloads\\NeuroTwin_full_project\\data\\processed\\model_investigation\\stage_audit"
+}

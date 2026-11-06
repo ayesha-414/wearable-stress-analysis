@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>NeuroTwin Aurora Preview (DAWN)</title>
+    <style>
+        
+    /* =====================================================================
+       NeuroTwin Aurora Theme (aurora_dawn)
+       Generated with pure CSS & local system typography. Zero external CDNs.
+       ===================================================================== */
+
+    :root {
+        --nt-bg: #FBF7F1;
+        --nt-surface-1: #FFFFFF;
+        --nt-surface-2: #F1EAE0;
+        --nt-border: rgba(11, 122, 112, 0.22);
+        --nt-text-primary: #1D2440;
+        --nt-text-muted: #4A5578;
+        --nt-teal: #0B7A70;
+        --nt-violet: #5642D1;
+        --nt-peach: #A8461F;
+        --nt-gold: #7A5A00;
+        --nt-sage: #1F7A45;
+        --nt-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        --nt-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    }
+
+    /* Base application background and container */
+    .stApp {
+        background-color: var(--nt-bg) !important;
+        color: var(--nt-text-primary) !important;
+        font-family: var(--nt-font-sans) !important;
+    }
+
+    /* Background Aurora mesh drift (aria-hidden, very slow 45s cycle, low opacity) */
+    .stApp::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.04;
+        background: radial-gradient(circle at 20% 25%, #0B7A70 0%, transparent 45%),
+                    radial-gradient(circle at 80% 30%, #5642D1 0%, transparent 50%),
+                    radial-gradient(circle at 50% 80%, #A8461F 0%, transparent 45%);
+        background-size: 200% 200%;
+        animation: auroraDrift 45s ease-in-out infinite alternate;
+    }
+
+    @keyframes auroraDrift {
+        0% { background-position: 0% 0%; }
+        50% { background-position: 100% 100%; }
+        100% { background-position: 0% 0%; }
+    }
+
+    /* Headers and typography */
+    h1, h2, h3, h4, h5, h6 {
+        color: var(--nt-text-primary) !important;
+        font-family: var(--nt-font-sans) !important;
+        letter-spacing: -0.015em;
+        font-weight: 600;
+    }
+
+    p, span, label, div {
+        color: var(--nt-text-primary);
+        font-family: var(--nt-font-sans);
+    }
+
+    small, .stCaption, .nt-muted {
+        color: var(--nt-text-muted) !important;
+    }
+
+    code, pre, .katex {
+        font-family: var(--nt-font-mono) !important;
+    }
+
+    /* Sidebar Aurora styling */
+    section[data-testid="stSidebar"] {
+        background-color: var(--nt-surface-1) !important;
+        border-right: 1px solid var(--nt-border) !important;
+    }
+
+    /* Crisis help persistent gold button */
+    .nt-crisis-button {
+        display: block;
+        width: 100%;
+        background: linear-gradient(135deg, rgba(255, 217, 138, 0.15), rgba(255, 217, 138, 0.05));
+        border: 1px solid var(--nt-gold);
+        border-radius: 8px;
+        padding: 0.65rem 0.85rem;
+        color: var(--nt-gold) !important;
+        font-weight: 600;
+        font-size: 0.85rem;
+        text-align: center;
+        text-decoration: none;
+        margin-bottom: 0.8rem;
+        transition: background 0.2s ease;
+    }
+    .nt-crisis-button:hover {
+        background: rgba(255, 217, 138, 0.22);
+        color: var(--nt-gold) !important;
+    }
+
+    /* Three-Layer Provenance Cards */
+    .nt-card {
+        background: var(--nt-surface-1);
+        border: 1px solid var(--nt-border);
+        border-radius: 12px;
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+        position: relative;
+    }
+
+    /* Layer 1: Measured (crisp cyan border, physical recording) */
+    .nt-card-measured {
+        background: var(--nt-surface-1);
+        border: 1.5px solid var(--nt-teal);
+        border-radius: 12px;
+        padding: 1.2rem;
+        position: relative;
+    }
+    .nt-card-measured .layer-tag {
+        color: var(--nt-teal);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+    }
+
+    /* Layer 2: Estimated (dashed violet border, uncertainty mist backdrop) */
+    .nt-card-estimated {
+        background: var(--nt-surface-1);
+        border: 1.5px dashed var(--nt-violet);
+        border-radius: 12px;
+        padding: 1.2rem;
+        position: relative;
+        backdrop-filter: blur(8px);
+    }
+    .nt-card-estimated::after {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        border-radius: 12px;
+        pointer-events: none;
+        background: radial-gradient(circle at 50% 50%, rgba(179, 165, 255, 0.06), transparent 70%);
+    }
+    .nt-card-estimated .layer-tag {
+        color: var(--nt-violet);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+    }
+
+    /* Layer 3: Reported (warm peach solid border, human voice) */
+    .nt-card-reported {
+        background: var(--nt-surface-1);
+        border: 1.5px solid var(--nt-peach);
+        border-radius: 12px;
+        padding: 1.2rem;
+        position: relative;
+    }
+    .nt-card-reported .layer-tag {
+        color: var(--nt-peach);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+    }
+
+    /* Uncertainty Mist Container */
+    .nt-mist-container {
+        background: radial-gradient(ellipse at center, rgba(179, 165, 255, 0.08) 0%, rgba(10, 15, 31, 0) 70%);
+        border: 1px solid rgba(179, 165, 255, 0.25);
+        border-radius: 14px;
+        padding: 1.2rem;
+        margin: 0.8rem 0;
+        backdrop-filter: blur(6px);
+    }
+
+    /* Journey Ribbon */
+    .journey-ribbon {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: var(--nt-surface-1);
+        border: 1px solid var(--nt-border);
+        border-radius: 10px;
+        padding: 0.6rem 1rem;
+        margin-bottom: 1.2rem;
+        overflow-x: auto;
+    }
+    .journey-node {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--nt-text-muted);
+        white-space: nowrap;
+    }
+    .journey-node.active {
+        color: var(--nt-teal);
+    }
+    .journey-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: var(--nt-text-muted);
+    }
+    .journey-node.active .journey-dot {
+        background-color: var(--nt-teal);
+        box-shadow: 0 0 8px var(--nt-teal);
+    }
+    .journey-arrow {
+        color: var(--nt-border);
+        font-size: 0.75rem;
+    }
+
+    /* Check-in Speech Bubbles */
+    .chat-bubble-agent {
+        background: var(--nt-surface-2);
+        border: 1px solid var(--nt-border);
+        border-radius: 14px 14px 14px 2px;
+        padding: 0.75rem 1rem;
+        margin-bottom: 0.6rem;
+        max-width: 85%;
+        color: var(--nt-text-primary);
+        font-size: 0.9rem;
+    }
+    .chat-bubble-user {
+        background: linear-gradient(135deg, rgba(255, 179, 138, 0.2), rgba(255, 179, 138, 0.1));
+        border: 1px solid var(--nt-peach);
+        border-radius: 14px 14px 2px 14px;
+        padding: 0.75rem 1rem;
+        margin-bottom: 0.6rem;
+        margin-left: auto;
+        max-width: 85%;
+        color: var(--nt-text-primary);
+        font-size: 0.9rem;
+    }
+
+    /* Adaptive Recommendation Cards */
+    .rec-card {
+        background: var(--nt-surface-1);
+        border: 1px solid var(--nt-border);
+        border-left: 4px solid var(--nt-teal);
+        border-radius: 10px;
+        padding: 1rem 1.1rem;
+        margin-bottom: 0.8rem;
+    }
+
+    /* Badges */
+    .aurora-badge {
+        display: inline-block;
+        padding: 0.2rem 0.6rem;
+        border-radius: 6px;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+    }
+    .badge-teal {
+        background: rgba(56, 225, 204, 0.15);
+        color: var(--nt-teal);
+        border: 1px solid var(--nt-teal);
+    }
+    .badge-violet {
+        background: rgba(179, 165, 255, 0.15);
+        color: var(--nt-violet);
+        border: 1px solid var(--nt-violet);
+    }
+    .badge-peach {
+        background: rgba(255, 179, 138, 0.15);
+        color: var(--nt-peach);
+        border: 1px solid var(--nt-peach);
+    }
+    .badge-gold {
+        background: rgba(255, 217, 138, 0.15);
+        color: var(--nt-gold);
+        border: 1px solid var(--nt-gold);
+    }
+    .badge-sage {
+        background: rgba(123, 227, 165, 0.15);
+        color: var(--nt-sage);
+        border: 1px solid var(--nt-sage);
+    }
+
+    /* Accessibility: Respect prefers-reduced-motion everywhere */
+    @media (prefers-reduced-motion: reduce) {
+        
+        * {
+            animation-duration: 0.001ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.001ms !important;
+            scroll-behavior: auto !important;
+        }
+        .aurora-mesh-bg, .breathing-orb, .pulse-ring, .heartbeat, .aurora-node-glow {
+            animation: none !important;
+        }
+    
+    }
+
+    /* Calm Mode Instant Class Override */
+    .calm-mode, body.calm-mode, .stApp.calm-mode {
+        
+        * {
+            animation-duration: 0.001ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.001ms !important;
+            scroll-behavior: auto !important;
+        }
+        .aurora-mesh-bg, .breathing-orb, .pulse-ring, .heartbeat, .aurora-node-glow {
+            animation: none !important;
+        }
+    
+    }
+    
+        body {
+            margin: 0;
+            padding: 2rem;
+            min-height: 100vh;
+            background-color: var(--nt-bg);
+            color: var(--nt-text-primary);
+            font-family: var(--nt-font-sans);
+        }
+        .container {
+            max-width: 960px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="journey-ribbon">
+            <div class="journey-node active"><span class="journey-dot"></span><span>Detect</span></div>
+            <span class="journey-arrow">➔</span>
+            <div class="journey-node"><span class="journey-dot"></span><span>Explain</span></div>
+            <span class="journey-arrow">➔</span>
+            <div class="journey-node"><span class="journey-dot"></span><span>Ask</span></div>
+            <span class="journey-arrow">➔</span>
+            <div class="journey-node"><span class="journey-dot"></span><span>Understand</span></div>
+            <span class="journey-arrow">➔</span>
+            <div class="journey-node"><span class="journey-dot"></span><span>Recommend</span></div>
+            <span class="journey-arrow">➔</span>
+            <div class="journey-node"><span class="journey-dot"></span><span>Learn</span></div>
+        </div>
+
+        <h1>NeuroTwin Aurora — Visual Architecture</h1>
+        <p style="color: var(--nt-text-muted);">Calm, explainable, uncertainty-first physiological digital twin interface.</p>
+
+        <div style="display: flex; gap: 1rem; margin: 1.5rem 0;">
+            <div class="nt-card-measured" style="flex: 1;">
+                <div class="layer-tag">1. Measured</div>
+                <p>Hardware signals from Empatica E4 wristband: HR 72 BPM, EDA 3.4 µS, Temp 32.1°C.</p>
+            </div>
+            <div class="nt-card-estimated" style="flex: 1;">
+                <div class="layer-tag">2. Estimated</div>
+                <p>Pattern associated with lower stress. Evidence: Limited. Uncertainty mist applied.</p>
+            </div>
+            <div class="nt-card-reported" style="flex: 1;">
+                <div class="layer-tag">3. Reported</div>
+                <p>Subjective self-rating (PSS-10 score 18/40, mild perceived strain).</p>
+            </div>
+        </div>
+
+        <div class="nt-mist-container">
+            <h3>Evidence Mist Indicator (Non-Numeric)</h3>
+            
+    <svg width="100%" height="42" viewBox="0 0 320 42" xmlns="http://www.w3.org/2000/svg" aria-label="Evidence meter: Limited Evidence (Uncertain)">
+        <defs>
+            <linearGradient id="mistGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#B3A5FF" stop-opacity="0.1" />
+                <stop offset="50%" stop-color="#B3A5FF" stop-opacity="0.65" />
+                <stop offset="100%" stop-color="#B3A5FF" stop-opacity="0.1" />
+            </linearGradient>
+            <filter id="mistBlur" x="-10%" y="-30%" width="120%" height="160%">
+                <feGaussianBlur stdDeviation="3" />
+            </filter>
+        </defs>
+        <!-- Background track -->
+        <rect x="10" y="8" width="300" height="12" rx="6" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+        <!-- Soft mist band representing uncertainty span -->
+        <rect x="20" y="7" width="70" height="14" rx="7" fill="url(#mistGrad)" filter="url(#mistBlur)" />
+        <rect x="20" y="9" width="70" height="10" rx="5" fill="#B3A5FF" opacity="0.45" />
+        <!-- Text label -->
+        <text x="12" y="34" font-family="-apple-system, sans-serif" font-size="11" fill="#B3A5FF" font-weight="600">Limited Evidence (Uncertain)</text>
+    </svg>
+    
+        </div>
+    </div>
+</body>
+</html>
